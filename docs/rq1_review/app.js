@@ -246,7 +246,8 @@ function renderPosthocAnnotation(item, review) {
     el("p", { text: "Assess each hypothesis independently from the shown evidence." }),
   ]);
   causes.forEach((cause) => {
-    const row = el("div", { class: "annotation-line" }, [el("div", { class: "annotation-cause", text: cause })]);
+    const options = el("div", { class: "annotation-options" });
+    const row = el("div", { class: "annotation-line" }, [el("div", { class: "annotation-cause", text: cause }), options]);
     states.forEach((stateValue) => {
       const input = el("input", { type: "radio", name: `${item.case_id}-${cause}`, value: stateValue });
       input.checked = review[cause] === stateValue;
@@ -255,7 +256,7 @@ function renderPosthocAnnotation(item, review) {
         review.annotation_status = causes.every((name) => review[name]) ? "complete" : "incomplete";
         render();
       });
-      row.append(el("label", {}, [input, document.createTextNode(stateValue)]));
+      options.append(el("label", {}, [input, document.createTextNode(stateValue)]));
     });
     panel.append(row);
   });

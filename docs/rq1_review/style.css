@@ -23,15 +23,6 @@ input,
   line-height: 1.35;
 }
 
-.derived-gate {
-  margin: 12px 0;
-  border: 1px solid #d8dee6;
-  border-radius: 6px;
-  padding: 9px 10px;
-  background: #f8fafc;
-  color: #26384f;
-}
-
 .derived-gate strong {
   letter-spacing: 0.02em;
 }
@@ -113,7 +104,7 @@ p {
 }
 
 .loader {
-  display: flex;
+  display: none;
   gap: 12px;
   align-items: end;
   padding: 16px 24px;
@@ -629,32 +620,50 @@ aside {
 
 .annotation-line {
   display: grid;
-  grid-template-columns: minmax(160px, 220px) repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  align-items: center;
-  padding: 10px 0;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 12px 0;
   border-bottom: 1px solid #edf1f5;
 }
 
 .annotation-line label {
-  display: grid;
-  grid-template-columns: 16px minmax(0, 1fr);
+  display: inline-flex;
   align-items: center;
-  gap: 7px;
-  min-height: 28px;
+  gap: 8px;
+  min-height: 34px;
+  border: 1px solid #d8dee6;
+  border-radius: 6px;
+  padding: 7px 10px;
+  background: #f8fafc;
+  color: #26384f;
   font-size: 13px;
-  line-height: 1.25;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.annotation-line label:has(input:checked) {
+  border-color: #2463a6;
+  background: #eaf3ff;
+  color: #1d5289;
+  font-weight: 750;
 }
 
 .annotation-line input[type="radio"] {
+  flex: 0 0 auto;
   width: 14px;
   height: 14px;
   margin: 0;
-  justify-self: center;
 }
 
 .annotation-cause {
-  font-weight: 750;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.annotation-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 
@@ -663,15 +672,6 @@ aside {
   color: #52606d;
   font-size: 13px;
   line-height: 1.35;
-}
-
-.derived-gate {
-  margin: 12px 0;
-  border: 1px solid #d8dee6;
-  border-radius: 6px;
-  padding: 9px 10px;
-  background: #f8fafc;
-  color: #26384f;
 }
 
 .derived-gate strong {
