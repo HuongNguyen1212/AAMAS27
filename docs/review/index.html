@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RQ1 Controlled Benchmark Audit</title>
+    <link rel="stylesheet" href="../review_assets/style.css" />
+    <link rel="stylesheet" href="../review_assets/rereview.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <h1>RQ1 Controlled Benchmark Audit</h1>
+          <p id="progressText">Load cases to start reviewing.</p>
+        </div>
+        <div class="reviewer-box">
+          <label>
+            Reviewer name
+            <input id="reviewerId" type="text" placeholder="e.g. reviewer_01" />
+          </label>
+          <button id="importProgressBtn" type="button" class="secondary-action">Import Progress</button>
+          <input id="importProgressFile" type="file" accept="application/json,.json" hidden />
+          <button id="exportBtn" type="button">Export Progress</button>
+        </div>
+      </header>
+
+      <section class="loader" hidden>
+        <label>
+          Controlled case packet
+          <input id="packetUrl" type="text" />
+        </label>
+        <button id="loadBtn" type="button">Load</button>
+        <label class="mode-label">
+          Group by
+          <select id="groupMode">
+            <option value="domain">Domain</option>
+            <option value="none">File order</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="guide">
+        <details open>
+          <summary>Review guide</summary>
+          <div class="review-steps">
+            <div><strong>1.</strong> Read the question, shown schema fields, metadata, answer and evaluator feedback.</div>
+            <div><strong>2.</strong> Judge each failure hypothesis independently from the shown evidence.</div>
+            <div><strong>3.</strong> Use <strong>SUPPORTED</strong> only when the evidence positively supports that cause.</div>
+            <div><strong>4.</strong> Use <strong>UNRESOLVED</strong> when the evidence is not enough to decide.</div>
+            <div><strong>5.</strong> Click <strong>Next</strong> to save and mark the current case done.</div>
+            <div><strong>6.</strong> Click <strong>Export Progress</strong> at any time. To continue on another computer, open this page and use <strong>Import Progress</strong> to restore the downloaded JSON.</div>
+          </div>
+          <div class="guide-cards">
+            <section class="guide-card schema-card">
+              <h3>Schema Deficiency</h3>
+              <p class="guide-focus">Can the schema represent what the question needs?</p>
+              <p>Supported when the schema lacks a required field, structure, unit, provenance, extraction rule or derivation rule.</p>
+            </section>
+
+            <section class="guide-card metadata-card">
+              <h3>Data Gap</h3>
+              <p class="guide-focus">Is the required information available from the permitted evidence?</p>
+              <p>Supported when the source evidence shown for this case cannot ground or derive the needed information.</p>
+            </section>
+
+            <section class="guide-card answer-card">
+              <h3>Reasoning Failure</h3>
+              <p class="guide-focus">Was enough grounded metadata available but used incorrectly?</p>
+              <p>Supported when the answer ignores, misuses, miscalculates or contradicts available grounded metadata.</p>
+            </section>
+
+            <section class="guide-card rejection-card">
+              <h3>Evaluation Failure</h3>
+              <p class="guide-focus">Was a grounded answer rejected?</p>
+              <p>Supported when the answer is responsive and supported by shown evidence, but the evaluator feedback rejects it.</p>
+            </section>
+          </div>
+        </details>
+      </section>
+
+      <section class="layout">
+        <aside>
+          <div class="sidebar-head">
+            <div class="sidebar-title">Progress</div>
+            <div id="sidebarProgress" class="sidebar-progress">0/0 done</div>
+          </div>
+          <div id="caseList" class="case-list"></div>
+        </aside>
+        <article id="caseView" class="case-view"></article>
+      </section>
+    </main>
+    <script>
+      window.RQ1_REVIEW_CONFIG = {
+        defaultPath: "cases.json",
+        storageKey: "rq1-controlled-benchmark-public-review-v1",
+        protocol: "rq1-blinded-independent-review-public-v1",
+        progressLabel: "review cases",
+        progressVerb: "reviewed",
+        usePreviousAnnotations: false
+      };
+    </script>
+    <script src="../review_assets/app.js"></script>
+  </body>
+</html>
