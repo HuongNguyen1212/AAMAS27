@@ -3,11 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AAMAS27</title>
+    <title>RQ1 Expert Review</title>
+    <style>
+      :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #172033; background: #f4f6f9; }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      main { width: min(760px, calc(100% - 32px)); margin: 72px auto; }
+      h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+      p { margin: 0 0 28px; color: #5d687a; line-height: 1.55; }
+      nav { display: grid; gap: 12px; }
+      a { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 18px 20px; color: inherit; text-decoration: none; background: #fff; border: 1px solid #d8dee8; border-radius: 6px; }
+      a:hover { border-color: #2463a8; }
+      strong { font-size: 16px; }
+      span { margin-top: 5px; color: #667085; font-size: 14px; }
+      b { align-self: center; color: #2463a8; font-size: 20px; }
+    </style>
   </head>
   <body>
     <main>
-      <h1>AAMAS27</h1>
+      <h1>RQ1 Expert Review</h1>
+      <p>Select the assigned review stage. Progress is stored in the browser and can be exported as JSON.</p>
+      <nav>
+        <a href="baseline-review/">
+          <span><strong>Baseline validation</strong><br />Review 41 target-route baselines before intervention.</span>
+          <b aria-hidden="true">&#8594;</b>
+        </a>
+        <a href="controlled-review/">
+          <span><strong>Controlled-case attribution</strong><br />Review 164 blinded intervention cases.</span>
+          <b aria-hidden="true">&#8594;</b>
+        </a>
+      </nav>
     </main>
   </body>
 </html>

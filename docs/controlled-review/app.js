@@ -5,6 +5,9 @@ const reviewProtocol = reviewConfig.protocol || "rq1-controlled-benchmark-source
 const usePreviousAnnotations = reviewConfig.usePreviousAnnotations !== false;
 const progressLabel = reviewConfig.progressLabel || "review cases";
 const progressVerb = reviewConfig.progressVerb || "reviewed";
+const controlledDatasetBase = reviewConfig.controlledDatasetBase || "datasets/";
+const originalDatasetBase = reviewConfig.originalDatasetBase || "../review_web/datasets/";
+const sourceLinksEnabled = reviewConfig.sourceLinksEnabled !== false;
 const state = {
   cases: [],
   selected: 0,
@@ -107,44 +110,35 @@ function chipList(items) {
 }
 
 function datasetLinks(item) {
-  const raw = item.source_files;
+  const raw = item.source_files || item.metadata?.source_file;
   const files = Array.isArray(raw) ? raw : raw ? [raw] : [];
-  const entries = files.map((file, index) => el("span", {
-    class: "dataset-label",
-    text: `Source record ${index + 1}`,
-  }));
-  if (!entries.length) return el("span", { text: "No source record is available." });
+  const domain = String(item.domain || "").toLowerCase();
+  const links = files
+    .map((file) => String(file))
+    .filter((file) => file.endsWith(".txt") || file.endsWith(".json"))
+    .map((file) => {
+      if (!sourceLinksEnabled) {
+        return el("span", {
+          class: "source-file-name",
+          text: file.split("/").at(-1) || file,
+        });
+      }
+      const href = file === "dataset_context.txt"
+        ? `${controlledDatasetBase}context/${encodeURIComponent(file)}`
+        : file.startsWith("controlled_sources/")
+          ? `${controlledDatasetBase}${file.split("/").map(encodeURIComponent).join("/")}`
+          : `${originalDatasetBase}${domain}/${encodeURIComponent(file)}`;
+      return el("a", {
+        href,
+        target: "_blank",
+        rel: "noopener",
+        text: file,
+      });
+    });
+  if (!links.length) return el("span", { text: "No source file link available." });
   const box = el("div", { class: "dataset-links" });
-  entries.forEach((entry) => box.append(entry));
+  links.forEach((link) => box.append(link));
   return box;
-}
-
-function sourceEvidenceCards(sourceEvidence) {
-  const records = Array.isArray(sourceEvidence?.records) ? sourceEvidence.records : [];
-  if (!records.length) return el("p", { class: "source-empty", text: "No permitted source evidence is available." });
-  const grid = el("div", { class: "source-evidence-grid" });
-  records.forEach((record, index) => {
-    const columns = Array.isArray(record.table_columns) && record.table_columns.length
-      ? record.table_columns.join(", ")
-      : "None shown";
-    const context = Array.isArray(record.context_fields) && record.context_fields.length
-      ? record.context_fields.join(", ")
-      : "None shown";
-    grid.append(el("section", { class: "source-evidence-card" }, [
-      el("strong", { text: `Source record ${index + 1}` }),
-      el("dl", {}, [
-        el("dt", { text: "Rows" }),
-        el("dd", { text: String(record.row_count ?? "Not shown") }),
-        el("dt", { text: "Table columns" }),
-        el("dd", { text: columns }),
-        el("dt", { text: "Context fields" }),
-        el("dd", { text: context }),
-        el("dt", { text: "Rows available" }),
-        el("dd", { text: record.table_rows_available ? "Yes" : "No" }),
-      ]),
-    ]));
-  });
-  return grid;
 }
 
 function causeNames() {
@@ -392,8 +386,7 @@ function renderCase() {
     kv("Schema fields", ""),
     chipList(item.schema_fields || []),
     kv(Array.isArray(shownMetadata) ? "Metadata records" : "Metadata", shownMetadata),
-    kv("Permitted source evidence", ""),
-    sourceEvidenceCards(item.source_evidence),
+    kv("Permitted source evidence", item.source_evidence || {}),
     kv("System answer", item.system_answer),
     kv("Rejection reason", item.rejection_reason),
   ]));

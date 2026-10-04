@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RQ1 Controlled Benchmark Audit</title>
-    <link rel="stylesheet" href="../review_assets/style.css" />
-    <link rel="stylesheet" href="../review_assets/rereview.css" />
+    <link rel="stylesheet" href="style.css" />
+    
   </head>
   <body>
     <main class="app">
@@ -48,7 +48,7 @@
             <div><strong>2.</strong> Judge each failure hypothesis independently from the shown evidence.</div>
             <div><strong>3.</strong> Use <strong>SUPPORTED</strong> only when the evidence positively supports that cause.</div>
             <div><strong>4.</strong> Use <strong>UNRESOLVED</strong> when the evidence is not enough to decide.</div>
-            <div><strong>5.</strong> Cases selected for re-review start blank. Other cases retain the previous assessment and remain available for inspection.</div>
+            <div><strong>5.</strong> Click <strong>Next</strong> to save and mark the current case done.</div>
             <div><strong>6.</strong> Click <strong>Export Progress</strong> at any time. To continue on another computer, open this page and use <strong>Import Progress</strong> to restore the downloaded JSON.</div>
           </div>
           <div class="guide-cards">
@@ -93,13 +93,16 @@
     <script>
       window.RQ1_REVIEW_CONFIG = {
         defaultPath: "cases.json",
-        storageKey: "rq1-controlled-benchmark-public-rereview-v1",
-        protocol: "rq1-blinded-rereview-public-v1",
-        progressLabel: "re-review cases",
-        progressVerb: "re-reviewed",
-        usePreviousAnnotations: true
+        storageKey: "rq1-controlled-case-review-public-v1",
+        protocol: "rq1-forward-controlled-benchmark-blind-expert-audit-v1",
+        progressLabel: "review cases",
+        progressVerb: "reviewed",
+        usePreviousAnnotations: false,
+        controlledDatasetBase: "",
+        originalDatasetBase: "",
+        sourceLinksEnabled: false
       };
     </script>
-    <script src="../review_assets/app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

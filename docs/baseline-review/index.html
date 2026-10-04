@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RQ1 Baseline Validation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>RQ1 Baseline Validation</h1>
+          <p id="progressText">Loading source-first candidate baselines...</p>
+        </div>
+        <div class="topbar-actions">
+          <label class="reviewer-field">
+            <span>Reviewer</span>
+            <input id="reviewerId" type="text" placeholder="Reviewer name" autocomplete="name" />
+          </label>
+          <button id="importBtn" class="button secondary" type="button">Import JSON</button>
+          <input id="importFile" type="file" accept="application/json,.json" hidden />
+          <button id="exportBtn" class="button primary" type="button">Export JSON</button>
+        </div>
+      </header>
+
+      <section class="protocol-strip" aria-label="Validation protocol">
+        <strong>Validation criterion:</strong>
+        approve a baseline only when its reference answer is supported by the permitted source, the target route is scientifically valid, the schema provides that route and the proposed metadata are grounded.
+      </section>
+
+      <div class="workspace">
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <div>
+              <strong>Baselines</strong>
+              <span id="sidebarProgress">0/0 complete</span>
+            </div>
+            <select id="caseFilter" aria-label="Filter baselines">
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="APPROVE">Approved</option>
+              <option value="REVISE">Revise</option>
+              <option value="EXCLUDE">Excluded</option>
+            </select>
+          </div>
+          <nav id="caseList" class="case-list" aria-label="Candidate baselines"></nav>
+        </aside>
+
+        <article id="caseView" class="case-view" aria-live="polite"></article>
+      </div>
+    </main>
+
+    <script>
+      window.BASELINE_REVIEW_CONFIG = {
+        candidatesPath: "cases.json",
+        sourceBase: "",
+        sourceLinksEnabled: false,
+        storageKey: "rq1-baseline-validation-public-v1",
+        protocol: "rq1-forward-baseline-validation-v1"
+      };
+    </script>
+    <script src="app.js"></script>
+  </body>
+</html>
