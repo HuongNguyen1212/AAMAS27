@@ -40,6 +40,7 @@ function blankReview() {
     schema_capacity: "",
     metadata_grounding: "",
     answer_correctness: "",
+    supported_information: "",
     exclusion_reason: "",
     notes: "",
     ui_step: 1,
@@ -244,6 +245,7 @@ function restoreLocal() {
 
 function removeDatasetContextEvidence(review) {
   if (!review || typeof review !== "object") return;
+  if (typeof review.supported_information !== "string") review.supported_information = "";
   const fields = Array.isArray(review.route_fields) ? review.route_fields : [];
   const unsupportedMethod = !["", "DIRECT_EXTRACTION", "DETERMINISTIC_DERIVATION", "DOMAIN_RULE", "MIXED"].includes(review.evidence_kind || "");
   const usedContext = review.use_dataset_context === true
@@ -330,6 +332,9 @@ function validationError(item, review) {
   if (!state.reviewerId.trim()) return "Enter an expert identifier before completing a specification.";
   if (!review.eligibility) return "Decide whether the reference answer can be verified from the shown evidence.";
   if (review.eligibility === "INELIGIBLE") {
+    if (review.reference_supported === "PARTIAL" && !String(review.supported_information || "").trim()) {
+      return "State which part of the reference answer can be verified.";
+    }
     return review.exclusion_reason.trim() ? "" : "Explain why the reference answer cannot be verified from the shown evidence.";
   }
   if (review.eligibility === "UNCERTAIN") {
@@ -888,8 +893,16 @@ function mutate(review, key, value) {
 
 function setBaselineFeasibility(item, review, value) {
   review.reference_supported = value;
-  review.eligibility = value === "YES" ? "ELIGIBLE" : value === "NO" ? "INELIGIBLE" : value === "UNCERTAIN" ? "UNCERTAIN" : "";
+  review.eligibility = value === "YES"
+    ? "ELIGIBLE"
+    : ["PARTIAL", "NO"].includes(value)
+      ? "INELIGIBLE"
+      : value === "UNCERTAIN"
+        ? "UNCERTAIN"
+        : "";
   review.baseline_answer = value === "YES" ? item.fixed_reference_answer : "";
+  if (value !== "PARTIAL") review.supported_information = "";
+  if (value === "YES") review.exclusion_reason = "";
   review.ui_step = value === "YES" ? 2 : 1;
   resetValidationChecks(review);
   review.done = false;
@@ -950,15 +963,23 @@ function renderForm(item, review) {
   form.append(
     formStep("1", "Check the reference answer", "Use only the available source files. Shared experiment information is background only, not evidence."),
     selectField("Is there enough evidence to verify the reference answer?", review.reference_supported, [
-      ["YES", "Yes - the shown evidence is sufficient"],
-      ["NO", "No - required information is missing"],
+      ["YES", "Yes - every part of the reference answer can be verified"],
+      ["PARTIAL", "Partially - some parts can be verified but others are missing"],
+      ["NO", "No - the reference answer cannot be verified"],
       ["UNCERTAIN", "Not sure - I cannot decide from the shown evidence"],
     ], (value) => setBaselineFeasibility(item, review, value), true),
   );
 
   if (review.eligibility === "INELIGIBLE") {
+    if (review.reference_supported === "PARTIAL") {
+      form.append(textField("What information can be verified?", review.supported_information, (value) => mutate(review, "supported_information", value), {
+        placeholder: "Example: The current unit A can be verified from the current column header.",
+      }));
+    }
     form.append(textField("What information is missing?", review.exclusion_reason, (value) => mutate(review, "exclusion_reason", value), {
-      placeholder: "Example: The source does not report the hydrogen charging method.",
+      placeholder: review.reference_supported === "PARTIAL"
+        ? "Example: The potential unit cannot be verified from the available source evidence."
+        : "Example: The source does not report the hydrogen charging method.",
     }));
   } else if (review.eligibility === "UNCERTAIN") {
     form.append(textField("Why can you not decide?", review.notes, (value) => mutate(review, "notes", value), {
@@ -1124,6 +1145,7 @@ function structuredReview(item, review) {
       answer_correctness: review.answer_correctness,
     },
     exclusion_reason: review.exclusion_reason.trim() || null,
+    supported_information: String(review.supported_information || "").trim() || null,
     target_quantity: review.target_quantity.trim() || null,
     source_scope: review.source_scope || null,
     source_files: [...review.selected_source_files],
@@ -1202,6 +1224,7 @@ function reviewFromStructured(entry, item) {
     metadata_grounding: spec.validation_checks?.metadata_grounding || "",
     answer_correctness: spec.validation_checks?.answer_correctness || "",
     exclusion_reason: spec.exclusion_reason || "",
+    supported_information: spec.supported_information || "",
     notes: spec.notes || "",
     ui_step: entry.done === true ? 3 : spec.eligibility === "ELIGIBLE" ? 2 : 1,
     done: entry.done === true,
