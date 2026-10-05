@@ -3,63 +3,145 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RQ1 Baseline Validation</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>RQ1 Baseline Review</title>
+    <link rel="stylesheet" href="style.css?v=15" />
   </head>
   <body>
-    <main class="app-shell">
+    <main class="app">
       <header class="topbar">
         <div>
-          <h1>RQ1 Baseline Validation</h1>
-          <p id="progressText">Loading source-first candidate baselines...</p>
+          <h1>RQ1 Baseline Review</h1>
+          <p id="progressText">Loading the blank specification packet...</p>
         </div>
-        <div class="topbar-actions">
-          <label class="reviewer-field">
-            <span>Reviewer</span>
-            <input id="reviewerId" type="text" placeholder="Reviewer name" autocomplete="name" />
+        <div class="reviewer-tools">
+          <a class="button-link secondary guide-link" href="#reviewGuide">Review Guide</a>
+          <label>
+            Expert identifier
+            <input id="reviewerId" type="text" autocomplete="off" placeholder="expert_01" />
           </label>
-          <button id="importBtn" class="button secondary" type="button">Import JSON</button>
+          <button id="importBtn" type="button" class="secondary">Import Progress</button>
           <input id="importFile" type="file" accept="application/json,.json" hidden />
-          <button id="exportBtn" class="button primary" type="button">Export JSON</button>
+          <button id="exportBtn" type="button">Export Progress</button>
         </div>
       </header>
 
-      <section class="protocol-strip" aria-label="Validation protocol">
-        <strong>Validation criterion:</strong>
-        approve a baseline only when its reference answer is supported by the permitted source, the target route is scientifically valid, the schema provides that route and the proposed metadata are grounded.
+      <section class="quick-start" aria-labelledby="quickStartTitle">
+        <div class="quick-start-heading">
+          <div>
+            <strong id="quickStartTitle">What to do</strong>
+            <span>For each question, verify the shown answer and record the metadata needed to reproduce it. Complete the numbered boxes from top to bottom.</span>
+          </div>
+          <a class="guide-link" href="#reviewGuide">Open detailed instructions</a>
+        </div>
+        <ol class="quick-steps three-steps">
+          <li><strong>Open the files</strong><span>Check whether the answer is supported by the actual source data.</span></li>
+          <li><strong>Record each value</strong><span>Choose a schema field, enter its value and identify exactly where it came from.</span></li>
+          <li><strong>Confirm and save</strong><span>Check the completed summary, confirm four statements and continue.</span></li>
+        </ol>
       </section>
 
-      <div class="workspace">
+      <details id="reviewGuide" class="review-guide">
+        <summary>Detailed instructions and examples</summary>
+        <div class="guide-content">
+          <section>
+            <h2>Your goal</h2>
+            <p>Create one verified baseline for each question. A baseline contains the schema field, grounded metadata value, exact source parts and procedure needed to reproduce the reference answer. You are not classifying failures on this page.</p>
+          </section>
+
+          <section>
+            <h2>Before you start</h2>
+            <ol>
+              <li>Enter a reviewer code, for example <code>expert_01</code>.</li>
+              <li>Read the question and reference answer.</li>
+              <li>Open the source files and schema when you need to inspect them. Shared experiment information is background only.</li>
+            </ol>
+          </section>
+
+          <section>
+            <h2>What to select and what to type</h2>
+            <dl class="guide-definitions">
+              <dt>Is the answer supported?</dt>
+              <dd>Choose <strong>Yes</strong> when the shown evidence is enough to verify it. Choose <strong>No</strong> when required information is absent. Choose <strong>Not sure</strong> when you cannot decide from what is shown.</dd>
+
+              <dt>How the value was obtained</dt>
+              <dd>For each metadata value, choose whether you copied it, calculated it or interpreted the data. Different values may use different methods.</dd>
+
+              <dt>Source files</dt>
+              <dd>Open the files to inspect their values. Select only the file or files actually used. Do not select every file unless all of them are needed.</dd>
+
+              <dt>Exact source parts</dt>
+              <dd>For every metadata value, tick the filename, header or data column that you used. A calculation must include every input column. A scientific interpretation must include every examined column.</dd>
+
+              <dt>Shared experiment information</dt>
+              <dd>This is provided only to help you understand the experiment. It is not an evidence source. Do not use it to verify the answer or enter a metadata value.</dd>
+
+              <dt>Existing or new field</dt>
+              <dd>Use an existing field when the schema already has a suitable place for the value. For a new field, first enter a short concept name such as <code>potential unit</code>. The page converts it mechanically to <code>potential_unit</code>. Check the suggested name, then write one sentence explaining what the field stores, including its scope and unit when needed.</dd>
+
+              <dt>Value</dt>
+              <dd>Enter the value supported by the evidence, including the unit when the field is text. Do not invent a value to match the reference answer.</dd>
+
+              <dt>Direct reading</dt>
+              <dd><strong>No formula.</strong> Use this form: <code>Column or header = Potential applied (V)</code>.</dd>
+
+              <dt>Calculation</dt>
+              <dd>Use this form: <code>Formula = max(Time(s)) - min(Time(s)); Input = Time(s); Unit = seconds</code>.</dd>
+
+              <dt>Scientific rule</dt>
+              <dd>Use this form: <code>Rule = ...; Threshold = ...; Data region = ...</code>. Write <code>not applicable</code> when no numerical threshold is used.</dd>
+
+            </dl>
+          </section>
+
+          <section>
+            <h2>One short example</h2>
+            <p>For “What is the total duration?”, you might use the existing field <code>experiment_duration_seconds</code>, enter <code>5400</code>, choose <strong>Calculate</strong>, tick the <code>Time(s)</code> column and write <code>Formula = max(Time(s)) - min(Time(s)); Input = Time(s); Unit = seconds</code>.</p>
+            <p>When a new field is required, enter <code>potential unit</code> as the short concept name, check the suggested name <code>potential_unit</code> and describe it as <code>Unit used for applied and working-electrode potential values.</code></p>
+            <p>If an answer needs two metadata values, such as potential unit and current unit, complete one value box for each field.</p>
+          </section>
+
+          <section>
+            <h2>Finish and save</h2>
+            <p>Select <strong>Check my entries</strong>. Read the summary and tick the four confirmation boxes. Then select <strong>Save this question and continue</strong>. Use <strong>Export Progress</strong> before changing computers and <strong>Import Progress</strong> to continue later.</p>
+          </section>
+        </div>
+      </details>
+
+      <section class="workspace">
         <aside class="sidebar">
-          <div class="sidebar-header">
-            <div>
-              <strong>Baselines</strong>
-              <span id="sidebarProgress">0/0 complete</span>
-            </div>
-            <select id="caseFilter" aria-label="Filter baselines">
-              <option value="all">All</option>
-              <option value="pending">Pending</option>
-              <option value="APPROVE">Approved</option>
-              <option value="REVISE">Revise</option>
-              <option value="EXCLUDE">Excluded</option>
-            </select>
+          <div class="sidebar-controls">
+            <label>
+              Domain
+              <select id="domainFilter">
+                <option value="ALL">All</option>
+                <option value="CV">CV</option>
+                <option value="DIL">DIL</option>
+              </select>
+            </label>
+            <label>
+              Status
+              <select id="statusFilter">
+                <option value="ALL">All</option>
+                <option value="PENDING">Pending</option>
+                <option value="COMPLETE">Complete</option>
+              </select>
+            </label>
           </div>
-          <nav id="caseList" class="case-list" aria-label="Candidate baselines"></nav>
+          <nav id="itemList" class="item-list" aria-label="Questions"></nav>
         </aside>
 
-        <article id="caseView" class="case-view" aria-live="polite"></article>
-      </div>
+        <article id="itemView" class="item-view" aria-live="polite"></article>
+      </section>
     </main>
 
     <script>
-      window.BASELINE_REVIEW_CONFIG = {
-        candidatesPath: "cases.json",
-        sourceBase: "",
+      window.HUMAN_ROUTE_CONFIG = {
+        packetPath: "route_authoring_packet.json",
         sourceLinksEnabled: false,
-        storageKey: "rq1-baseline-validation-public-v1",
-        protocol: "rq1-forward-baseline-validation-v1"
+        storageKey: "rq1-human-route-authoring-v1",
+        reviewProtocol: "rq1-independent-human-route-review-v1"
       };
     </script>
-    <script src="app.js"></script>
+    <script src="app.js?v=21"></script>
   </body>
 </html>
