@@ -962,11 +962,11 @@ function renderForm(item, review) {
   const form = el("div", { className: "form-grid" });
   form.append(
     formStep("1", "Check the reference answer", "Use only the available source files. Shared experiment information is background only, not evidence."),
-    selectField("Is there enough evidence to verify the reference answer?", review.reference_supported, [
-      ["YES", "Yes - every part of the reference answer can be verified"],
-      ["PARTIAL", "Partially - some parts can be verified but others are missing"],
-      ["NO", "No - the reference answer cannot be verified"],
-      ["UNCERTAIN", "Not sure - I cannot decide from the shown evidence"],
+    selectField("Does the available source evidence shown here support the reference answer?", review.reference_supported, [
+      ["YES", "Yes - the evidence supports every part of the reference answer"],
+      ["PARTIAL", "Partially - the evidence supports some parts but not all"],
+      ["NO", "No - the evidence does not support the reference answer"],
+      ["UNCERTAIN", "Not sure - I cannot determine support from the available evidence"],
     ], (value) => setBaselineFeasibility(item, review, value), true),
   );
 
