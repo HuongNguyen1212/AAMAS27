@@ -1188,7 +1188,7 @@ async function importProgress(file) {
 }
 
 async function loadPacket() {
-  const response = await fetch(config.packetPath);
+  const response = await fetch(config.packetPath, { cache: "no-store" });
   if (!response.ok) throw new Error(`Failed to load ${config.packetPath}: ${response.status}`);
   state.packet = await response.json();
   if (
