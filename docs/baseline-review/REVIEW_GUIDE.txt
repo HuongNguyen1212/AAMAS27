@@ -1,0 +1,98 @@
+BASELINE REVIEW GUIDE
+
+Website
+https://huongnguyen1212.github.io/AAMAS27/baseline-review/
+
+Files needed
+The CV and DIL source files are provided separately. Keep them available while completing the review.
+
+Purpose
+For each scientific question, determine whether the reference answer is supported by the permitted source data. When every part of the answer is supported, describe the metadata fields and values needed to reproduce that answer.
+
+HOW TO REVIEW EACH QUESTION
+
+1. Check the question and reference answer
+
+Read the question and the displayed reference answer. Open the listed source files and inspect the actual data. Shared experiment information is background information only and must not be used as the source of a value.
+
+2. Select the source-support decision
+
+Choose one option:
+
+- Yes: The source data supports every part of the reference answer.
+- Partially: The source data supports some parts, but other required parts are missing.
+- No: The reference answer cannot be verified from the permitted source data.
+- Not sure: You cannot determine support from the available source data.
+
+Do not select Yes unless every required part of the reference answer can be verified.
+
+If you select Partially, state which information can be verified and which information is missing. If you select No or Not sure, briefly explain why.
+
+3. Select the source files used
+
+This section appears after selecting Yes. Select only the files that you actually inspected and used. If one file is sufficient, select only that file.
+
+4. Define each required metadata value
+
+Use one value box for each metadata field needed to answer the question. If the answer requires two values, add two value boxes.
+
+For every value:
+
+- Enter a short concept name, such as "potential unit". The website converts it to a field name such as "potential_unit". Check that the field name is clear and correct.
+- Choose the data type: text, number, true/false, list or object.
+- Describe what the field stores. Include its scope and unit when applicable.
+- Enter the verified value. For a numeric field, enter only the number and put the unit in the field description. For a text field, include the unit when needed.
+
+5. Record how the value was obtained
+
+Choose one method for each value:
+
+A. Copy it directly - no calculation
+
+Use this when the value is written directly in a file header or data column. Select the exact file component and enter its location.
+
+Example:
+Column or header = Potential applied (V)
+
+B. Calculate it from values in the file
+
+Use this when the value is obtained through a deterministic calculation. Select every input column and provide the formula, inputs and output unit.
+
+Example:
+Formula = max(Time(s)) - min(Time(s)); Input = Time(s); Unit = seconds
+
+C. Interpret the data using a scientific rule
+
+Use this when the value is identified by applying a scientific criterion to the data. Select every examined column and provide the rule, threshold and data region. Write "not applicable" if no numerical threshold is used.
+
+Example:
+Rule = featureless current with no faradaic peak; Threshold = not applicable; Data region = forward scan
+
+6. Add all values needed for the answer
+
+Select "Add another metadata value" only when another field is required. For example, a question asking for both potential and current units normally requires two value boxes.
+
+7. Check and save
+
+Select "Check my entries". Read the summary and confirm that:
+
+- the answer is fully supported by the selected source files;
+- every required metadata value has been included;
+- every value is grounded in the selected source data; and
+- the recorded procedure is sufficiently clear for another researcher to reproduce it.
+
+Then select "Save this question and continue".
+
+SAVING YOUR WORK
+
+The website saves progress in the current browser. Select "Export Progress" regularly to download a backup JSON file. To continue in another browser or on another computer, open the website, select "Import Progress" and choose the latest exported JSON file.
+
+WHAT HAPPENS AFTER THE REVIEW
+
+A question can become a verified baseline only when every part of its reference answer is supported and the required source files, schema fields, metadata values and reproduction procedure have been recorded and validated.
+
+Questions marked Partially, No or Not sure do not become complete controlled baselines. Therefore, the final number of verified baselines may be smaller than the number of reviewed questions.
+
+Each retained baseline may subsequently be used to construct four matched controlled cases: schema deficiency, data gap, reasoning failure and evaluation failure. If N baselines are retained, the controlled benchmark contains up to 4N cases.
+
+When the review is complete, export the progress JSON file and return that file to the study coordinator.
