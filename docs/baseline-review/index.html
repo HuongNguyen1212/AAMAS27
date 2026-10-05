@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RQ1 Baseline Review</title>
-    <link rel="stylesheet" href="style.css?v=15" />
+    <link rel="stylesheet" href="style.css?v=16" />
   </head>
   <body>
     <main class="app">
@@ -35,7 +35,7 @@
         </div>
         <ol class="quick-steps three-steps">
           <li><strong>Open the files</strong><span>Check whether the answer is supported by the actual source data.</span></li>
-          <li><strong>Define each value</strong><span>Create its schema field, enter its value and identify exactly where it came from.</span></li>
+          <li><strong>Define each field</strong><span>Choose whether it stores an actual value or references source columns, then identify its source.</span></li>
           <li><strong>Confirm and save</strong><span>Check the completed summary, confirm four statements and continue.</span></li>
         </ol>
       </section>
@@ -76,13 +76,19 @@
               <dd>This is provided only to help you understand the experiment. It is not an evidence source. Do not use it to verify the answer or enter a metadata value.</dd>
 
               <dt>Define a schema field</dt>
-              <dd>For every required metadata value, enter a short concept name such as <code>potential unit</code>. The page converts it mechanically to <code>potential_unit</code>. Check the suggested name, choose its data type and write one sentence explaining what the field stores, including its scope and unit when needed. No pre-existing or model-generated schema fields are provided.</dd>
+              <dd>For every required metadata value, enter a short concept name such as <code>potential unit</code>. The page converts it mechanically to <code>potential_unit</code>. Check the suggested name and write one sentence explaining what the field stores, including its scope and unit when needed.</dd>
 
-              <dt>Value</dt>
-              <dd>Enter the value supported by the evidence, including the unit when the field is text. Do not invent a value to match the reference answer.</dd>
+              <dt>Metadata storage</dt>
+              <dd>Choose <strong>An actual value or calculated result</strong> when the metadata stores a value. Choose <strong>Reference(s) to source data column(s)</strong> for a large series that remains in the source file.</dd>
+
+              <dt>Actual value</dt>
+              <dd>Select its data type and enter the value supported by the source, including the unit when the field is text. Do not invent a value to match the reference answer.</dd>
+
+              <dt>Source-column reference</dt>
+              <dd>Do not paste the full series. Tick each exact source column that this field should reference. The page records the file, column and unit automatically for this field.</dd>
 
               <dt>Direct reading</dt>
-              <dd><strong>No formula.</strong> Use this form: <code>Column or header = Potential applied (V)</code>.</dd>
+              <dd><strong>No formula and no repeated column name.</strong> Tick the exact filename, header or column below.</dd>
 
               <dt>Calculation</dt>
               <dd>Use this form: <code>Formula = max(Time(s)) - min(Time(s)); Input = Time(s); Unit = seconds</code>.</dd>
@@ -142,6 +148,6 @@
         reviewProtocol: "rq1-independent-human-route-review-v2"
       };
     </script>
-    <script src="app.js?v=27"></script>
+    <script src="app.js?v=28"></script>
   </body>
 </html>

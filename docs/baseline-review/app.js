@@ -56,6 +56,7 @@ function blankRouteField() {
     concept_label: "",
     use_existing: false,
     type: "string",
+    value_mode: "literal",
     description: "",
     value_raw: "",
     source_ref: "",
@@ -65,6 +66,55 @@ function blankRouteField() {
     schema_extra: {},
     provenance_extra: {},
   };
+}
+
+function cleanSourceKey(value) {
+  return String(value || "").replace(/^\uFEFF/, "").trim();
+}
+
+function sourceFileName(path) {
+  return String(path || "").split("/").filter(Boolean).pop() || "";
+}
+
+function unitFromColumn(column) {
+  const match = cleanSourceKey(column).match(/\(([^()]*)\)\s*$/);
+  return match ? match[1].trim() : "";
+}
+
+function sourceColumnReferences(field) {
+  return (field.source_bindings || [])
+    .filter((binding) => binding.source_kind === "TABLE_COLUMN")
+    .map((binding) => {
+      const column = cleanSourceKey(binding.source_key);
+      const unit = unitFromColumn(column);
+      return {
+        source_file: String(binding.source_file),
+        column,
+        ...(unit ? { unit } : {}),
+      };
+    });
+}
+
+function isSourceColumnReferenceValue(value, bindings) {
+  if (!Array.isArray(value) || !value.length) return false;
+  const tableBindings = (bindings || []).filter((binding) => binding.source_kind === "TABLE_COLUMN");
+  if (!tableBindings.length || value.length !== tableBindings.length) return false;
+  return value.every((entry) => {
+    if (!entry || Array.isArray(entry) || typeof entry !== "object") return false;
+    let fileName;
+    let column;
+    if (typeof entry.source_file === "string" && typeof entry.column === "string") {
+      fileName = sourceFileName(entry.source_file);
+      column = entry.column;
+    } else if (Object.keys(entry).length === 1) {
+      [fileName, column] = Object.entries(entry)[0];
+    } else {
+      return false;
+    }
+    return tableBindings.some((binding) =>
+      sourceFileName(binding.source_file) === fileName
+      && cleanSourceKey(binding.source_key) === cleanSourceKey(column));
+  });
 }
 
 function fieldNameFromConcept(concept) {
@@ -118,8 +168,20 @@ function routeFieldsFromStructured(item, schemaFields, metadata, provenance, def
   return schemaFields.map((field) => {
     const name = String(field?.name || "");
     const source = provenance?.[name] || {};
+    const bindings = Array.isArray(source.source_bindings)
+      ? source.source_bindings.map((binding) => ({
+        source_file: String(binding?.source_file || ""),
+        source_kind: String(binding?.source_kind || ""),
+        source_key: String(binding?.source_key || ""),
+      }))
+      : [];
+    const storedValue = Object.prototype.hasOwnProperty.call(metadata || {}, name) ? metadata[name] : undefined;
+    const usesSourceReferences = field?.value_representation === "source_column_references"
+      || isSourceColumnReferenceValue(storedValue, bindings);
     const matchedSource = sourceInventory.find((entry) => entry.source_file === source.source_file || entry.file_name === source.source_file);
-    const schemaExtra = Object.fromEntries(Object.entries(field || {}).filter(([key]) => !["name", "use_existing", "type", "description"].includes(key)));
+    const schemaExtra = Object.fromEntries(Object.entries(field || {}).filter(([key]) => ![
+      "name", "use_existing", "type", "description", "value_representation", "items",
+    ].includes(key)));
     const provenanceExtra = Object.fromEntries(Object.entries(source || {}).filter(([key]) => !["source_file", "source_bindings", "dataset_context", "evidence_kind", "method"].includes(key)));
     return {
       ...blankRouteField(),
@@ -128,16 +190,11 @@ function routeFieldsFromStructured(item, schemaFields, metadata, provenance, def
       concept_label: name.replaceAll("_", " "),
       use_existing: false,
       type: String(field?.type || "string"),
+      value_mode: usesSourceReferences ? "source_column_references" : "literal",
       description: String(field?.description || ""),
-      value_raw: Object.prototype.hasOwnProperty.call(metadata || {}, name) ? valueToRaw(metadata[name]) : "",
+      value_raw: storedValue !== undefined && !usesSourceReferences ? valueToRaw(storedValue) : "",
       source_ref: source.dataset_context === true ? "__DATASET_CONTEXT__" : String(matchedSource?.source_file || source.source_file || ""),
-      source_bindings: Array.isArray(source.source_bindings)
-        ? source.source_bindings.map((binding) => ({
-          source_file: String(binding?.source_file || ""),
-          source_kind: String(binding?.source_kind || ""),
-          source_key: String(binding?.source_key || ""),
-        }))
-        : [],
+      source_bindings: bindings,
       evidence_kind: String(source.evidence_kind || defaultEvidenceKind || ""),
       method: String(source.method || ""),
       schema_extra: schemaExtra,
@@ -185,13 +242,29 @@ function syncRouteFields(review) {
       name,
       type: field.type || "string",
       description,
+      ...(field.value_mode === "source_column_references" ? {
+        value_representation: "source_column_references",
+        items: {
+          type: "object",
+          required: ["source_file", "column"],
+          properties: {
+            source_file: { type: "string" },
+            column: { type: "string" },
+            unit: { type: "string" },
+          },
+        },
+      } : {}),
       ...(routeKinds.length ? { source_pattern: routeKinds.join("+").toLowerCase() } : {}),
       ...(dependencies.length ? { depends_on: dependencies } : {}),
       ...(evidenceKind === "DETERMINISTIC_DERIVATION" && method ? { formula: method } : {}),
       ...(method ? { comment: method } : {}),
       ...(field.use_existing ? { use_existing: true } : {}),
     });
-    if (String(field.value_raw || "").trim()) metadata[name] = metadataValueFromRaw(field);
+    if (field.value_mode === "source_column_references") {
+      metadata[name] = sourceColumnReferences(field);
+    } else if (String(field.value_raw || "").trim()) {
+      metadata[name] = metadataValueFromRaw(field);
+    }
     const source = {
       ...field.provenance_extra,
       source_file: field.source_bindings[0]?.source_file || field.source_ref,
@@ -255,6 +328,7 @@ function removeDatasetContextEvidence(review) {
     }
     if (field.source_ref === "__DATASET_CONTEXT__") field.source_ref = "";
     if (!Array.isArray(field.source_bindings)) field.source_bindings = [];
+    if (!field.value_mode) field.value_mode = "literal";
   });
   if (review.source_scope === "RECORD_AND_CONTEXT") review.source_scope = "";
   if (unsupportedMethod) review.evidence_kind = "";
@@ -296,7 +370,12 @@ function routeDefinitionError(item, review) {
     names.add(name);
     if (!field.use_existing && !String(field.concept_label || "").trim()) return `Enter a short concept name for ${name}.`;
     if (!field.use_existing && !String(field.description || "").trim()) return `Explain what the new field ${name} stores.`;
-    if (!String(field.value_raw || "").trim()) return `Enter the value for ${name}.`;
+    if (field.value_mode === "source_column_references") {
+      if (field.type !== "array") return `${name}: source-column references require the List value type.`;
+      if (!sourceColumnReferences(field).length) return `${name}: select at least one data column containing the series.`;
+    } else if (!String(field.value_raw || "").trim()) {
+      return `Enter the value for ${name}.`;
+    }
     if (!field.evidence_kind) return `${name}: choose how this value was obtained.`;
     if (!Array.isArray(field.source_bindings) || !field.source_bindings.length) {
       return `${name}: select at least one filename, header or data column used to obtain this value.`;
@@ -308,6 +387,9 @@ function routeDefinitionError(item, review) {
       if (!sourceBindingExists(item, binding)) {
         return `${name}: one selected source component is no longer available. Select it again.`;
       }
+    }
+    if (field.evidence_kind === "DIRECT_EXTRACTION" && !String(field.method || "").trim()) {
+      field.method = "Read directly from the selected source part(s).";
     }
     if (!String(field.method || "").trim()) return `${name}: ${methodInstructions(field.evidence_kind).error}`;
   }
@@ -477,7 +559,9 @@ function sourceComponentSelector(item, review, field) {
     const source = item.source_inventory.find((entry) => entry.source_file === sourceFile);
     if (!source) return;
     const options = el("div", { className: "source-component-options" });
-    sourceComponents(source).forEach((component) => {
+    const components = sourceComponents(source).filter((component) =>
+      field.value_mode !== "source_column_references" || component.source_kind === "TABLE_COLUMN");
+    components.forEach((component) => {
       const input = el("input", { attrs: { type: "checkbox" } });
       const id = sourceBindingId(component);
       input.checked = selected.has(id);
@@ -506,9 +590,20 @@ function sourceComponentSelector(item, review, field) {
       options,
     ]));
   });
+  const fieldLabel = String(field.name || "this field").replaceAll("_", " ");
+  const referenceMode = field.value_mode === "source_column_references";
   return el("div", { className: "route-control full source-component-selector" }, [
-    el("span", { text: "4. Tick the exact source parts used for this value" }),
-    el("div", { className: "help", text: "Copied value: tick where it appears. Calculation: tick every input column. Scientific rule: tick every column you examined." }),
+    el("span", {
+      text: referenceMode
+        ? `5. Which source column(s) should ${fieldLabel} reference?`
+        : `5. Which source parts were used to obtain ${fieldLabel}?`,
+    }),
+    el("div", {
+      className: "help",
+      text: referenceMode
+        ? "Every checked column will be stored as a reference inside this field only."
+        : "Copied value: tick where it appears. Calculation: tick every input column. Scientific rule: tick every column you examined.",
+    }),
     groups,
   ]);
 }
@@ -639,7 +734,7 @@ function newFieldIdentityControls(field, review) {
       name,
     ]),
     el("div", { className: "field-name-help full" }, [
-      el("span", { text: "The page only converts letters to lowercase and replaces spaces with underscores. No model is used. Confirm that the name is meaningful and unique." }),
+      el("span", { text: "The page converts letters to lowercase and replaces spaces with underscores. Confirm that the name is meaningful and unique." }),
       preview,
     ]),
     el("label", { className: "route-control full" }, [
@@ -654,11 +749,11 @@ function methodInstructions(evidenceKind) {
   const instructions = {
     DIRECT_EXTRACTION: {
       title: "Copy from the file",
-      text: "Type the exact column or header name. No formula is needed.",
-      label: "Identify the exact source location",
-      placeholder: "Column or header = Potential applied (V)",
-      error: "Enter the exact column, header or other source location where you read this value.",
-      example: "Column or header = Potential applied (V)",
+      text: "Select the exact source part in step 5. No formula or repeated column name is needed.",
+      label: "Direct reading",
+      placeholder: "Recorded automatically from the selected source part.",
+      error: "Select the source part where this value was read.",
+      example: "Tick the exact filename, header or column in step 5.",
     },
     DETERMINISTIC_DERIVATION: {
       title: "Calculate from values in the file",
@@ -717,40 +812,69 @@ function routeFieldEditor(item, review) {
     field.use_existing = false;
     controls.append(
       ...newFieldIdentityControls(field, review),
-      compactSelect("Choose the value type", field.type, [["string", "Text"], ["number", "Number"], ["boolean", "True / false"], ["array", "List"], ["object", "Object"]], (value) => {
-        field.type = value || "string";
+      compactSelect("2. What should this metadata store?", field.value_mode || "literal", [
+        ["literal", "An actual value or calculated result"],
+        ["source_column_references", "Reference(s) to source data column(s)"],
+      ], (value) => {
+        field.value_mode = value || "literal";
+        field.type = field.value_mode === "source_column_references" ? "array" : "string";
+        if (field.value_mode === "source_column_references") {
+          field.source_bindings = (field.source_bindings || []).filter(
+            (binding) => binding.source_kind === "TABLE_COLUMN",
+          );
+        }
         field.value_raw = "";
         routeFieldChanged(review, true);
       }),
     );
 
     if (field.use_existing === false) {
-      if (field.type === "boolean") {
-        controls.append(compactSelect("2. Enter the verified metadata value", field.value_raw, [["true", "True"], ["false", "False"]], (value) => {
+      if (field.value_mode !== "source_column_references") {
+        controls.append(compactSelect("Choose the value type", field.type, [["string", "Text"], ["number", "Number"], ["boolean", "True / false"], ["array", "List"], ["object", "Object"]], (value) => {
+          field.type = value || "string";
+          field.value_raw = "";
+          routeFieldChanged(review, true);
+        }));
+      }
+
+      if (field.value_mode === "source_column_references") {
+        controls.append(el("div", { className: "fixed-data-type full" }, [
+          el("span", { className: "fixed-data-type-label", text: "Data type for this field:" }),
+          el("strong", { text: "List of source-column reference objects" }),
+          el("code", { text: "[{ source_file, column, unit }]" }),
+        ]));
+        controls.append(el("div", { className: "method-guidance full" }, [
+          el("strong", { text: "The metadata will contain source-column references" }),
+          el("span", { text: "Do not paste the full data series. In step 5, select every source column containing it. The page creates the references automatically." }),
+        ]));
+      } else if (field.type === "boolean") {
+        controls.append(compactSelect("3. Enter the verified metadata value", field.value_raw, [["true", "True"], ["false", "False"]], (value) => {
           field.value_raw = value;
           routeFieldChanged(review);
         }));
       } else {
         const valueHint = field.type === "array"
-          ? "Enter a list in this form: [1, 2, 3]."
+          ? "Enter the actual values, for example [0.001, 0.001, 0.001]. For per-file results use [{\"source_file\": \"record.txt\", \"value\": 0.001, \"unit\": \"V\"}]."
           : field.type === "object"
             ? "Enter labeled values in this form: {\"unit\": \"V\"}."
             : field.type === "number"
               ? "Enter only the number. Put the unit in the field description. Example: 5400"
               : "Enter the value exactly as supported by the evidence. Include the unit when needed.";
-        controls.append(compactTextarea("2. Enter the verified metadata value", field.value_raw, (value) => {
+        controls.append(compactTextarea("3. Enter the verified metadata value", field.value_raw, (value) => {
           field.value_raw = value;
           routeFieldChanged(review);
         }, valueHint));
       }
 
-      controls.append(compactSelect("3. How did you obtain this value?", field.evidence_kind, [
+      controls.append(compactSelect("4. How did you obtain this metadata?", field.evidence_kind, [
         ["DIRECT_EXTRACTION", "Copy it directly - no calculation"],
         ["DETERMINISTIC_DERIVATION", "Calculate it from values in the file"],
         ["DOMAIN_RULE", "Interpret the data using a scientific rule"],
       ], (value) => {
         field.evidence_kind = value;
-        field.method = "";
+        field.method = value === "DIRECT_EXTRACTION"
+          ? "Read directly from the selected source part(s)."
+          : "";
         routeFieldChanged(review, true);
       }));
 
@@ -767,12 +891,14 @@ function routeFieldEditor(item, review) {
             el("span", { text: methodHelp.example }),
           ]),
         ]));
-        controls.append(compactTextarea(`5. ${methodHelp.label}`, field.method, (value) => {
-          field.method = value;
-          routeFieldChanged(review);
-        }, methodHelp.placeholder));
+        if (field.evidence_kind !== "DIRECT_EXTRACTION") {
+          controls.append(compactTextarea(`6. ${methodHelp.label}`, field.method, (value) => {
+            field.method = value;
+            routeFieldChanged(review);
+          }, methodHelp.placeholder));
+        }
       } else {
-        controls.append(el("div", { className: "next-action full", text: "Choose an option in step 3 to see exactly what to write in step 5." }));
+        controls.append(el("div", { className: "next-action full", text: "Choose an option in step 4 to see exactly what to write in step 6." }));
       }
     }
     card.append(controls);

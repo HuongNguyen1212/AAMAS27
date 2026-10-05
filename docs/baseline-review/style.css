@@ -240,6 +240,9 @@ button:disabled { cursor: default; opacity: 0.45; }
 .method-guidance { display: grid; gap: 3px; padding: 9px 10px; border-left: 3px solid #2463a8; background: #eef5fc; }
 .method-guidance strong { color: #234e7c; font-size: 12px; }
 .method-guidance span { color: #526174; font-size: 11px; line-height: 1.4; }
+.fixed-data-type { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 9px 10px; border: 1px solid #cbd6e2; border-radius: 5px; background: #f8fafc; color: #243b53; }
+.fixed-data-type-label { color: #52667a; font-size: 11px; font-weight: 700; }
+.fixed-data-type code { padding: 3px 6px; border-radius: 4px; background: #e9eef4; color: #334e68; font-size: 11px; }
 .method-example { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 7px; margin-top: 5px; padding-top: 6px; border-top: 1px solid #cfdeed; }
 .method-example b { color: #344054; font-size: 11px; }
 .method-example span { overflow-wrap: anywhere; }
@@ -251,7 +254,7 @@ button:disabled { cursor: default; opacity: 0.45; }
 .compact-button { min-height: 30px; padding: 4px 8px; font-size: 11px; }
 .route-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
 .route-control { display: grid; align-content: start; gap: 5px; }
-.route-control.full, .existing-field-summary.full, .method-guidance.full, .next-action.full, .field-name-help.full { grid-column: 1 / -1; }
+.route-control.full, .existing-field-summary.full, .method-guidance.full, .fixed-data-type.full, .next-action.full, .field-name-help.full { grid-column: 1 / -1; }
 .field-name-help { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 9px; border-left: 3px solid #2463a8; background: #f4f8fc; }
 .field-name-help span { color: #526174; font-size: 11px; line-height: 1.4; }
 .field-name-help code { flex: none; padding: 5px 7px; border: 1px solid #d7dee8; background: #fff; color: #243f5e; font-size: 11px; }
@@ -302,7 +305,7 @@ button:disabled { cursor: default; opacity: 0.45; }
   .evidence-grid, .form-grid { grid-template-columns: 1fr; }
   .form-field.full { grid-column: auto; }
   .route-field-grid { grid-template-columns: 1fr; }
-  .route-control.full, .existing-field-summary.full, .method-guidance.full, .next-action.full, .field-name-help.full { grid-column: auto; }
+  .route-control.full, .existing-field-summary.full, .method-guidance.full, .fixed-data-type.full, .next-action.full, .field-name-help.full { grid-column: auto; }
   .field-name-help { align-items: start; flex-direction: column; }
   .source-component-options { grid-template-columns: 1fr; }
 }
