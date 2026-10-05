@@ -35,7 +35,7 @@
         </div>
         <ol class="quick-steps three-steps">
           <li><strong>Open the files</strong><span>Check whether the answer is supported by the actual source data.</span></li>
-          <li><strong>Record each value</strong><span>Choose a schema field, enter its value and identify exactly where it came from.</span></li>
+          <li><strong>Define each value</strong><span>Create its schema field, enter its value and identify exactly where it came from.</span></li>
           <li><strong>Confirm and save</strong><span>Check the completed summary, confirm four statements and continue.</span></li>
         </ol>
       </section>
@@ -45,7 +45,7 @@
         <div class="guide-content">
           <section>
             <h2>Your goal</h2>
-            <p>Create one verified baseline for each question. A baseline contains the schema field, grounded metadata value, exact source parts and procedure needed to reproduce the reference answer. You are not classifying failures on this page.</p>
+            <p>Create one verified baseline for each question. Define every required schema field yourself from the question, reference answer and permitted source data. A baseline also contains grounded metadata values, exact source parts and procedures needed to reproduce the reference answer. You are not classifying failures on this page.</p>
           </section>
 
           <section>
@@ -53,7 +53,7 @@
             <ol>
               <li>Enter a reviewer code, for example <code>expert_01</code>.</li>
               <li>Read the question and reference answer.</li>
-              <li>Open the source files and schema when you need to inspect them. Shared experiment information is background only.</li>
+              <li>Open the source files when you need to inspect them. Shared experiment information is background only.</li>
             </ol>
           </section>
 
@@ -75,8 +75,8 @@
               <dt>Shared experiment information</dt>
               <dd>This is provided only to help you understand the experiment. It is not an evidence source. Do not use it to verify the answer or enter a metadata value.</dd>
 
-              <dt>Existing or new field</dt>
-              <dd>Use an existing field when the schema already has a suitable place for the value. For a new field, first enter a short concept name such as <code>potential unit</code>. The page converts it mechanically to <code>potential_unit</code>. Check the suggested name, then write one sentence explaining what the field stores, including its scope and unit when needed.</dd>
+              <dt>Define a schema field</dt>
+              <dd>For every required metadata value, enter a short concept name such as <code>potential unit</code>. The page converts it mechanically to <code>potential_unit</code>. Check the suggested name, choose its data type and write one sentence explaining what the field stores, including its scope and unit when needed. No pre-existing or model-generated schema fields are provided.</dd>
 
               <dt>Value</dt>
               <dd>Enter the value supported by the evidence, including the unit when the field is text. Do not invent a value to match the reference answer.</dd>
@@ -95,8 +95,8 @@
 
           <section>
             <h2>One short example</h2>
-            <p>For “What is the total duration?”, you might use the existing field <code>experiment_duration_seconds</code>, enter <code>5400</code>, choose <strong>Calculate</strong>, tick the <code>Time(s)</code> column and write <code>Formula = max(Time(s)) - min(Time(s)); Input = Time(s); Unit = seconds</code>.</p>
-            <p>When a new field is required, enter <code>potential unit</code> as the short concept name, check the suggested name <code>potential_unit</code> and describe it as <code>Unit used for applied and working-electrode potential values.</code></p>
+            <p>For “What is the total duration?”, define <code>experiment_duration_seconds</code>, enter <code>5400</code>, choose <strong>Calculate</strong>, tick the <code>Time(s)</code> column and write <code>Formula = max(Time(s)) - min(Time(s)); Input = Time(s); Unit = seconds</code>.</p>
+            <p>For a potential unit, enter <code>potential unit</code> as the short concept name, check the suggested name <code>potential_unit</code> and describe it as <code>Unit used for applied and working-electrode potential values.</code></p>
             <p>If an answer needs two metadata values, such as potential unit and current unit, complete one value box for each field.</p>
           </section>
 
@@ -138,10 +138,10 @@
       window.HUMAN_ROUTE_CONFIG = {
         packetPath: "route_authoring_packet.json",
         sourceLinksEnabled: false,
-        storageKey: "rq1-human-route-authoring-v1",
-        reviewProtocol: "rq1-independent-human-route-review-v1"
+        storageKey: "rq1-human-route-authoring-v2",
+        reviewProtocol: "rq1-independent-human-route-review-v2"
       };
     </script>
-    <script src="app.js?v=25"></script>
+    <script src="app.js?v=26"></script>
   </body>
 </html>

@@ -54,7 +54,7 @@ function blankRouteField() {
     name: "",
     auto_name: true,
     concept_label: "",
-    use_existing: null,
+    use_existing: false,
     type: "string",
     description: "",
     value_raw: "",
@@ -114,9 +114,7 @@ function valueToRaw(value) {
 
 function routeFieldsFromStructured(item, schemaFields, metadata, provenance, defaultEvidenceKind = "") {
   if (!Array.isArray(schemaFields)) return [];
-  const bootstrapFields = item?.bootstrap_schema_fields || [];
   const sourceInventory = item?.source_inventory || [];
-  const bootstrapNames = new Set(bootstrapFields.map((field) => field.name));
   return schemaFields.map((field) => {
     const name = String(field?.name || "");
     const source = provenance?.[name] || {};
@@ -128,9 +126,9 @@ function routeFieldsFromStructured(item, schemaFields, metadata, provenance, def
       name,
       auto_name: false,
       concept_label: name.replaceAll("_", " "),
-      use_existing: field?.use_existing === true || bootstrapNames.has(name),
-      type: String(field?.type || bootstrapFields.find((entry) => entry.name === name)?.type || "string"),
-      description: String(field?.description || bootstrapFields.find((entry) => entry.name === name)?.description || ""),
+      use_existing: false,
+      type: String(field?.type || "string"),
+      description: String(field?.description || ""),
       value_raw: Object.prototype.hasOwnProperty.call(metadata || {}, name) ? valueToRaw(metadata[name]) : "",
       source_ref: source.dataset_context === true ? "__DATASET_CONTEXT__" : String(matchedSource?.source_file || source.source_file || ""),
       source_bindings: Array.isArray(source.source_bindings)
@@ -291,7 +289,6 @@ function routeDefinitionError(item, review) {
   if (!review.route_fields.length) return "Add at least one value needed for the answer.";
   const names = new Set();
   for (const field of review.route_fields) {
-    if (field.use_existing !== true && field.use_existing !== false) return "For each value, choose an existing field or create a new field.";
     const name = String(field.name || "").trim();
     if (!name) return "Choose or enter a field name for every value.";
     if (!/^[a-z][a-z0-9_]*$/.test(name)) return `${name}: field names must use snake_case, for example potential_unit.`;
@@ -404,18 +401,6 @@ function labeledValue(label, value) {
     el("div", { className: "value-label", text: label }),
     el("div", { className: "value-content", text: value || "Not provided" }),
   ]);
-}
-
-function renderSchema(item) {
-  const grid = el("div", { className: "schema-grid" });
-  item.bootstrap_schema_fields.forEach((field) => {
-    grid.append(el("section", { className: "schema-card" }, [
-      el("strong", { text: field.name }),
-      el("span", { className: "field-type", text: field.type || "unspecified type" }),
-      el("p", { text: field.description || "No description recorded." }),
-    ]));
-  });
-  return grid;
 }
 
 function renderSources(item) {
@@ -646,7 +631,7 @@ function newFieldIdentityControls(field, review) {
   refreshPreview();
   return [
     el("label", { className: "route-control" }, [
-      el("span", { text: "Short concept name" }),
+      el("span", { text: "1. Short concept name" }),
       concept,
     ]),
     el("label", { className: "route-control" }, [
@@ -729,59 +714,17 @@ function routeFieldEditor(item, review) {
     ]));
 
     const controls = el("div", { className: "route-field-grid" });
-    const originValue = field.use_existing === true ? "EXISTING" : field.use_existing === false ? "NEW" : "";
-    const originControl = compactSelect("1. Where should this metadata value be stored?", originValue, [
-      ["EXISTING", "Use a field already listed in the schema"],
-      ["NEW", "Create a new field because no suitable field exists"],
-    ], (value) => {
-      const previousOrigin = field.use_existing;
-      field.use_existing = value === "EXISTING" ? true : value === "NEW" ? false : null;
-      if (field.use_existing && !item.bootstrap_schema_fields.some((entry) => entry.name === field.name)) {
-        field.name = "";
-        field.concept_label = "";
-        field.description = "";
-        field.auto_name = false;
-      }
-      if (field.use_existing === false && previousOrigin !== false) {
-        field.name = "";
-        field.concept_label = "";
-        field.description = "";
-        field.type = "string";
-        field.auto_name = true;
-      }
-      routeFieldChanged(review, true);
-    });
-    originControl.classList.add("full");
-    controls.append(originControl);
-
-    if (field.use_existing === true) {
-      controls.append(compactSelect("Choose the field", field.name, item.bootstrap_schema_fields.map((entry) => [entry.name, `${entry.name} (${entry.type || "unspecified"})`]), (value) => {
-        const selected = item.bootstrap_schema_fields.find((entry) => entry.name === value);
-        field.name = value;
-        field.auto_name = false;
-        field.concept_label = value.replaceAll("_", " ");
-        field.type = selected?.type || "string";
-        field.description = selected?.description || "";
+    field.use_existing = false;
+    controls.append(
+      ...newFieldIdentityControls(field, review),
+      compactSelect("Choose the value type", field.type, [["string", "Text"], ["number", "Number"], ["boolean", "True / false"], ["array", "List"], ["object", "Object"]], (value) => {
+        field.type = value || "string";
+        field.value_raw = "";
         routeFieldChanged(review, true);
-      }));
-      if (field.name) {
-        controls.append(el("div", { className: "existing-field-summary full" }, [
-          el("strong", { text: `${field.name}: ${field.type}` }),
-          el("span", { text: field.description || "No bootstrap description recorded." }),
-        ]));
-      }
-    } else if (field.use_existing === false) {
-      controls.append(
-        ...newFieldIdentityControls(field, review),
-        compactSelect("Choose the value type", field.type, [["string", "Text"], ["number", "Number"], ["boolean", "True / false"], ["array", "List"], ["object", "Object"]], (value) => {
-          field.type = value || "string";
-          field.value_raw = "";
-          routeFieldChanged(review, true);
-        }),
-      );
-    }
+      }),
+    );
 
-    if (field.use_existing === true || field.use_existing === false) {
+    if (field.use_existing === false) {
       if (field.type === "boolean") {
         controls.append(compactSelect("2. Enter the verified metadata value", field.value_raw, [["true", "True"], ["false", "False"]], (value) => {
           field.value_raw = value;
@@ -1110,10 +1053,6 @@ function renderItem() {
     renderSources(item),
   ]));
   root.append(el("details", { className: "panel reference-details" }, [
-    el("summary", { text: `Open the current schema (${item.bootstrap_schema_fields.length} fields)` }),
-    renderSchema(item),
-  ]));
-  root.append(el("details", { className: "panel reference-details" }, [
     el("summary", { text: "Open background information (for understanding only, not evidence)" }),
     el("pre", { className: "context", text: item.dataset_context || "No shared experiment information was provided." }),
   ]));
@@ -1252,7 +1191,11 @@ async function loadPacket() {
   const response = await fetch(config.packetPath);
   if (!response.ok) throw new Error(`Failed to load ${config.packetPath}: ${response.status}`);
   state.packet = await response.json();
-  if (state.packet.route_suggestions_included !== false || state.packet.previous_annotations_included !== false) {
+  if (
+    state.packet.route_suggestions_included !== false
+    || state.packet.schema_suggestions_included !== false
+    || state.packet.previous_annotations_included !== false
+  ) {
     throw new Error("The packet is not a blank independent-authoring packet.");
   }
   state.items = state.packet.items || [];
