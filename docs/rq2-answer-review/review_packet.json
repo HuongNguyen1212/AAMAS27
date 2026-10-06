@@ -306,7 +306,7 @@
       "case_id": "RQ2-AUDIT-044",
       "domain": "CV",
       "question": "Are there any spikes in the dataset?",
-      "reference_answer": "Yes, spikes are present in the Pd n7.",
+      "reference_answer": "No.",
       "system_answer": "Yes, there are spikes in the dataset."
     },
     {
@@ -422,13 +422,15 @@
       "system_answer": "For record_001 and record_002, the sample returns to its original length. For record_003, it does not."
     }
   ],
-  "packet_id": "sha256:de71680ee9e5515132172082ecf8068a82c8efa7b474eb3c236d3c33d61eceaa",
+  "packet_id": "sha256:175ea8991b3750f67add7f2aa87a9def76eff965f7617121352b2f341f1ebafb",
   "protocol": "rq2-single-answer-human-audit-v3",
-  "sample_status": "frozen",
+  "reference_correction_count": 1,
+  "sample_status": "frozen_reference_corrected",
   "score_scale": [
     1.0,
     0.5,
     0.0,
     null
-  ]
+  ],
+  "source_packet_id": "sha256:de71680ee9e5515132172082ecf8068a82c8efa7b474eb3c236d3c33d61eceaa"
 }

@@ -1,5 +1,5 @@
 {
-  "case_count": 13,
+  "case_count": 12,
   "cases": [
     {
       "case_id": "RQ2-REREVIEW-001",
@@ -60,12 +60,12 @@
       "case_id": "RQ2-REREVIEW-006",
       "domain": "DIL",
       "first_pass_choice": "Correct",
-      "first_pass_note": "The system answer is correct, but the information required to answer this question is not in the datafile itself.",
+      "first_pass_note": "The system answer is correct, but the information required to answer the question is not in the datafile itself.",
       "independent_judge_choice": "Partially correct",
-      "independent_judge_reason": "The system answer correctly identifies that the spikes are instrumental rather than physical, which is the main point. However, it states this definitively ('are instrumental') while the reference answer includes an important epistemic qualification ('Most probably'), indicating uncertainty. This qualification is material to the scientific accuracy of the answer.",
-      "question": "Are derivative spikes (noise) physical or instrumental?",
-      "reference_answer": "Most probably instrumental",
-      "system_answer": "The derivative spikes (noise) are instrumental."
+      "independent_judge_reason": "The system answer correctly confirms that multiple kinetic processes are present, which is the main point. However, it lacks the essential detail provided in the reference answer about what those specific processes are (proton transport, adsorption, absorption, bulk diffusion), which is material information for a scientific QA context.",
+      "question": "Are multiple kinetic processes present?",
+      "reference_answer": "Possible processes are: proton transport, adsorption, absorption, bulk diffusion",
+      "system_answer": "Yes, multiple kinetic processes are present."
     },
     {
       "case_id": "RQ2-REREVIEW-007",
@@ -93,12 +93,12 @@
       "case_id": "RQ2-REREVIEW-009",
       "domain": "DIL",
       "first_pass_choice": "Correct",
-      "first_pass_note": "The system answer is correct, but the information required to answer the question is not in the datafile itself.",
+      "first_pass_note": "No note provided.",
       "independent_judge_choice": "Partially correct",
-      "independent_judge_reason": "The system answer correctly confirms that multiple kinetic processes are present, which is the main point. However, it lacks the essential detail provided in the reference answer about what those specific processes are (proton transport, adsorption, absorption, bulk diffusion), which is material information for a scientific QA context.",
-      "question": "Are multiple kinetic processes present?",
-      "reference_answer": "Possible processes are: proton transport, adsorption, absorption, bulk diffusion",
-      "system_answer": "Yes, multiple kinetic processes are present."
+      "independent_judge_reason": "The system answer correctly identifies that smoothing is needed, but omits essential context from the reference: the SNR value (13.5 dB), the moderate quality characterization, and the specific reasons for smoothing (improving readability and quantitative peak analysis). The answer is directionally correct but lacks important qualifying information.",
+      "question": "Is smoothing required for the dL/dt data?",
+      "reference_answer": "An SNR of approximately 13.5 dB indicates a signal of moderate quality. Smoothing is recommended to improve figure readability and quantitative peak analysis.",
+      "system_answer": "Yes, smoothing is required for the dL/dt data."
     },
     {
       "case_id": "RQ2-REREVIEW-010",
@@ -115,17 +115,6 @@
       "case_id": "RQ2-REREVIEW-011",
       "domain": "DIL",
       "first_pass_choice": "Correct",
-      "first_pass_note": "No note provided.",
-      "independent_judge_choice": "Partially correct",
-      "independent_judge_reason": "The system answer correctly identifies that smoothing is needed, but omits essential context from the reference: the SNR value (13.5 dB), the moderate quality characterization, and the specific reasons for smoothing (improving readability and quantitative peak analysis). The answer is directionally correct but lacks important qualifying information.",
-      "question": "Is smoothing required for the dL/dt data?",
-      "reference_answer": "An SNR of approximately 13.5 dB indicates a signal of moderate quality. Smoothing is recommended to improve figure readability and quantitative peak analysis.",
-      "system_answer": "Yes, smoothing is required for the dL/dt data."
-    },
-    {
-      "case_id": "RQ2-REREVIEW-012",
-      "domain": "DIL",
-      "first_pass_choice": "Correct",
       "first_pass_note": "The System answer is correct, but that information is not in the datafile itself.",
       "independent_judge_choice": "Partially correct",
       "independent_judge_reason": "The system answer correctly identifies 'electrochemical charging' as the method, which is the core concept. However, it omits the essential qualification that the charging occurs 'in an acidic electrolyte,' which is a material condition specified in the reference answer.",
@@ -134,18 +123,18 @@
       "system_answer": "Electrochemical charging"
     },
     {
-      "case_id": "RQ2-REREVIEW-013",
-      "domain": "CV",
-      "first_pass_choice": "Incorrect",
-      "first_pass_note": "The reference answer is incorrect. The system answer is the same as the reference answer. Therefore, both are incorrect.",
+      "case_id": "RQ2-REREVIEW-012",
+      "domain": "DIL",
+      "first_pass_choice": "Correct",
+      "first_pass_note": "The system answer is correct, but the information required to answer this question is not in the datafile itself.",
       "independent_judge_choice": "Partially correct",
-      "independent_judge_reason": "The system answer correctly confirms that spikes are present, but omits the essential detail that the spikes are specifically in 'Pd n7', which is a material piece of information provided in the reference answer.",
-      "question": "Are there any spikes in the dataset?",
-      "reference_answer": "Yes, spikes are present in the Pd n7.",
-      "system_answer": "Yes, there are spikes in the dataset."
+      "independent_judge_reason": "The system answer correctly identifies that the spikes are instrumental rather than physical, which is the main point. However, it states this definitively ('are instrumental') while the reference answer includes an important epistemic qualification ('Most probably'), indicating uncertainty. This qualification is material to the scientific accuracy of the answer.",
+      "question": "Are derivative spikes (noise) physical or instrumental?",
+      "reference_answer": "Most probably instrumental",
+      "system_answer": "The derivative spikes (noise) are instrumental."
     }
   ],
-  "packet_id": "sha256:e456e9f8f128a03f4111725039539ed2967d979015709b58ee7e42f2932df48f",
+  "packet_id": "sha256:28b9390890c0e99a1f3a26f449915a09bd30fd5b2efa98011cf239e4846f0fa3",
   "protocol": "rq2-single-answer-human-audit-v3",
   "review_type": "representative_disagreement_adjudication",
   "sample_status": "frozen",
