@@ -128,7 +128,8 @@ function renderCase() {
       <div class="response-title"><h3>System answer</h3></div>
       <div class="answer-text">${escapeHtml(item.system_answer)}</div>
     </section>
-    ${item.first_pass_choice ? `<section class="reference"><h3>First-pass choice</h3><p>${escapeHtml(item.first_pass_choice)}</p></section>` : ""}
+    ${item.first_pass_choice ? `<section class="reference"><h3>First-pass expert choice</h3><p>${escapeHtml(item.first_pass_choice)}</p></section>` : ""}
+    ${item.independent_judge_choice ? `<section class="reference"><h3>Independent judge choice</h3><p>${escapeHtml(item.independent_judge_choice)}</p></section>` : ""}
     <section class="comparison">
       <h3>How accurate is the system answer?</h3>
       <p>Compare its scientific content with the reference. Differences in wording alone do not matter.</p>
