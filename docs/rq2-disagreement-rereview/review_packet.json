@@ -4,8 +4,8 @@
     {
       "case_id": "RQ2-REREVIEW-001",
       "domain": "CV",
-      "first_pass_choice": "Incorrect",
-      "first_pass_note": "No note provided.",
+      "first_pass_choice": "Correct",
+      "first_pass_note": "Reviewer-confirmed correction: the abstention is consistent with the reference requirement for unavailable additional input.",
       "independent_judge_choice": "Partially correct",
       "independent_judge_reason": "Both answers indicate uncertainty/inability to provide a definitive answer, but the reference provides more informative context by explaining that WAXS/SAXS data would be needed as additional input to answer the question. The system's 'No answer' is directionally correct in acknowledging the question cannot be answered, but lacks the helpful qualification about what would be required.",
       "question": "Can this be correlated with WAXS/SAXS phase data (if available)?",
@@ -134,7 +134,7 @@
       "system_answer": "The derivative spikes (noise) are instrumental."
     }
   ],
-  "packet_id": "sha256:28b9390890c0e99a1f3a26f449915a09bd30fd5b2efa98011cf239e4846f0fa3",
+  "packet_id": "sha256:4f514bd2f53c700030fdadf58118ccb27dc8ef8bf59afaf3ecefd88b54ed2371",
   "protocol": "rq2-single-answer-human-audit-v3",
   "review_type": "representative_disagreement_adjudication",
   "sample_status": "frozen",
