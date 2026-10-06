@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RQ1 Controlled Benchmark Audit</title>
+    <title>RQ1 Failure Review</title>
     <link rel="stylesheet" href="style.css" />
     
   </head>
@@ -11,7 +11,7 @@
     <main class="app">
       <header class="topbar">
         <div>
-          <h1>RQ1 Controlled Benchmark Audit</h1>
+          <h1>RQ1 Failure Review</h1>
           <p id="progressText">Load cases to start reviewing.</p>
         </div>
         <div class="reviewer-box">
@@ -42,39 +42,82 @@
 
       <section class="guide">
         <details open>
-          <summary>Review guide</summary>
-          <div class="review-steps">
-            <div><strong>1.</strong> Read the question, shown schema fields, metadata, answer and evaluator feedback.</div>
-            <div><strong>2.</strong> Judge each failure hypothesis independently from the shown evidence.</div>
-            <div><strong>3.</strong> Use <strong>SUPPORTED</strong> only when the evidence positively supports that cause.</div>
-            <div><strong>4.</strong> Use <strong>UNRESOLVED</strong> when the evidence is not enough to decide.</div>
-            <div><strong>5.</strong> Click <strong>Next</strong> to save and mark the current case done.</div>
-            <div><strong>6.</strong> Click <strong>Export Progress</strong> at any time. To continue on another computer, open this page and use <strong>Import Progress</strong> to restore the downloaded JSON.</div>
-          </div>
-          <div class="guide-cards">
-            <section class="guide-card schema-card">
-              <h3>Schema Deficiency</h3>
-              <p class="guide-focus">Can the schema represent what the question needs?</p>
-              <p>Supported when the schema lacks a required field, structure, unit, provenance, extraction rule or derivation rule.</p>
-            </section>
-
-            <section class="guide-card metadata-card">
-              <h3>Data Gap</h3>
-              <p class="guide-focus">Is the required information available from the permitted evidence?</p>
-              <p>Supported when the source evidence shown for this case cannot ground or derive the needed information.</p>
-            </section>
-
-            <section class="guide-card answer-card">
-              <h3>Reasoning Failure</h3>
-              <p class="guide-focus">Was enough grounded metadata available but used incorrectly?</p>
-              <p>Supported when the answer ignores, misuses, miscalculates or contradicts available grounded metadata.</p>
-            </section>
-
-            <section class="guide-card rejection-card">
-              <h3>Evaluation Failure</h3>
-              <p class="guide-focus">Was a grounded answer rejected?</p>
-              <p>Supported when the answer is responsive and supported by shown evidence, but the evaluator feedback rejects it.</p>
-            </section>
+          <summary>Worked example: how to judge one case</summary>
+          <div class="worked-example">
+            <p class="example-disclaimer"><strong>Practice example only.</strong> This fictional example is not one of the 96 review cases.</p>
+            <div class="term-explanation">
+              <strong>Schema and metadata in this review</strong>
+              <p><strong>Schema (section A)</strong> lists the fields available to the system. Each field states what can be stored and, when needed, how it can be read or calculated. A field or rule that is not shown is unavailable in that case.</p>
+              <p><strong>Metadata (section B)</strong> lists the values and source-column references currently available from the source data. Metadata that is not shown is unavailable in that case.</p>
+              <p>The exact <strong>Schema JSON</strong> and <strong>Metadata JSON</strong> are provided under sections A and B of every case and can be expanded for verification.</p>
+              <p>If the source contains the required information but the schema has no suitable instruction for it, assess <strong>Missing capability (Schema Deficiency)</strong>.</p>
+            </div>
+            <div class="example-evidence">
+              <div><strong>Question</strong><span>What is the maximum temperature?</span></div>
+              <div><strong>Available source file</strong><span>The file contains a <code>Temperature (°C)</code> column.</span></div>
+              <div><strong>A. Schema fields available to the system</strong><span>The schema has fields for time and length, but no field or calculation rule for maximum temperature.</span></div>
+              <div><strong>B. Metadata available from the current source data</strong><span>The permitted source file contains the temperature column.</span></div>
+              <div><strong>C. Answer produced</strong><span>No answer.</span></div>
+              <div><strong>D. Evaluator decision</strong><span>The answer was rejected.</span></div>
+            </div>
+            <div class="example-reasoning">
+              <h3>How to decide</h3>
+              <ol>
+                <li>The question requires the maximum temperature.</li>
+                <li>The permitted source file contains temperature data, so the source information is not missing.</li>
+                <li>Section A has no instruction for storing or calculating maximum temperature.</li>
+                <li>The missing instruction explains why the system could not answer.</li>
+              </ol>
+            </div>
+            <div class="example-result" aria-label="Example judgments">
+              <div><strong>Missing capability (Schema Deficiency)</strong><span class="example-yes">Yes</span></div>
+              <div><strong>Missing source information (Data Gap)</strong><span>No</span></div>
+              <div><strong>Answer-use problem (Reasoning Failure)</strong><span>No</span></div>
+              <div><strong>Wrong rejection (Evaluation Failure)</strong><span>No</span></div>
+            </div>
+            <div class="failure-comparison">
+              <h3>The simplest way to distinguish the four causes</h3>
+              <p class="comparison-order"><strong>Check:</strong> Schema instructions → source/metadata → answer → rejection.</p>
+              <div class="failure-table" role="table" aria-label="Comparison of the four failure causes">
+                <div class="failure-table-head" role="row">
+                  <strong role="columnheader">Cause</strong>
+                  <strong role="columnheader">Schema</strong>
+                  <strong role="columnheader">Source and metadata</strong>
+                  <strong role="columnheader">Answer</strong>
+                  <strong role="columnheader">Rejection</strong>
+                </div>
+                <div role="row">
+                  <strong role="cell">Schema Deficiency</strong>
+                  <span role="cell">Required field or rule is missing</span>
+                  <span role="cell">Required source information is available</span>
+                  <span role="cell">May be “No answer”</span>
+                  <span role="cell">Rejecting the answer can be justified</span>
+                </div>
+                <div role="row">
+                  <strong role="cell">Data Gap</strong>
+                  <span role="cell">Required field and rule are available</span>
+                  <span role="cell">Required information is missing</span>
+                  <span role="cell">May be “No answer”</span>
+                  <span role="cell">Rejecting the answer can be justified</span>
+                </div>
+                <div role="row">
+                  <strong role="cell">Reasoning Failure</strong>
+                  <span role="cell">Required field and rule are available</span>
+                  <span role="cell">Required information is available</span>
+                  <span role="cell">Wrong, contradictory or missing</span>
+                  <span role="cell">Rejecting the answer can be justified</span>
+                </div>
+                <div role="row">
+                  <strong role="cell">Evaluation Failure</strong>
+                  <span role="cell">Required field and rule are available</span>
+                  <span role="cell">Required information is available</span>
+                  <span role="cell">Correct and supported</span>
+                  <span role="cell">Correct answer is rejected</span>
+                </div>
+              </div>
+              <p class="independent-note">Assess all four causes separately. Choose Yes only when the shown case satisfies the full row for that cause.</p>
+            </div>
+            <p class="cannot-decide-note"><strong>Choose Cannot decide</strong> when the page does not provide enough information to verify a condition. Do not choose Yes merely because C says “No answer.”</p>
           </div>
         </details>
       </section>
@@ -92,15 +135,15 @@
     </main>
     <script>
       window.RQ1_REVIEW_CONFIG = {
-        defaultPath: "cases.json",
-        storageKey: "rq1-controlled-case-review-public-v1",
+        defaultPath: "blinded_cases.json",
+        storageKey: "rq1-forward-controlled-benchmark-review-v2",
         protocol: "rq1-forward-controlled-benchmark-blind-expert-audit-v1",
         progressLabel: "review cases",
         progressVerb: "reviewed",
         usePreviousAnnotations: false,
-        controlledDatasetBase: "",
-        originalDatasetBase: "",
-        sourceLinksEnabled: false
+        sourceFilesDownloadable: false,
+        controlledDatasetBase: "datasets/",
+        originalDatasetBase: "datasets/"
       };
     </script>
     <script src="app.js"></script>

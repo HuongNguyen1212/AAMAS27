@@ -7,7 +7,7 @@ const progressLabel = reviewConfig.progressLabel || "review cases";
 const progressVerb = reviewConfig.progressVerb || "reviewed";
 const controlledDatasetBase = reviewConfig.controlledDatasetBase || "datasets/";
 const originalDatasetBase = reviewConfig.originalDatasetBase || "../review_web/datasets/";
-const sourceLinksEnabled = reviewConfig.sourceLinksEnabled !== false;
+const sourceFilesDownloadable = reviewConfig.sourceFilesDownloadable !== false;
 const state = {
   cases: [],
   selected: 0,
@@ -21,6 +21,49 @@ function text(value) {
   if (value === null || value === undefined) return "";
   if (typeof value === "object") return JSON.stringify(value, null, 2);
   return String(value);
+}
+
+function plainName(value) {
+  const words = String(value || "").replaceAll("_", " ").trim();
+  return words ? words.charAt(0).toUpperCase() + words.slice(1) : "Unnamed information";
+}
+
+function plainValue(value) {
+  if (value === null || value === undefined || value === "") return "Not available";
+  if (typeof value === "boolean") return value ? "Yes" : "No";
+  if (Array.isArray(value)) {
+    if (!value.length) return "No values available";
+    return value.map((entry) => typeof entry === "object" ? JSON.stringify(entry) : String(entry)).join("; ");
+  }
+  if (typeof value === "object") return JSON.stringify(value, null, 2);
+  return String(value);
+}
+
+function storageDescription(item) {
+  if (item.value_representation === "source_column_references") {
+    return "references to source-data columns; the full column is not copied here";
+  }
+  const labels = {
+    number: "one numeric value",
+    integer: "one whole-number value",
+    string: "one text value",
+    boolean: "a Yes/No value",
+    array: "a list of values",
+    object: "a structured set of values",
+  };
+  return labels[item.type] || "a value needed by the system";
+}
+
+function dataTypeDescription(item) {
+  const labels = {
+    number: "number",
+    integer: "whole number",
+    string: "text",
+    boolean: "Yes/No",
+    array: "list",
+    object: "structured object",
+  };
+  return labels[item.type] || String(item.type || "not specified");
 }
 
 function el(tag, attrs = {}, children = []) {
@@ -45,6 +88,7 @@ function keyClassFor(key) {
   const normalized = String(key).toLowerCase();
   if (normalized.includes("schema")) return "schema-key";
   if (normalized.includes("metadata")) return "metadata-key";
+  if (normalized.includes("source-column route")) return "metadata-key";
   if (normalized.includes("system answer")) return "answer-key";
   if (normalized.includes("rejection")) return "rejection-key";
   if (normalized.includes("question")) return "question-key";
@@ -52,61 +96,143 @@ function keyClassFor(key) {
   return "";
 }
 
-function chipList(items) {
-  const labels = {
-    source_pattern: "Source pattern",
-    regex: "Pattern",
-    depends_on: "Depends on",
-    depend: "Source dependency",
-    formula: "Formula",
-    comment: "Extraction / derivation guidance",
-    unit: "Unit",
-  };
+function routeList(items) {
   return el(
     "div",
-    { class: "chips" },
+    { class: "route-list" },
     (items || []).map((item) => {
       if (item && typeof item === "object") {
-        const type = item.type ? `: ${item.type}` : "";
-        const name = `${item.name || ""}${type}`;
-        const card = el("div", { class: "field-chip" }, [
-          el("div", { class: "field-name", text: name }),
+        const card = el("div", { class: "route-item" }, [
+          el("div", { class: "route-name", text: plainName(item.name) }),
         ]);
+        card.append(el("div", { class: "route-detail" }, [
+          el("strong", { text: "Field name: " }),
+          document.createTextNode(String(item.name || "not specified")),
+        ]));
+        card.append(el("div", { class: "route-detail" }, [
+          el("strong", { text: "Data type: " }),
+          document.createTextNode(dataTypeDescription(item)),
+        ]));
         if (item.description) {
-          card.append(el("div", { class: "field-description", text: item.description }));
-        }
-        const details = Object.entries(item).filter(
-          ([key, value]) => !["name", "type", "description"].includes(key)
-            && value !== null
-            && value !== ""
-            && (!Array.isArray(value) || value.length),
-        );
-        details.forEach(([key, value]) => {
-          const renderedValue = text(value);
-          const valueNode = key === "comment" && renderedValue.length > 320
-            ? el("details", { class: "field-property-value field-guidance" }, [
-                el("summary", { text: "Show full guidance" }),
-                el("div", { class: "field-guidance-text", text: renderedValue }),
-              ])
-            : el("span", { class: "field-property-value", text: renderedValue });
-          card.append(el("div", { class: "field-property" }, [
-            el("span", { class: "field-property-label", text: labels[key] || key.replaceAll("_", " ") }),
-            valueNode,
+          card.append(el("div", { class: "route-detail" }, [
+            el("strong", { text: "Purpose: " }),
+            document.createTextNode(String(item.description)),
           ]));
-        });
-        const hasRoute = ["source_pattern", "regex", "depends_on", "depend", "formula", "comment"]
-          .some((key) => item[key] !== undefined && item[key] !== null && item[key] !== "");
-        if (!hasRoute) {
-          card.append(el("div", {
-            class: "field-route-missing",
-            text: "No explicit source pattern, dependency, formula or field-level extraction guidance is recorded in this schema snapshot.",
-          }));
         }
+
+        card.append(el("div", { class: "route-detail" }, [
+          el("strong", { text: "What it stores: " }),
+          document.createTextNode(storageDescription(item)),
+        ]));
+
+        const inputs = item.depends_on || item.depend;
+        if (inputs && (!Array.isArray(inputs) || inputs.length)) {
+          card.append(el("div", { class: "route-detail" }, [
+            el("strong", { text: "Read from: " }),
+            document.createTextNode(Array.isArray(inputs) ? inputs.join(", ") : String(inputs)),
+          ]));
+        }
+
+        const formula = item.formula;
+        const guidance = item.comment && item.comment !== item.formula ? item.comment : "";
+        if (formula) card.append(el("div", { class: "route-detail" }, [
+          el("strong", { text: "Calculation or decision rule: " }),
+          document.createTextNode(String(formula)),
+        ]));
+
+        if (guidance) card.append(el("div", { class: "route-detail" }, [
+          el("strong", { text: formula ? "Additional extraction guidance: " : "How to obtain it: " }),
+          document.createTextNode(String(guidance)),
+        ]));
+
+        if (item.unit) card.append(el("div", { class: "route-detail" }, [
+          el("strong", { text: "Unit: " }),
+          document.createTextNode(String(item.unit)),
+        ]));
+
+        if (item.source_pattern) card.append(el("div", { class: "route-detail" }, [
+          el("strong", { text: "Source access: " }),
+          document.createTextNode(String(item.source_pattern).replaceAll("_", " ")),
+        ]));
+
+        if (!inputs && !formula && !guidance && !item.source_pattern) card.append(el("div", {
+          class: "route-warning",
+          text: "No source location or calculation rule is shown for this item.",
+        }));
+
         return card;
       }
-      return el("span", { class: "chip", text: String(item) });
+      return el("div", { class: "route-item", text: plainName(item) });
     }),
   );
+}
+
+function valueList(values) {
+  const entries = Object.entries(values || {});
+  if (!entries.length) {
+    return el("div", { class: "empty-evidence", text: "No question-relevant value or source reference is currently available." });
+  }
+  return el("div", { class: "information-list" }, entries.map(([name, value]) => {
+    return el("div", { class: "information-item" }, [
+      el("div", { class: "information-name", text: plainName(name) }),
+      el("div", { class: "information-value", text: plainValue(value) }),
+    ]);
+  }));
+}
+
+function sourceRouteList(routes) {
+  const entries = Object.entries(routes || {});
+  if (!entries.length) return null;
+  return el("div", { class: "information-list" }, entries.map(([name, bindings]) => {
+    const lines = (bindings || []).map((binding) => {
+      const count = Number(binding.source_file_count || 0);
+      const scope = count === 1 ? "1 source file" : `${count} source files`;
+      return `${binding.column}${binding.unit ? ` (${binding.unit})` : ""} · ${scope}`;
+    });
+    return el("div", { class: "information-item" }, [
+      el("div", { class: "information-name", text: plainName(name) }),
+      el("div", { class: "information-value", text: lines.join("; ") || "No source column selected" }),
+    ]);
+  }));
+}
+
+function jsonDetails(title, value) {
+  return el("details", { class: "raw-json" }, [
+    el("summary", { text: title }),
+    el("pre", { text: JSON.stringify(value, null, 2) }),
+  ]);
+}
+
+function splitMetadata(item) {
+  const fields = new Map(
+    (item.schema_fields || []).map((field) => [field.name, field]),
+  );
+  const values = {};
+  const sourceRoutes = {};
+  Object.entries(item.metadata || {}).forEach(([name, value]) => {
+    if (fields.get(name)?.value_representation === "source_column_references") {
+      const grouped = new Map();
+      (Array.isArray(value) ? value : []).forEach((entry) => {
+        const key = `${entry?.column || ""}\u0000${entry?.unit || ""}`;
+        if (!grouped.has(key)) {
+          grouped.set(key, {
+            column: entry?.column || "column not specified",
+            unit: entry?.unit || "",
+            source_files: new Set(),
+          });
+        }
+        if (entry?.source_file) grouped.get(key).source_files.add(entry.source_file);
+      });
+      sourceRoutes[name] = [...grouped.values()].map((entry) => ({
+        column: entry.column,
+        ...(entry.unit ? { unit: entry.unit } : {}),
+        source_file_count: entry.source_files.size,
+      }));
+    } else {
+      values[name] = value;
+    }
+  });
+  return { values, sourceRoutes };
 }
 
 function datasetLinks(item) {
@@ -117,11 +243,8 @@ function datasetLinks(item) {
     .map((file) => String(file))
     .filter((file) => file.endsWith(".txt") || file.endsWith(".json"))
     .map((file) => {
-      if (!sourceLinksEnabled) {
-        return el("span", {
-          class: "source-file-name",
-          text: file.split("/").at(-1) || file,
-        });
+      if (!sourceFilesDownloadable) {
+        return el("span", { class: "source-file-name", text: file.split("/").at(-1) });
       }
       const href = file === "dataset_context.txt"
         ? `${controlledDatasetBase}context/${encodeURIComponent(file)}`
@@ -141,9 +264,53 @@ function datasetLinks(item) {
   return box;
 }
 
+function sourceEvidenceSummary(sourceEvidence) {
+  const records = sourceEvidence?.records || [];
+  if (!records.length) {
+    return el("div", { class: "empty-evidence", text: "No source record information is shown." });
+  }
+  return el("div", { class: "information-list source-summary" }, records.map((record, index) => {
+    const sourceFile = record?.record_metadata?.source_file || record?.record_id || `source-${index + 1}`;
+    const columns = Array.isArray(record?.table_columns) ? record.table_columns : [];
+    const details = [
+      `${Number(record?.row_count || 0).toLocaleString()} rows`,
+      columns.length ? `Columns: ${columns.join(", ")}` : "No table columns shown",
+    ];
+    return el("div", { class: "information-item" }, [
+      el("div", { class: "information-name", text: sourceFile }),
+      el("div", { class: "information-value", text: details.join(". ") }),
+    ]);
+  }));
+}
+
 function causeNames() {
   return ["SchemaDeficiency", "DataGap", "ReasoningFailure", "EvaluationFailure"];
 }
+
+const causeCopy = {
+  SchemaDeficiency: {
+    title: "1. Missing capability (Schema Deficiency)",
+    question: "Does the schema lack a necessary field or rule for reading or calculating the answer?",
+  },
+  DataGap: {
+    title: "2. Missing source information (Data Gap)",
+    question: "Is required information absent from the permitted source files and available metadata?",
+  },
+  ReasoningFailure: {
+    title: "3. Answer-use problem (Reasoning Failure)",
+    question: "Did the system know how to obtain the information, but still produce a wrong or missing answer?",
+  },
+  EvaluationFailure: {
+    title: "4. Wrong rejection (Evaluation Failure)",
+    question: "Is the produced answer scientifically acceptable even though it was rejected?",
+  },
+};
+
+const stateCopy = {
+  SUPPORTED: "Yes: supported by the shown information",
+  NOT_SUPPORTED: "No: not supported",
+  UNRESOLVED: "Cannot decide from what is shown",
+};
 
 function isRetained(item) {
   return usePreviousAnnotations && item.review_status === "COMPLETED_PREVIOUS_ROUND";
@@ -306,8 +473,8 @@ function renderAnnotation(item) {
   const review = currentReview(item);
   const states = ["SUPPORTED", "NOT_SUPPORTED", "UNRESOLVED"];
   const panel = el("section", { class: "panel" }, [
-    el("h2", { text: "Your Attribution" }),
-    el("p", { text: "Assess each hypothesis independently from the shown evidence." }),
+    el("h2", { text: "Your four judgments" }),
+    el("p", { text: "Answer every question separately. More than one Yes is allowed when the shown information supports it." }),
   ]);
   if (isRetained(item)) {
     panel.append(el("div", {
@@ -318,7 +485,8 @@ function renderAnnotation(item) {
   causeNames().forEach((cause) => {
     const options = el("div", { class: "annotation-options" });
     const row = el("div", { class: "annotation-line" }, [
-      el("div", { class: "annotation-cause", text: cause }),
+      el("div", { class: "annotation-cause", text: causeCopy[cause].title }),
+      el("div", { class: "annotation-question", text: causeCopy[cause].question }),
       options,
     ]);
     states.forEach((stateValue) => {
@@ -337,7 +505,7 @@ function renderAnnotation(item) {
       });
       options.append(el("label", {}, [
         input,
-        document.createTextNode(stateValue),
+        document.createTextNode(stateCopy[stateValue]),
       ]));
     });
     panel.append(row);
@@ -370,25 +538,44 @@ function renderCase() {
   const right = el("div", { class: "case-col evidence-col" });
   const grid = el("div", { class: "case-grid" }, [left, right]);
   const sourceCount = Array.isArray(item.source_files) ? item.source_files.length : 0;
-  const shownMetadata = item.metadata_records || item.metadata || {};
+  const shownMetadata = splitMetadata(item);
 
   left.append(el("section", { class: "panel" }, [
     el("h2", { text: `Case ${currentPositionText()}` }),
     kv("Case ID", shownCaseId(item, state.selected)),
     kv("Domain", item.domain),
     kv("Question", item.question),
-    kv(sourceCount === 1 ? "Related dataset file" : "Related dataset files", ""),
+    kv(sourceCount === 1 ? "Available source file" : "Available source files", ""),
     datasetLinks(item),
+    el("h3", { text: "Source information available to the system" }),
+    sourceEvidenceSummary(item.source_evidence),
   ]));
 
+  const routes = sourceRouteList(shownMetadata.sourceRoutes);
   right.append(el("section", { class: "panel" }, [
-    el("h2", { text: "Evidence" }),
-    kv("Schema fields", ""),
-    chipList(item.schema_fields || []),
-    kv(Array.isArray(shownMetadata) ? "Metadata records" : "Metadata", shownMetadata),
-    kv("Permitted source evidence", item.source_evidence || {}),
-    kv("System answer", item.system_answer),
-    kv("Rejection reason", item.rejection_reason),
+    el("div", { class: "start-here-label", text: "Start here" }),
+    el("h2", { text: "Information shown to the system" }),
+    el("div", { class: "evidence-section" }, [
+      el("h3", { text: "A. Schema fields available to the system" }),
+      el("p", { class: "section-help", text: "Each field below shows what the system can store and, when needed, how it can read or calculate that information. Only the fields and rules shown here exist in this case." }),
+      routeList(item.schema_fields || []),
+      jsonDetails("Schema JSON", item.schema_fields || []),
+    ]),
+    el("div", { class: "evidence-section" }, [
+      el("h3", { text: "B. Metadata available from the current source data" }),
+      el("p", { class: "section-help", text: "These are the values and source-column references currently available for the schema fields. Only the metadata shown here is available in this case." }),
+      valueList(shownMetadata.values),
+      ...(routes ? [routes] : []),
+      jsonDetails("Metadata JSON", item.metadata || {}),
+    ]),
+    el("div", { class: "evidence-section answer-section" }, [
+      el("h3", { text: "C. Answer produced from the available information" }),
+      el("div", { class: "answer-text", text: item.system_answer || "No answer." }),
+    ]),
+    el("div", { class: "evidence-section rejection-section" }, [
+      el("h3", { text: "D. Evaluator decision about the answer" }),
+      el("div", { class: "rejection-text", text: item.rejection_reason || "No evaluator feedback." }),
+    ]),
   ]));
 
   left.append(renderAnnotation(item));
