@@ -57,7 +57,7 @@
           "record_id": "source-3"
         }
       ],
-      "question": "What are the starting potential, end potential, and potential window (range) for each sample (Pd n7, Pd n6, Pd n114)?",
+      "question": "What are the starting potential, end potential, and potential window (range)?",
       "rejection_reason": "The proxy evaluator rejected this response.",
       "schema_fields": [
         {
@@ -14254,7 +14254,7 @@
           "record_id": "source-3"
         }
       ],
-      "question": "What are the starting potential, end potential, and potential window (range) for each sample (Pd n7, Pd n6, Pd n114)?",
+      "question": "What are the starting potential, end potential, and potential window (range)?",
       "rejection_reason": "The proxy evaluator rejected this response.",
       "schema_fields": [
         {
@@ -20305,7 +20305,7 @@
         "controlled_sources/c-0052/source_2.txt",
         "controlled_sources/c-0052/source_3.txt"
       ],
-      "system_answer": "Yes, spikes are present in the Pd n6 file ('CV cycles using RHE_Pdn6'); Pd n7 and Pd n114 show no spikes."
+      "system_answer": "No."
     },
     {
       "case_id": "C-0053",
@@ -25966,7 +25966,7 @@
           "record_id": "source-3"
         }
       ],
-      "question": "What are the starting potential, end potential, and potential window (range) for each sample (Pd n7, Pd n6, Pd n114)?",
+      "question": "What are the starting potential, end potential, and potential window (range)?",
       "rejection_reason": "The proxy evaluator rejected this response.",
       "schema_fields": [
         {
@@ -26295,7 +26295,7 @@
         "controlled_sources/c-0067/source_2.txt",
         "controlled_sources/c-0067/source_3.txt"
       ],
-      "system_answer": "Pd n7: start 0.370 V, end 0.370 V, range 0.0 to 0.4 V. Pd n6: start 0.390 V, end 0.390 V, range 0.0 to 1.2 V. Pd n114: start 0.180 V, end 0.180 V, range -0.2 to 0.9 V."
+      "system_answer": "start 0.370 V, end 0.370 V, range 0.0 to 0.4 V."
     },
     {
       "case_id": "C-0068",
@@ -27536,7 +27536,7 @@
           "record_id": "source-3"
         }
       ],
-      "question": "What are the starting potential, end potential, and potential window (range) for each sample (Pd n7, Pd n6, Pd n114)?",
+      "question": "What are the starting potential, end potential, and potential window (range)?",
       "rejection_reason": "The proxy evaluator rejected this response.",
       "schema_fields": [
         {
