@@ -1,0 +1,106 @@
+{
+  "case_count": 13,
+  "cases": [
+    {
+      "case_id": "RQ2-REREVIEW-001",
+      "domain": "CV",
+      "question": "Can this be correlated with WAXS/SAXS phase data (if available)?",
+      "reference_answer": "Open question: requires WAXS/SAXS data as additional input.",
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-002",
+      "domain": "DIL",
+      "question": "Is the time spacing uniform?",
+      "reference_answer": "Yes, 0.1 s",
+      "system_answer": "Yes, the time spacing is uniform."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-003",
+      "domain": "DIL",
+      "question": "Does the sample return to its original length?",
+      "reference_answer": "No, shrinkage after each measurement",
+      "system_answer": "For record_001 and record_002, the sample returns to its original length. For record_003, it does not."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-004",
+      "domain": "DIL",
+      "question": "When was the measurement performed?",
+      "reference_answer": "Fri Nov 28 13:53:24 2025; Fri Nov 29 13:53:24 2025; Fri Nov 30 13:53:24 2025",
+      "system_answer": "The measurements were performed on 2025-11-28, 2025-11-29, and 2025-11-30."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-005",
+      "domain": "DIL",
+      "question": "Are all columns numerical?",
+      "reference_answer": "Yes, except for the header lines",
+      "system_answer": "Yes, all columns are numerical."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-006",
+      "domain": "DIL",
+      "question": "Are derivative spikes (noise) physical or instrumental?",
+      "reference_answer": "Most probably instrumental",
+      "system_answer": "The derivative spikes (noise) are instrumental."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-007",
+      "domain": "CV",
+      "question": "How many cycles should be discarded to have stable repetition?",
+      "reference_answer": "Discard at least 1 cycle; in some cases 2 cycles may be better.",
+      "system_answer": "1.0 cycle"
+    },
+    {
+      "case_id": "RQ2-REREVIEW-008",
+      "domain": "DIL",
+      "question": "Does the sample undergo α to β or β to α phase transformation?",
+      "reference_answer": "Yes, the dilatation range indicates the occurrence of a phase transformation.",
+      "system_answer": "α to β"
+    },
+    {
+      "case_id": "RQ2-REREVIEW-009",
+      "domain": "DIL",
+      "question": "Are multiple kinetic processes present?",
+      "reference_answer": "Possible processes are: proton transport, adsorption, absorption, bulk diffusion",
+      "system_answer": "Yes, multiple kinetic processes are present."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-010",
+      "domain": "DIL",
+      "question": "How does nanoporous Pd differ from bulk Pd?",
+      "reference_answer": "Compared to bulk Pd, nanoporous Pd has extremely high surface area, so surface stress significantly influences lattice strain and macroscopic dimensions, as well as hydrogen absorption behavior. Its large electrochemically active surface area leads to higher currents and faster hydrogen uptake/release. Short diffusion distances enable rapid hydrogen transport and equilibration.",
+      "system_answer": "Nanoporous Pd has a high surface area and enhanced catalytic and hydrogen absorption properties compared to bulk Pd, due to its porous structure."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-011",
+      "domain": "DIL",
+      "question": "Is smoothing required for the dL/dt data?",
+      "reference_answer": "An SNR of approximately 13.5 dB indicates a signal of moderate quality. Smoothing is recommended to improve figure readability and quantitative peak analysis.",
+      "system_answer": "Yes, smoothing is required for the dL/dt data."
+    },
+    {
+      "case_id": "RQ2-REREVIEW-012",
+      "domain": "DIL",
+      "question": "What is the hydrogen charging method?",
+      "reference_answer": "Electrochemical hydrogen charging in an acidic electrolyte",
+      "system_answer": "Electrochemical charging"
+    },
+    {
+      "case_id": "RQ2-REREVIEW-013",
+      "domain": "CV",
+      "question": "Are there any spikes in the dataset?",
+      "reference_answer": "Yes, spikes are present in the Pd n7.",
+      "system_answer": "Yes, there are spikes in the dataset."
+    }
+  ],
+  "packet_id": "sha256:8b926891d68c2ed4a65023c89a5cadd36643dabba4b67fb9149e59dd6c019f28",
+  "protocol": "rq2-single-answer-human-audit-v3",
+  "review_type": "blinded_representative_disagreement_rereview",
+  "sample_status": "frozen",
+  "score_scale": [
+    1.0,
+    0.5,
+    0.0,
+    null
+  ]
+}
