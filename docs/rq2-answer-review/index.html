@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RQ2 Answer Review</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Human validation</p>
+        <h1>RQ2 Answer Review</h1>
+        <p id="progressText">Loading review packet...</p>
+      </div>
+      <div class="toolbar">
+        <label class="reviewer-field">
+          Reviewer ID
+          <input id="reviewerId" type="text" placeholder="expert_01" autocomplete="off" />
+        </label>
+        <button id="importBtn" class="secondary" type="button">Import progress</button>
+        <input id="importFile" type="file" accept="application/json,.json" hidden />
+        <button id="exportBtn" type="button">Export review</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="guide">
+        <div class="guide-step"><span>1</span><p><strong>Read the question and reference.</strong><br />Then read the system answer shown below them.</p></div>
+        <div class="guide-step"><span>2</span><p><strong>Score scientific correctness.</strong><br />Choose Correct, Partially correct, Incorrect or Not sure.</p></div>
+        <div class="guide-step"><span>3</span><p><strong>Save and continue.</strong><br />You can export at any time and import the file on another computer.</p></div>
+      </section>
+
+      <div class="workspace">
+        <aside class="sidebar">
+          <div class="filters">
+            <label>Domain<select id="domainFilter"><option value="all">All</option><option value="CV">CV</option><option value="DIL">DIL</option></select></label>
+            <label>Status<select id="statusFilter"><option value="all">All</option><option value="pending">Pending</option><option value="complete">Complete</option></select></label>
+          </div>
+          <div id="pairList" class="pair-list"></div>
+        </aside>
+
+        <article id="reviewView" class="review-view" aria-live="polite"></article>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
