@@ -9,6 +9,11 @@ const controlledDatasetBase = reviewConfig.controlledDatasetBase || "datasets/";
 const originalDatasetBase = reviewConfig.originalDatasetBase || "../review_web/datasets/";
 const sourceFilesDownloadable = reviewConfig.sourceFilesDownloadable !== false;
 const showSourceSection = reviewConfig.showSourceSection !== false;
+const caseDescriptor = reviewConfig.caseDescriptor || "blinded controlled case";
+const exportFilenamePrefix = reviewConfig.exportFilenamePrefix || "controlled_benchmark_review";
+const showRouteWarnings = reviewConfig.showRouteWarnings !== false;
+const emptyMetadataMessage = reviewConfig.emptyMetadataMessage
+  || "No question-relevant value or source reference is currently available.";
 const state = {
   cases: [],
   selected: 0,
@@ -156,7 +161,7 @@ function routeList(items) {
           document.createTextNode(String(item.source_pattern).replaceAll("_", " ")),
         ]));
 
-        if (!inputs && !formula && !guidance && !item.source_pattern) card.append(el("div", {
+        if (showRouteWarnings && !inputs && !formula && !guidance && !item.source_pattern) card.append(el("div", {
           class: "route-warning",
           text: "No source location or calculation rule is shown for this item.",
         }));
@@ -171,7 +176,9 @@ function routeList(items) {
 function valueList(values) {
   const entries = Object.entries(values || {});
   if (!entries.length) {
-    return el("div", { class: "empty-evidence", text: "No question-relevant value or source reference is currently available." });
+    return emptyMetadataMessage
+      ? el("div", { class: "empty-evidence", text: emptyMetadataMessage })
+      : document.createDocumentFragment();
   }
   return el("div", { class: "information-list" }, entries.map(([name, value]) => {
     return el("div", { class: "information-item" }, [
@@ -428,7 +435,7 @@ function renderList() {
         el("div", { class: `case-status ${status}`, text: status }),
       ]),
       el("div", { class: "case-question", text: item.question || "" }),
-      el("div", { class: "case-meta", text: `${item.domain || "runtime"} · blinded controlled case` }),
+      el("div", { class: "case-meta", text: `${item.domain || "runtime"} · ${caseDescriptor}` }),
     ]);
     button.addEventListener("click", () => {
       state.selected = index;
@@ -657,7 +664,7 @@ function exportReview() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `controlled_benchmark_review_${safeFilename(reviewerId)}_${allComplete ? "validated" : "progress"}.json`;
+  link.download = `${safeFilename(exportFilenamePrefix)}_${safeFilename(reviewerId)}_${allComplete ? "validated" : "progress"}.json`;
   link.click();
   URL.revokeObjectURL(url);
 }
