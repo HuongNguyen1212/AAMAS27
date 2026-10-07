@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RQ1 Controlled Benchmark Follow-up Review</title>
+    <link rel="stylesheet" href="../controlled-review/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <h1>RQ1 Controlled Benchmark Follow-up Review</h1>
+          <p id="progressText">Load cases to start reviewing.</p>
+        </div>
+        <div class="reviewer-box">
+          <label>
+            Reviewer name
+            <input id="reviewerId" type="text" placeholder="e.g. reviewer_01" />
+          </label>
+          <button id="importProgressBtn" type="button" class="secondary-action">Import Progress</button>
+          <input id="importProgressFile" type="file" accept="application/json,.json" hidden />
+          <button id="exportBtn" type="button">Export Progress</button>
+        </div>
+      </header>
+
+      <section class="loader" hidden>
+        <label>Review packet <input id="packetUrl" type="text" /></label>
+        <button id="loadBtn" type="button">Load</button>
+        <label class="mode-label">
+          Group by
+          <select id="groupMode">
+            <option value="domain">Domain</option>
+            <option value="none">File order</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="guide">
+        <details open>
+          <summary>How to review these cases</summary>
+          <div class="worked-example">
+            <div class="term-explanation">
+              <p>Start with <strong>Information shown to the system</strong>. Section A lists the schema fields and rules. Section B lists the metadata values and source-column references.</p>
+              <p>Use only the source information, schema, metadata, produced answer and evaluator decision shown on this page.</p>
+            </div>
+            <div class="failure-comparison">
+              <h3>Distinguishing the four causes</h3>
+              <p class="comparison-order"><strong>Check:</strong> Schema instructions, source and metadata, answer, then rejection.</p>
+              <div class="failure-table" role="table" aria-label="Comparison of the four failure causes">
+                <div class="failure-table-head" role="row">
+                  <strong role="columnheader">Cause</strong><strong role="columnheader">Schema</strong><strong role="columnheader">Source and metadata</strong><strong role="columnheader">Answer</strong><strong role="columnheader">Rejection</strong>
+                </div>
+                <div role="row"><strong role="cell">Schema Deficiency</strong><span role="cell">Required field or rule is missing</span><span role="cell">Required information is available</span><span role="cell">May be no answer</span><span role="cell">Can be justified</span></div>
+                <div role="row"><strong role="cell">Data Gap</strong><span role="cell">Required field or rule is available</span><span role="cell">Required information is missing</span><span role="cell">May be no answer</span><span role="cell">Can be justified</span></div>
+                <div role="row"><strong role="cell">Reasoning Failure</strong><span role="cell">Required field or rule is available</span><span role="cell">Required information is available</span><span role="cell">Wrong or missing</span><span role="cell">Can be justified</span></div>
+                <div role="row"><strong role="cell">Evaluation Failure</strong><span role="cell">Required field or rule is available</span><span role="cell">Required information is available</span><span role="cell">Correct and supported</span><span role="cell">Incorrectly rejected</span></div>
+              </div>
+            </div>
+            <p class="cannot-decide-note"><strong>Choose Cannot decide</strong> when the shown evidence is insufficient. Assess every cause independently.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="layout">
+        <aside>
+          <div class="sidebar-head"><div class="sidebar-title">Progress</div><div id="sidebarProgress" class="sidebar-progress">0/0 done</div></div>
+          <div id="caseList" class="case-list"></div>
+        </aside>
+        <article id="caseView" class="case-view"></article>
+      </section>
+    </main>
+    <script>
+      window.RQ1_REVIEW_CONFIG = {
+        defaultPath: "review_cases.json",
+        storageKey: "rq1-controlled-source-boundary-followup-v2",
+        protocol: "rq1-controlled-source-boundary-followup-v2",
+        progressLabel: "review cases",
+        progressVerb: "reviewed",
+        usePreviousAnnotations: true,
+        sourceFilesDownloadable: false,
+        caseDescriptor: "blinded controlled case",
+        exportFilenamePrefix: "controlled_case_rereview",
+        showRouteWarnings: false,
+        emptyMetadataMessage: "",
+        showSourceSection: true,
+        controlledDatasetBase: "datasets/",
+        originalDatasetBase: "datasets/"
+      };
+    </script>
+    <script src="../controlled-review/app.js?v=2"></script>
+  </body>
+</html>

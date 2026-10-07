@@ -8,6 +8,7 @@ const progressVerb = reviewConfig.progressVerb || "reviewed";
 const controlledDatasetBase = reviewConfig.controlledDatasetBase || "datasets/";
 const originalDatasetBase = reviewConfig.originalDatasetBase || "../review_web/datasets/";
 const sourceFilesDownloadable = reviewConfig.sourceFilesDownloadable !== false;
+const showSourceSection = reviewConfig.showSourceSection !== false;
 const state = {
   cases: [],
   selected: 0,
@@ -540,16 +541,26 @@ function renderCase() {
   const sourceCount = Array.isArray(item.source_files) ? item.source_files.length : 0;
   const shownMetadata = splitMetadata(item);
 
-  left.append(el("section", { class: "panel" }, [
+  const caseSummary = [
     el("h2", { text: `Case ${currentPositionText()}` }),
     kv("Case ID", shownCaseId(item, state.selected)),
     kv("Domain", item.domain),
     kv("Question", item.question),
-    kv(sourceCount === 1 ? "Available source file" : "Available source files", ""),
-    datasetLinks(item),
-    el("h3", { text: "Source information available to the system" }),
-    sourceEvidenceSummary(item.source_evidence),
-  ]));
+  ];
+  if (showSourceSection && item.hide_source_section !== true) {
+    const sourceLabel = sourceCount === 1 ? "Available source file" : "Available source files";
+    if (sourceCount === 0) {
+      caseSummary.push(kv(sourceLabel, "None"));
+    } else {
+      caseSummary.push(
+        kv(sourceLabel, ""),
+        datasetLinks(item),
+        el("h3", { text: "Source information available to the system" }),
+        sourceEvidenceSummary(item.source_evidence),
+      );
+    }
+  }
+  left.append(el("section", { class: "panel" }, caseSummary));
 
   const routes = sourceRouteList(shownMetadata.sourceRoutes);
   right.append(el("section", { class: "panel" }, [
