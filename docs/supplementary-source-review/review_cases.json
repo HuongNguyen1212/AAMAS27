@@ -1,1670 +1,2541 @@
 {
-  "protocol": "rq1-supplementary-source-support-blind-audit-v2",
-  "case_count": 7,
+  "protocol": "rq1-supplementary-source-data-blind-audit-v3",
+  "case_count": 8,
   "cases": [
     {
-      "domain": "DIL",
-      "question": "Is there evidence of hydrogen desorption?",
-      "schema_fields": [
-        {
-          "description": "Indicates whether there are abrupt changes in dilatation during the experiment.",
-          "name": "abrupt_changes_in_dilatation",
-          "type": "boolean"
-        },
-        {
-          "description": "The units of measurement for each column in the dataset.",
-          "name": "column_units",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all columns in the dataset are numerical.",
-          "name": "columns_are_numerical",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the derivative column matches the numerical differentiation of the third column.",
-          "name": "derivative_match",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether derivative spikes (noise) are physical or instrumental in nature.",
-          "name": "derivative_spikes",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether there is evidence of hydrogen desorption from the sample.",
-          "name": "evidence_of_hydrogen_desorption",
-          "type": "boolean"
-        },
-        {
-          "description": "The method used for hydrogen charging of the sample.",
-          "name": "hydrogen_charging_method",
-          "type": "string"
-        },
-        {
-          "description": "The initial length of the sample measured in millimeters.",
-          "name": "initial_length_mm",
-          "type": "number"
-        },
-        {
-          "description": "The maximum expansion of the sample measured during the experiment.",
-          "name": "maximum_expansion",
-          "type": "number"
-        },
-        {
-          "description": "The date when the measurement was performed, formatted as YYYY-MM-DD.",
-          "name": "measurement_date",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap.",
-          "name": "measurement_setup_phase_transformation",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the smoothed dL/dt data over time is monotonic.",
-          "name": "monotonic_dL_dt",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether multiple kinetic processes are present during the experiment.",
-          "name": "multiple_kinetic_processes",
-          "type": "boolean"
-        },
-        {
-          "description": "A description of how nanoporous Pd differs from bulk Pd.",
-          "name": "nanoporous_vs_bulk_difference",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the sample exhibits net shrinkage after the experiment.",
-          "name": "net_shrinkage",
-          "type": "boolean"
-        },
-        {
-          "description": "The Pearson correlation coefficient between the dilatation measurements.",
-          "name": "pearson_correlation_coefficient",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the sample undergoes α to β or β to α phase transformation.",
-          "name": "phase_transformation",
-          "type": "string"
-        },
-        {
-          "description": "The time at which the phase transformation begins and ends, formatted as 'start_time - end_time'.",
-          "name": "phase_transformation_timing",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all three dilatation measurements show the same qualitative features.",
-          "name": "qualitative_features_agreement",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the sample returns to its original length after the experiment.",
-          "name": "returns_to_original_length",
-          "type": "boolean"
-        },
-        {
-          "description": "The material composition of the sample being tested.",
-          "name": "sample_material",
-          "type": "string"
-        },
-        {
-          "description": "The method used to produce the sample, such as dealloying, templating, or another route.",
-          "name": "sample_production_method",
-          "type": "string"
-        },
-        {
-          "description": "An explanation for why the sample exhibits net shrinkage, if applicable.",
-          "name": "shrinkage_explanation",
-          "type": "string"
-        },
-        {
-          "description": "The signal-to-noise ratio (SNR) of the measurements taken during the experiment.",
-          "name": "signal_to_noise_ratio",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether smoothing is required for the dL/dt data.",
-          "name": "smoothing_required",
-          "type": "boolean"
-        },
-        {
-          "description": "The range of temperatures experienced during the experiment, specified as a range (e.g., '20-100°C').",
-          "name": "temperature_range",
-          "type": "string"
-        },
-        {
-          "description": "The total duration of the experiment measured in seconds.",
-          "name": "total_experiment_duration",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the time spacing between measurements is uniform.",
-          "name": "uniform_time_spacing",
-          "type": "boolean"
-        },
-        {
-          "comment": "Assess desorption only from grounded thermal and dimensional signatures exposed by the source route.",
-          "depends_on": [
-            "temperature_series",
-            "delta_l_series",
-            "dl_dt_series"
-          ],
-          "description": "evidence for hydrogen desorption",
-          "name": "desorption_evidence",
-          "type": "object"
-        }
+      "case_id": "S-0001",
+      "diagnostic_schema_fields": [
+        "potential_applied",
+        "we_potential"
       ],
-      "metadata": {
-        "source_measurement_summary": [
-          {
-            "delta_l": {
-              "count": 54001,
-              "first": 0.0,
-              "last": -0.9942099999999998,
-              "max": 39.46821,
-              "mean": 25.603930247363827,
-              "median_positive_step": 0.0015000000000000568,
-              "min": -1.1032900000000003
-            },
-            "dl_dt": {
-              "count": 54001,
-              "first": 0.00923872,
-              "last": 0.000496705,
-              "max": 0.131925,
-              "mean": -0.00018408141636262624,
-              "median_positive_step": 0.00268221,
-              "min": -0.19898
-            },
-            "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-            "temperature": {
-              "count": 54001,
-              "first": 19.4,
-              "last": 19.45,
-              "max": 19.55,
-              "mean": 19.42722449584267,
-              "median_positive_step": 0.05000000000000071,
-              "min": 19.15
-            },
-            "time": {
-              "count": 54001,
-              "first": 0.0,
-              "last": 5400.0,
-              "max": 5400.0,
-              "mean": 2700.3499935186387,
-              "median_positive_step": 1.0,
-              "min": 0.0
-            }
-          }
-        ]
-      },
-      "metadata_records": [],
-      "system_answer": "No answer.",
-      "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt"
-      ],
-      "source_evidence": {
-        "domain": "DIL",
-        "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-              "date": "Fri Nov 28 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-              "date": "Fri Nov 29 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt",
-              "date": "Fri Nov 30 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          }
-        ]
-      },
-      "case_id": "S-0001"
-    },
-    {
       "domain": "CV",
-      "question": "Can this be correlated with WAXS/SAXS phase data (if available)?",
+      "metadata": {
+        "current_unit": [
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          },
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          },
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          }
+        ]
+      },
+      "metadata_records": [
+        {
+          "current_unit": [
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            },
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            },
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            }
+          ],
+          "record_id": "source-1"
+        }
+      ],
+      "question": "Are 'Potential applied' and 'WE potential' identical?",
+      "rejection_reason": "The proxy evaluator rejected this response.",
       "schema_fields": [
         {
-          "name": "source_file",
-          "type": "string",
-          "description": "Source filename or record identifier for the CV measurement.",
-          "comment": "Extract from the input record name or file path when available."
-        },
-        {
-          "name": "sample_id",
-          "type": "string",
-          "description": "Sample identifier stated in the filename or record metadata.",
-          "comment": "Extract only if the sample identifier is stated or can be directly parsed from the source filename."
-        },
-        {
-          "name": "potential_applied_column",
-          "type": "string",
-          "description": "Name of the column containing applied potential values.",
-          "comment": "Use the exact source column name, such as a column labeled Potential applied."
-        },
-        {
-          "name": "we_potential_column",
-          "type": "string",
-          "description": "Name of the column containing working-electrode potential values.",
-          "comment": "Use the exact source column name for working-electrode potential."
-        },
-        {
-          "name": "current_column",
-          "type": "string",
-          "description": "Name of the column containing measured current values.",
-          "comment": "Use the exact source column name for current."
-        },
-        {
-          "name": "time_column",
-          "type": "string",
-          "description": "Name of the column containing time values, if present.",
-          "comment": "Use the exact source column name when a time column is present."
-        },
-        {
+          "comment": "column header",
+          "depends_on": [
+            "Potential applied (V)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "unit used for the potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
           "name": "potential_unit",
-          "type": "string",
-          "description": "Unit of measurement for potential or voltage.",
-          "comment": "Extract from source column headers or metadata, for example V."
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
         },
         {
+          "comment": "column header",
+          "depends_on": [
+            "WE(1).Current (A)"
+          ],
+          "description": "Unit used for WE(1).Current values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
           "name": "current_unit",
-          "type": "string",
-          "description": "Unit of measurement for current.",
-          "comment": "Extract from source column headers or metadata, for example A."
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
         },
         {
-          "name": "scan_rate_mv_per_s",
-          "type": "number",
-          "description": "Scan rate in millivolts per second.",
-          "comment": "Extract from filename, source metadata, or an explicit scan-rate field when available."
-        },
-        {
-          "name": "waxs_phase_data",
-          "type": "object",
-          "description": "WAXS phase information linked to the measured sample.",
-          "comment": "Populate only from an explicitly available WAXS record for the same sample."
-        },
-        {
-          "name": "saxs_phase_data",
-          "type": "object",
-          "description": "SAXS phase information linked to the measured sample.",
-          "comment": "Populate only from an explicitly available SAXS record for the same sample."
-        }
-      ],
-      "metadata": {},
-      "metadata_records": [],
-      "system_answer": "No answer.",
-      "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "cv/20251125Pdn7-CV-10mVperSecond.txt",
-        "cv/20251125Pdn7-CV-1mVperSecond.txt",
-        "cv/20251125Pdn7-CV-5mVperSecond.txt"
-      ],
-      "source_evidence": {
-        "domain": "CV",
-        "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "CV",
-            "record_metadata": {
-              "source_file": "20251125Pdn7-CV-10mVperSecond.txt"
+          "comment": "column: Potential applied (V)",
+          "depends_on": [
+            "Potential applied (V)"
+          ],
+          "description": "applied potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
             },
-            "row_count": 320,
-            "table_columns": [
-              "Potential applied (V)",
-              "Time (s)",
-              "WE(1).Current (A)",
-              "Scan",
-              "Index",
-              "WE(1).Potential (V)"
+            "required": [
+              "source_file",
+              "column"
             ],
-            "table_rows_available": true,
-            "context_fields": []
+            "type": "object"
           },
-          {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "CV",
-            "record_metadata": {
-              "source_file": "20251125Pdn7-CV-1mVperSecond.txt"
+          "name": "potential_applied",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "working-electrode potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
             },
-            "row_count": 3000,
-            "table_columns": [
-              "Potential applied (V)",
-              "Time (s)",
-              "WE(1).Current (A)",
-              "Scan",
-              "Index",
-              "WE(1).Potential (V)"
+            "required": [
+              "source_file",
+              "column"
             ],
-            "table_rows_available": true,
-            "context_fields": []
+            "type": "object"
           },
-          {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "CV",
-            "record_metadata": {
-              "source_file": "20251125Pdn7-CV-5mVperSecond.txt"
+          "name": "we_potential",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Sampling step in time = time (line i+1) - time (line i)",
+          "depends_on": [
+            "Time (s)"
+          ],
+          "description": "time",
+          "formula": "Sampling step in time = time (line i+1) - time (line i)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
             },
-            "row_count": 640,
-            "table_columns": [
-              "Potential applied (V)",
-              "Time (s)",
-              "WE(1).Current (A)",
-              "Scan",
-              "Index",
-              "WE(1).Potential (V)"
+            "required": [
+              "source_file",
+              "column"
             ],
-            "table_rows_available": true,
-            "context_fields": []
-          }
-        ]
-      },
-      "case_id": "S-0002"
-    },
-    {
-      "domain": "DIL",
-      "question": "What is the hydrogen charging method?",
-      "schema_fields": [
-        {
-          "description": "Indicates whether there are abrupt changes in dilatation during the experiment.",
-          "name": "abrupt_changes_in_dilatation",
-          "type": "boolean"
-        },
-        {
-          "description": "The units of measurement for each column in the dataset.",
-          "name": "column_units",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all columns in the dataset are numerical.",
-          "name": "columns_are_numerical",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the derivative column matches the numerical differentiation of the third column.",
-          "name": "derivative_match",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether derivative spikes (noise) are physical or instrumental in nature.",
-          "name": "derivative_spikes",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether there is evidence of hydrogen desorption from the sample.",
-          "name": "evidence_of_hydrogen_desorption",
-          "type": "boolean"
-        },
-        {
-          "comment": "Extract the charging method only when it is explicitly stated in the permitted source boundary.",
-          "description": "The method used for hydrogen charging of the sample.",
-          "name": "hydrogen_charging_method",
-          "source_pattern": "record_header|record_metadata|dataset_context",
-          "type": "string"
-        },
-        {
-          "description": "The initial length of the sample measured in millimeters.",
-          "name": "initial_length_mm",
-          "type": "number"
-        },
-        {
-          "description": "The maximum expansion of the sample measured during the experiment.",
-          "name": "maximum_expansion",
-          "type": "number"
-        },
-        {
-          "description": "The date when the measurement was performed, formatted as YYYY-MM-DD.",
-          "name": "measurement_date",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap.",
-          "name": "measurement_setup_phase_transformation",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the smoothed dL/dt data over time is monotonic.",
-          "name": "monotonic_dL_dt",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether multiple kinetic processes are present during the experiment.",
-          "name": "multiple_kinetic_processes",
-          "type": "boolean"
-        },
-        {
-          "description": "A description of how nanoporous Pd differs from bulk Pd.",
-          "name": "nanoporous_vs_bulk_difference",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the sample exhibits net shrinkage after the experiment.",
-          "name": "net_shrinkage",
-          "type": "boolean"
-        },
-        {
-          "description": "The Pearson correlation coefficient between the dilatation measurements.",
-          "name": "pearson_correlation_coefficient",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the sample undergoes α to β or β to α phase transformation.",
-          "name": "phase_transformation",
-          "type": "string"
-        },
-        {
-          "description": "The time at which the phase transformation begins and ends, formatted as 'start_time - end_time'.",
-          "name": "phase_transformation_timing",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all three dilatation measurements show the same qualitative features.",
-          "name": "qualitative_features_agreement",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the sample returns to its original length after the experiment.",
-          "name": "returns_to_original_length",
-          "type": "boolean"
-        },
-        {
-          "description": "The material composition of the sample being tested.",
-          "name": "sample_material",
-          "type": "string"
-        },
-        {
-          "description": "The method used to produce the sample, such as dealloying, templating, or another route.",
-          "name": "sample_production_method",
-          "type": "string"
-        },
-        {
-          "description": "An explanation for why the sample exhibits net shrinkage, if applicable.",
-          "name": "shrinkage_explanation",
-          "type": "string"
-        },
-        {
-          "description": "The signal-to-noise ratio (SNR) of the measurements taken during the experiment.",
-          "name": "signal_to_noise_ratio",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether smoothing is required for the dL/dt data.",
-          "name": "smoothing_required",
-          "type": "boolean"
-        },
-        {
-          "description": "The range of temperatures experienced during the experiment, specified as a range (e.g., '20-100°C').",
-          "name": "temperature_range",
-          "type": "string"
-        },
-        {
-          "description": "The total duration of the experiment measured in seconds.",
-          "name": "total_experiment_duration",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the time spacing between measurements is uniform.",
-          "name": "uniform_time_spacing",
-          "type": "boolean"
-        }
-      ],
-      "metadata": {},
-      "metadata_records": [],
-      "system_answer": "No answer.",
-      "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt"
-      ],
-      "source_evidence": {
-        "domain": "DIL",
-        "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-              "date": "Fri Nov 28 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
+            "type": "object"
           },
-          {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-              "date": "Fri Nov 29 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt",
-              "date": "Fri Nov 30 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          }
-        ]
-      },
-      "case_id": "S-0003"
-    },
-    {
-      "domain": "DIL",
-      "question": "Was the sample produced by dealloying, templating, or another route?",
-      "schema_fields": [
-        {
-          "description": "Indicates whether there are abrupt changes in dilatation during the experiment.",
-          "name": "abrupt_changes_in_dilatation",
-          "type": "boolean"
+          "name": "time",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
         },
         {
-          "description": "The units of measurement for each column in the dataset.",
-          "name": "column_units",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all columns in the dataset are numerical.",
-          "name": "columns_are_numerical",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the derivative column matches the numerical differentiation of the third column.",
-          "name": "derivative_match",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether derivative spikes (noise) are physical or instrumental in nature.",
-          "name": "derivative_spikes",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether there is evidence of hydrogen desorption from the sample.",
-          "name": "evidence_of_hydrogen_desorption",
-          "type": "boolean"
-        },
-        {
-          "description": "The method used for hydrogen charging of the sample.",
-          "name": "hydrogen_charging_method",
-          "type": "string"
-        },
-        {
-          "description": "The initial length of the sample measured in millimeters.",
-          "name": "initial_length_mm",
-          "type": "number"
-        },
-        {
-          "description": "The maximum expansion of the sample measured during the experiment.",
-          "name": "maximum_expansion",
-          "type": "number"
-        },
-        {
-          "description": "The date when the measurement was performed, formatted as YYYY-MM-DD.",
-          "name": "measurement_date",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap.",
-          "name": "measurement_setup_phase_transformation",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the smoothed dL/dt data over time is monotonic.",
-          "name": "monotonic_dL_dt",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether multiple kinetic processes are present during the experiment.",
-          "name": "multiple_kinetic_processes",
-          "type": "boolean"
-        },
-        {
-          "description": "A description of how nanoporous Pd differs from bulk Pd.",
-          "name": "nanoporous_vs_bulk_difference",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the sample exhibits net shrinkage after the experiment.",
-          "name": "net_shrinkage",
-          "type": "boolean"
-        },
-        {
-          "description": "The Pearson correlation coefficient between the dilatation measurements.",
-          "name": "pearson_correlation_coefficient",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the sample undergoes α to β or β to α phase transformation.",
-          "name": "phase_transformation",
-          "type": "string"
-        },
-        {
-          "description": "The time at which the phase transformation begins and ends, formatted as 'start_time - end_time'.",
-          "name": "phase_transformation_timing",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all three dilatation measurements show the same qualitative features.",
-          "name": "qualitative_features_agreement",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the sample returns to its original length after the experiment.",
-          "name": "returns_to_original_length",
-          "type": "boolean"
-        },
-        {
-          "description": "The material composition of the sample being tested.",
-          "name": "sample_material",
-          "type": "string"
-        },
-        {
-          "description": "The method used to produce the sample, such as dealloying, templating, or another route.",
-          "name": "sample_production_method",
-          "type": "string"
-        },
-        {
-          "description": "An explanation for why the sample exhibits net shrinkage, if applicable.",
-          "name": "shrinkage_explanation",
-          "type": "string"
-        },
-        {
-          "description": "The signal-to-noise ratio (SNR) of the measurements taken during the experiment.",
-          "name": "signal_to_noise_ratio",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether smoothing is required for the dL/dt data.",
-          "name": "smoothing_required",
-          "type": "boolean"
-        },
-        {
-          "description": "The range of temperatures experienced during the experiment, specified as a range (e.g., '20-100°C').",
-          "name": "temperature_range",
-          "type": "string"
-        },
-        {
-          "description": "The total duration of the experiment measured in seconds.",
-          "name": "total_experiment_duration",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the time spacing between measurements is uniform.",
-          "name": "uniform_time_spacing",
-          "type": "boolean"
-        },
-        {
-          "comment": "Extract the preparation route only when explicitly stated in permitted metadata or context.",
-          "description": "sample preparation route",
-          "name": "production_route",
-          "source_pattern": "record_metadata|dataset_context",
-          "type": "string"
-        }
-      ],
-      "metadata": {},
-      "metadata_records": [],
-      "system_answer": "No answer.",
-      "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt"
-      ],
-      "source_evidence": {
-        "domain": "DIL",
-        "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-              "date": "Fri Nov 28 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-              "date": "Fri Nov 29 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt",
-              "date": "Fri Nov 30 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          }
-        ]
-      },
-      "case_id": "S-0004"
-    },
-    {
-      "domain": "DIL",
-      "question": "Are derivative spikes (noise) physical or instrumental?",
-      "schema_fields": [
-        {
-          "description": "Indicates whether there are abrupt changes in dilatation during the experiment.",
-          "name": "abrupt_changes_in_dilatation",
-          "type": "boolean"
-        },
-        {
-          "description": "The units of measurement for each column in the dataset.",
-          "name": "column_units",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all columns in the dataset are numerical.",
-          "name": "columns_are_numerical",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the derivative column matches the numerical differentiation of the third column.",
-          "name": "derivative_match",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether derivative spikes (noise) are physical or instrumental in nature.",
-          "name": "derivative_spikes",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether there is evidence of hydrogen desorption from the sample.",
-          "name": "evidence_of_hydrogen_desorption",
-          "type": "boolean"
-        },
-        {
-          "description": "The method used for hydrogen charging of the sample.",
-          "name": "hydrogen_charging_method",
-          "type": "string"
-        },
-        {
-          "description": "The initial length of the sample measured in millimeters.",
-          "name": "initial_length_mm",
-          "type": "number"
-        },
-        {
-          "description": "The maximum expansion of the sample measured during the experiment.",
-          "name": "maximum_expansion",
-          "type": "number"
-        },
-        {
-          "description": "The date when the measurement was performed, formatted as YYYY-MM-DD.",
-          "name": "measurement_date",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap.",
-          "name": "measurement_setup_phase_transformation",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the smoothed dL/dt data over time is monotonic.",
-          "name": "monotonic_dL_dt",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether multiple kinetic processes are present during the experiment.",
-          "name": "multiple_kinetic_processes",
-          "type": "boolean"
-        },
-        {
-          "description": "A description of how nanoporous Pd differs from bulk Pd.",
-          "name": "nanoporous_vs_bulk_difference",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the sample exhibits net shrinkage after the experiment.",
-          "name": "net_shrinkage",
-          "type": "boolean"
-        },
-        {
-          "description": "The Pearson correlation coefficient between the dilatation measurements.",
-          "name": "pearson_correlation_coefficient",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the sample undergoes α to β or β to α phase transformation.",
-          "name": "phase_transformation",
-          "type": "string"
-        },
-        {
-          "description": "The time at which the phase transformation begins and ends, formatted as 'start_time - end_time'.",
-          "name": "phase_transformation_timing",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all three dilatation measurements show the same qualitative features.",
-          "name": "qualitative_features_agreement",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the sample returns to its original length after the experiment.",
-          "name": "returns_to_original_length",
-          "type": "boolean"
-        },
-        {
-          "description": "The material composition of the sample being tested.",
-          "name": "sample_material",
-          "type": "string"
-        },
-        {
-          "description": "The method used to produce the sample, such as dealloying, templating, or another route.",
-          "name": "sample_production_method",
-          "type": "string"
-        },
-        {
-          "description": "An explanation for why the sample exhibits net shrinkage, if applicable.",
-          "name": "shrinkage_explanation",
-          "type": "string"
-        },
-        {
-          "description": "The signal-to-noise ratio (SNR) of the measurements taken during the experiment.",
-          "name": "signal_to_noise_ratio",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether smoothing is required for the dL/dt data.",
-          "name": "smoothing_required",
-          "type": "boolean"
-        },
-        {
-          "description": "The range of temperatures experienced during the experiment, specified as a range (e.g., '20-100°C').",
-          "name": "temperature_range",
-          "type": "string"
-        },
-        {
-          "description": "The total duration of the experiment measured in seconds.",
-          "name": "total_experiment_duration",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the time spacing between measurements is uniform.",
-          "name": "uniform_time_spacing",
-          "type": "boolean"
-        },
-        {
-          "comment": "Expose the recorded length-change derivative through the permitted time-series route.",
-          "description": "derivative of length change over time",
-          "name": "dl_dt_series",
-          "regex": "Delta L/dt|dL/dt|derivative",
+          "comment": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "depends_on": [
+            "Time (s)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "scan rate of the potential, computed by: Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "formula": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "name": "scan_rate",
           "source_pattern": "table_column",
           "type": "array"
         },
         {
-          "comment": "Populate only from explicit permitted source evidence. Leave null when the source does not support the value.",
-          "description": "field representing instrument diagnostic evidence",
-          "name": "instrument_diagnostic_evidence",
-          "type": "string"
-        }
-      ],
-      "metadata": {
-        "source_measurement_summary": [
-          {
-            "delta_l": {
-              "count": 54001,
-              "first": 0.0,
-              "last": -0.9942099999999998,
-              "max": 39.46821,
-              "mean": 25.603930247363827,
-              "median_positive_step": 0.0015000000000000568,
-              "min": -1.1032900000000003
-            },
-            "dl_dt": {
-              "count": 54001,
-              "first": 0.00923872,
-              "last": 0.000496705,
-              "max": 0.131925,
-              "mean": -0.00018408141636262624,
-              "median_positive_step": 0.00268221,
-              "min": -0.19898
-            },
-            "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-            "temperature": {
-              "count": 54001,
-              "first": 19.4,
-              "last": 19.45,
-              "max": 19.55,
-              "mean": 19.42722449584267,
-              "median_positive_step": 0.05000000000000071,
-              "min": 19.15
-            },
-            "time": {
-              "count": 54001,
-              "first": 0.0,
-              "last": 5400.0,
-              "max": 5400.0,
-              "mean": 2700.3499935186387,
-              "median_positive_step": 1.0,
-              "min": 0.0
-            }
-          }
-        ],
-        "dl_dt_series": [
-          {
-            "column": "Delta L|d(µm/s)",
-            "row_count": 54001,
-            "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt"
-          }
-        ]
-      },
-      "metadata_records": [],
-      "system_answer": "No answer.",
-      "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt"
-      ],
-      "source_evidence": {
-        "domain": "DIL",
-        "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-              "date": "Fri Nov 28 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-              "date": "Fri Nov 29 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt",
-              "date": "Fri Nov 30 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          }
-        ]
-      },
-      "case_id": "S-0005"
-    },
-    {
-      "domain": "DIL",
-      "question": "What is the sample?",
-      "schema_fields": [
-        {
-          "description": "Indicates whether there are abrupt changes in dilatation during the experiment.",
-          "name": "abrupt_changes_in_dilatation",
-          "type": "boolean"
-        },
-        {
-          "description": "The units of measurement for each column in the dataset.",
-          "name": "column_units",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all columns in the dataset are numerical.",
-          "name": "columns_are_numerical",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the derivative column matches the numerical differentiation of the third column.",
-          "name": "derivative_match",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether derivative spikes (noise) are physical or instrumental in nature.",
-          "name": "derivative_spikes",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether there is evidence of hydrogen desorption from the sample.",
-          "name": "evidence_of_hydrogen_desorption",
-          "type": "boolean"
-        },
-        {
-          "description": "The method used for hydrogen charging of the sample.",
-          "name": "hydrogen_charging_method",
-          "type": "string"
-        },
-        {
-          "description": "The initial length of the sample measured in millimeters.",
-          "name": "initial_length_mm",
-          "type": "number"
-        },
-        {
-          "description": "The maximum expansion of the sample measured during the experiment.",
-          "name": "maximum_expansion",
-          "type": "number"
-        },
-        {
-          "description": "The date when the measurement was performed, formatted as YYYY-MM-DD.",
-          "name": "measurement_date",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap.",
-          "name": "measurement_setup_phase_transformation",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the smoothed dL/dt data over time is monotonic.",
-          "name": "monotonic_dL_dt",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether multiple kinetic processes are present during the experiment.",
-          "name": "multiple_kinetic_processes",
-          "type": "boolean"
-        },
-        {
-          "description": "A description of how nanoporous Pd differs from bulk Pd.",
-          "name": "nanoporous_vs_bulk_difference",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the sample exhibits net shrinkage after the experiment.",
-          "name": "net_shrinkage",
-          "type": "boolean"
-        },
-        {
-          "description": "The Pearson correlation coefficient between the dilatation measurements.",
-          "name": "pearson_correlation_coefficient",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the sample undergoes α to β or β to α phase transformation.",
-          "name": "phase_transformation",
-          "type": "string"
-        },
-        {
-          "description": "The time at which the phase transformation begins and ends, formatted as 'start_time - end_time'.",
-          "name": "phase_transformation_timing",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all three dilatation measurements show the same qualitative features.",
-          "name": "qualitative_features_agreement",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the sample returns to its original length after the experiment.",
-          "name": "returns_to_original_length",
-          "type": "boolean"
-        },
-        {
-          "comment": "Populate only from explicit permitted source evidence. Leave null when the source does not support the value.",
-          "description": "The material composition of the sample being tested.",
-          "name": "sample_material",
-          "type": "string"
-        },
-        {
-          "description": "The method used to produce the sample, such as dealloying, templating, or another route.",
-          "name": "sample_production_method",
-          "type": "string"
-        },
-        {
-          "description": "An explanation for why the sample exhibits net shrinkage, if applicable.",
-          "name": "shrinkage_explanation",
-          "type": "string"
-        },
-        {
-          "description": "The signal-to-noise ratio (SNR) of the measurements taken during the experiment.",
-          "name": "signal_to_noise_ratio",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether smoothing is required for the dL/dt data.",
-          "name": "smoothing_required",
-          "type": "boolean"
-        },
-        {
-          "description": "The range of temperatures experienced during the experiment, specified as a range (e.g., '20-100°C').",
-          "name": "temperature_range",
-          "type": "string"
-        },
-        {
-          "description": "The total duration of the experiment measured in seconds.",
-          "name": "total_experiment_duration",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the time spacing between measurements is uniform.",
-          "name": "uniform_time_spacing",
-          "type": "boolean"
-        }
-      ],
-      "metadata": {
-        "sample_record_name": "Pd n7 2025 11 28-try11-17|d"
-      },
-      "metadata_records": [],
-      "system_answer": "No answer.",
-      "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt"
-      ],
-      "source_evidence": {
-        "domain": "DIL",
-        "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-              "date": "Fri Nov 28 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-              "date": "Fri Nov 29 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt",
-              "date": "Fri Nov 30 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          }
-        ]
-      },
-      "case_id": "S-0006"
-    },
-    {
-      "domain": "DIL",
-      "question": "Why does the sample exhibit net shrinkage?",
-      "schema_fields": [
-        {
-          "description": "Indicates whether there are abrupt changes in dilatation during the experiment.",
-          "name": "abrupt_changes_in_dilatation",
-          "type": "boolean"
-        },
-        {
-          "description": "The units of measurement for each column in the dataset.",
-          "name": "column_units",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all columns in the dataset are numerical.",
-          "name": "columns_are_numerical",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the derivative column matches the numerical differentiation of the third column.",
-          "name": "derivative_match",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether derivative spikes (noise) are physical or instrumental in nature.",
-          "name": "derivative_spikes",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether there is evidence of hydrogen desorption from the sample.",
-          "name": "evidence_of_hydrogen_desorption",
-          "type": "boolean"
-        },
-        {
-          "description": "The method used for hydrogen charging of the sample.",
-          "name": "hydrogen_charging_method",
-          "type": "string"
-        },
-        {
-          "description": "The initial length of the sample measured in millimeters.",
-          "name": "initial_length_mm",
-          "type": "number"
-        },
-        {
-          "description": "The maximum expansion of the sample measured during the experiment.",
-          "name": "maximum_expansion",
-          "type": "number"
-        },
-        {
-          "description": "The date when the measurement was performed, formatted as YYYY-MM-DD.",
-          "name": "measurement_date",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap.",
-          "name": "measurement_setup_phase_transformation",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the smoothed dL/dt data over time is monotonic.",
-          "name": "monotonic_dL_dt",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether multiple kinetic processes are present during the experiment.",
-          "name": "multiple_kinetic_processes",
-          "type": "boolean"
-        },
-        {
-          "description": "A description of how nanoporous Pd differs from bulk Pd.",
-          "name": "nanoporous_vs_bulk_difference",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the sample exhibits net shrinkage after the experiment.",
-          "name": "net_shrinkage",
-          "type": "boolean"
-        },
-        {
-          "description": "The Pearson correlation coefficient between the dilatation measurements.",
-          "name": "pearson_correlation_coefficient",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the sample undergoes α to β or β to α phase transformation.",
-          "name": "phase_transformation",
-          "type": "string"
-        },
-        {
-          "description": "The time at which the phase transformation begins and ends, formatted as 'start_time - end_time'.",
-          "name": "phase_transformation_timing",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all three dilatation measurements show the same qualitative features.",
-          "name": "qualitative_features_agreement",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the sample returns to its original length after the experiment.",
-          "name": "returns_to_original_length",
-          "type": "boolean"
-        },
-        {
-          "description": "The material composition of the sample being tested.",
-          "name": "sample_material",
-          "type": "string"
-        },
-        {
-          "description": "The method used to produce the sample, such as dealloying, templating, or another route.",
-          "name": "sample_production_method",
-          "type": "string"
-        },
-        {
-          "description": "An explanation for why the sample exhibits net shrinkage, if applicable.",
-          "name": "shrinkage_explanation",
-          "type": "string"
-        },
-        {
-          "description": "The signal-to-noise ratio (SNR) of the measurements taken during the experiment.",
-          "name": "signal_to_noise_ratio",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether smoothing is required for the dL/dt data.",
-          "name": "smoothing_required",
-          "type": "boolean"
-        },
-        {
-          "description": "The range of temperatures experienced during the experiment, specified as a range (e.g., '20-100°C').",
-          "name": "temperature_range",
-          "type": "string"
-        },
-        {
-          "description": "The total duration of the experiment measured in seconds.",
-          "name": "total_experiment_duration",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the time spacing between measurements is uniform.",
-          "name": "uniform_time_spacing",
-          "type": "boolean"
-        },
-        {
-          "comment": "Produce a causal explanation only when the permitted evidence states or supports the causal relation.",
+          "comment": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
           "depends_on": [
-            "record_metadata",
-            "measurement_series"
+            "Potential applied (V)"
           ],
-          "description": "field representing causal explanation",
-          "name": "causal_explanation",
-          "type": "string"
+          "description": "potential step size of the applied potential values.",
+          "formula": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_applied_step_size",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Maximum of Column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "maximum working-electrode potential value (V)",
+          "formula": "Maximum of Column: WE(1).Potential (V)",
+          "name": "max_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum working-electrode potential value (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "minimum working-electrode potential value (V)",
+          "formula": "minimum working-electrode potential value (V)",
+          "name": "min_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value when the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The first working electrode potential value (V) of a measurement cycle",
+          "name": "start_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value one line before the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The last working electrode potential value (V) of a measurement cycle",
+          "name": "end_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "First, the Current is plotted against the Time. A spike in the current value exists when there is a brief deviation from the local values exceeding a chosen noise threshold  followed by a return toward baseline.",
+          "depends_on": [
+            "WE(1).Current (A)",
+            "Time (s)"
+          ],
+          "description": "Whether there is spike in current values when plotted versus time",
+          "name": "current_spike",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Examine the cyclic voltammetry behavior: potential vs. current, and check from which Scan number the system shows a stable and consistent behavior over the cycles. Count the number of cycles (Scan number) until that.",
+          "depends_on": [
+            "WE(1).Potential (V)",
+            "WE(1).Current (A)"
+          ],
+          "description": "number of cycles to discard until the system shows a stable and consistent behavior over the cycles",
+          "name": "cycles_to_discard",
+          "source_pattern": "table_column",
+          "type": "number"
         }
       ],
+      "source_evidence": {
+        "domain": "CV",
+        "permitted_context_evidence": "",
+        "record_count": 0,
+        "records": []
+      },
+      "source_files": [],
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "S-0002",
+      "diagnostic_schema_fields": [
+        "potential_applied",
+        "time"
+      ],
+      "domain": "CV",
       "metadata": {
-        "source_measurement_summary": [
+        "current_unit": [
           {
-            "delta_l": {
-              "count": 54001,
-              "first": 0.0,
-              "last": -0.9942099999999998,
-              "max": 39.46821,
-              "mean": 25.603930247363827,
-              "median_positive_step": 0.0015000000000000568,
-              "min": -1.1032900000000003
-            },
-            "dl_dt": {
-              "count": 54001,
-              "first": 0.00923872,
-              "last": 0.000496705,
-              "max": 0.131925,
-              "mean": -0.00018408141636262624,
-              "median_positive_step": 0.00268221,
-              "min": -0.19898
-            },
-            "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-            "temperature": {
-              "count": 54001,
-              "first": 19.4,
-              "last": 19.45,
-              "max": 19.55,
-              "mean": 19.42722449584267,
-              "median_positive_step": 0.05000000000000071,
-              "min": 19.15
-            },
-            "time": {
-              "count": 54001,
-              "first": 0.0,
-              "last": 5400.0,
-              "max": 5400.0,
-              "mean": 2700.3499935186387,
-              "median_positive_step": 1.0,
-              "min": 0.0
-            }
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          },
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          },
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
           }
         ]
       },
-      "metadata_records": [],
-      "system_answer": "No answer.",
+      "metadata_records": [
+        {
+          "current_unit": [
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            },
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            },
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            }
+          ],
+          "record_id": "source-1"
+        }
+      ],
+      "question": "Is the sampling uniform in time or potential?",
       "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt"
+      "schema_fields": [
+        {
+          "comment": "column header",
+          "depends_on": [
+            "Potential applied (V)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "unit used for the potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_unit",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "column header",
+          "depends_on": [
+            "WE(1).Current (A)"
+          ],
+          "description": "Unit used for WE(1).Current values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "current_unit",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Sampling step in Potential = Potential applied (line i+1) - Potential applied (line i)",
+          "depends_on": [
+            "Potential applied (V)"
+          ],
+          "description": "applied potential values",
+          "formula": "Sampling step in Potential = Potential applied (line i+1) - Potential applied (line i)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_applied",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "working-electrode potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "we_potential",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Sampling step in time = time (line i+1) - time (line i)",
+          "depends_on": [
+            "Time (s)"
+          ],
+          "description": "time",
+          "formula": "Sampling step in time = time (line i+1) - time (line i)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "time",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "depends_on": [
+            "Time (s)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "scan rate of the potential, computed by: Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "formula": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "name": "scan_rate",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
+          "depends_on": [
+            "Potential applied (V)"
+          ],
+          "description": "potential step size of the applied potential values.",
+          "formula": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_applied_step_size",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Maximum of Column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "maximum working-electrode potential value (V)",
+          "formula": "Maximum of Column: WE(1).Potential (V)",
+          "name": "max_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum working-electrode potential value (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "minimum working-electrode potential value (V)",
+          "formula": "minimum working-electrode potential value (V)",
+          "name": "min_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value when the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The first working electrode potential value (V) of a measurement cycle",
+          "name": "start_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value one line before the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The last working electrode potential value (V) of a measurement cycle",
+          "name": "end_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "First, the Current is plotted against the Time. A spike in the current value exists when there is a brief deviation from the local values exceeding a chosen noise threshold  followed by a return toward baseline.",
+          "depends_on": [
+            "WE(1).Current (A)",
+            "Time (s)"
+          ],
+          "description": "Whether there is spike in current values when plotted versus time",
+          "name": "current_spike",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Examine the cyclic voltammetry behavior: potential vs. current, and check from which Scan number the system shows a stable and consistent behavior over the cycles. Count the number of cycles (Scan number) until that.",
+          "depends_on": [
+            "WE(1).Potential (V)",
+            "WE(1).Current (A)"
+          ],
+          "description": "number of cycles to discard until the system shows a stable and consistent behavior over the cycles",
+          "name": "cycles_to_discard",
+          "source_pattern": "table_column",
+          "type": "number"
+        }
+      ],
+      "source_evidence": {
+        "domain": "CV",
+        "permitted_context_evidence": "",
+        "record_count": 0,
+        "records": []
+      },
+      "source_files": [],
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "S-0003",
+      "diagnostic_schema_fields": [
+        "end_working_electrode_potential",
+        "max_working_electrode_potential",
+        "min_working_electrode_potential",
+        "start_working_electrode_potential"
+      ],
+      "domain": "CV",
+      "metadata": {
+        "current_unit": [
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          },
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          },
+          {
+            "column": "WE(1).Current (A)",
+            "unit": "A"
+          }
+        ]
+      },
+      "metadata_records": [
+        {
+          "current_unit": [
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            },
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            },
+            {
+              "column": "WE(1).Current (A)",
+              "unit": "A"
+            }
+          ],
+          "record_id": "source-1"
+        }
+      ],
+      "question": "What are the starting potential, end potential, and potential window (range)?",
+      "rejection_reason": "The proxy evaluator rejected this response.",
+      "schema_fields": [
+        {
+          "comment": "column header",
+          "depends_on": [
+            "Potential applied (V)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "unit used for the potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_unit",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "column header",
+          "depends_on": [
+            "WE(1).Current (A)"
+          ],
+          "description": "Unit used for WE(1).Current values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "current_unit",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Sampling step in Potential = Potential applied (line i+1) - Potential applied (line i)",
+          "depends_on": [
+            "Potential applied (V)"
+          ],
+          "description": "applied potential values",
+          "formula": "Sampling step in Potential = Potential applied (line i+1) - Potential applied (line i)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_applied",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "working-electrode potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "we_potential",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Sampling step in time = time (line i+1) - time (line i)",
+          "depends_on": [
+            "Time (s)"
+          ],
+          "description": "time",
+          "formula": "Sampling step in time = time (line i+1) - time (line i)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "time",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "depends_on": [
+            "Time (s)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "scan rate of the potential, computed by: Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "formula": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "name": "scan_rate",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
+          "depends_on": [
+            "Potential applied (V)"
+          ],
+          "description": "potential step size of the applied potential values.",
+          "formula": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_applied_step_size",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Maximum of Column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "maximum working-electrode potential value (V)",
+          "formula": "Maximum of Column: WE(1).Potential (V)",
+          "name": "max_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum working-electrode potential value (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "minimum working-electrode potential value (V)",
+          "formula": "minimum working-electrode potential value (V)",
+          "name": "min_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value when the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The first working electrode potential value (V) of a measurement cycle",
+          "name": "start_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value one line before the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The last working electrode potential value (V) of a measurement cycle",
+          "name": "end_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "First, the Current is plotted against the Time. A spike in the current value exists when there is a brief deviation from the local values exceeding a chosen noise threshold  followed by a return toward baseline.",
+          "depends_on": [
+            "WE(1).Current (A)",
+            "Time (s)"
+          ],
+          "description": "Whether there is spike in current values when plotted versus time",
+          "name": "current_spike",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Examine the cyclic voltammetry behavior: potential vs. current, and check from which Scan number the system shows a stable and consistent behavior over the cycles. Count the number of cycles (Scan number) until that.",
+          "depends_on": [
+            "WE(1).Potential (V)",
+            "WE(1).Current (A)"
+          ],
+          "description": "number of cycles to discard until the system shows a stable and consistent behavior over the cycles",
+          "name": "cycles_to_discard",
+          "source_pattern": "table_column",
+          "type": "number"
+        }
+      ],
+      "source_evidence": {
+        "domain": "CV",
+        "permitted_context_evidence": "",
+        "record_count": 0,
+        "records": []
+      },
+      "source_files": [],
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "S-0004",
+      "diagnostic_schema_fields": [
+        "current_spike"
+      ],
+      "domain": "CV",
+      "metadata": {
+        "potential_unit": [
+          {
+            "column": "Potential applied (V)",
+            "unit": "V"
+          },
+          {
+            "column": "WE(1).Potential (V)",
+            "unit": "V"
+          },
+          {
+            "column": "Potential applied (V)",
+            "unit": "V"
+          },
+          {
+            "column": "WE(1).Potential (V)",
+            "unit": "V"
+          },
+          {
+            "column": "Potential applied (V)",
+            "unit": "V"
+          },
+          {
+            "column": "WE(1).Potential (V)",
+            "unit": "V"
+          }
+        ]
+      },
+      "metadata_records": [
+        {
+          "potential_unit": [
+            {
+              "column": "Potential applied (V)",
+              "unit": "V"
+            },
+            {
+              "column": "WE(1).Potential (V)",
+              "unit": "V"
+            },
+            {
+              "column": "Potential applied (V)",
+              "unit": "V"
+            },
+            {
+              "column": "WE(1).Potential (V)",
+              "unit": "V"
+            },
+            {
+              "column": "Potential applied (V)",
+              "unit": "V"
+            },
+            {
+              "column": "WE(1).Potential (V)",
+              "unit": "V"
+            }
+          ],
+          "record_id": "source-1"
+        }
+      ],
+      "question": "Are there any spikes in the dataset?",
+      "rejection_reason": "The proxy evaluator rejected this response.",
+      "schema_fields": [
+        {
+          "comment": "column header",
+          "depends_on": [
+            "Potential applied (V)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "unit used for the potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_unit",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "column header",
+          "depends_on": [
+            "WE(1).Current (A)"
+          ],
+          "description": "Unit used for WE(1).Current values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "current_unit",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Sampling step in Potential = Potential applied (line i+1) - Potential applied (line i)",
+          "depends_on": [
+            "Potential applied (V)"
+          ],
+          "description": "applied potential values",
+          "formula": "Sampling step in Potential = Potential applied (line i+1) - Potential applied (line i)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_applied",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "working-electrode potential values",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "we_potential",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Sampling step in time = time (line i+1) - time (line i)",
+          "depends_on": [
+            "Time (s)"
+          ],
+          "description": "time",
+          "formula": "Sampling step in time = time (line i+1) - time (line i)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "time",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "depends_on": [
+            "Time (s)",
+            "WE(1).Potential (V)"
+          ],
+          "description": "scan rate of the potential, computed by: Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "formula": "Scan rate (V/s) = ﻿{WE(1).Potential (V) (line i+1) - WE(1).Potential (V) (line i)} / {Time (s) (line i+1) - Time (s) (line i)}",
+          "name": "scan_rate",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
+          "depends_on": [
+            "Potential applied (V)"
+          ],
+          "description": "potential step size of the applied potential values.",
+          "formula": "potential step size (V) = ﻿{﻿Potential applied (V) (line i+1) - ﻿Potential applied (V) (line i)} \nCompare the positive potential step sizes and the absolute value of negative potential step sizes.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "potential_applied_step_size",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Maximum of Column: WE(1).Potential (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "maximum working-electrode potential value (V)",
+          "formula": "Maximum of Column: WE(1).Potential (V)",
+          "name": "max_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum working-electrode potential value (V)",
+          "depends_on": [
+            "WE(1).Potential (V)"
+          ],
+          "description": "minimum working-electrode potential value (V)",
+          "formula": "minimum working-electrode potential value (V)",
+          "name": "min_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value when the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The first working electrode potential value (V) of a measurement cycle",
+          "name": "start_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "Read the WE(1).Potential (V) value one line before the Column: Scan changes by +1",
+          "depends_on": [
+            "Scan",
+            "WE(1).Potential (V)"
+          ],
+          "description": "The last working electrode potential value (V) of a measurement cycle",
+          "name": "end_working_electrode_potential",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "First, the Current is plotted against the Time. A spike in the current value exists when there is a brief deviation from the local values exceeding a chosen noise threshold  followed by a return toward baseline.",
+          "depends_on": [
+            "WE(1).Current (A)",
+            "Time (s)"
+          ],
+          "description": "Whether there is spike in current values when plotted versus time",
+          "name": "current_spike",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Examine the cyclic voltammetry behavior: potential vs. current, and check from which Scan number the system shows a stable and consistent behavior over the cycles. Count the number of cycles (Scan number) until that.",
+          "depends_on": [
+            "WE(1).Potential (V)",
+            "WE(1).Current (A)"
+          ],
+          "description": "number of cycles to discard until the system shows a stable and consistent behavior over the cycles",
+          "name": "cycles_to_discard",
+          "source_pattern": "table_column",
+          "type": "number"
+        }
+      ],
+      "source_evidence": {
+        "domain": "CV",
+        "permitted_context_evidence": "",
+        "record_count": 0,
+        "records": []
+      },
+      "source_files": [],
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "S-0005",
+      "diagnostic_schema_fields": [
+        "time_step"
+      ],
+      "domain": "DIL",
+      "metadata": {
+        "initial_sample_length": 1.33
+      },
+      "metadata_records": [
+        {
+          "initial_sample_length": 1.33,
+          "record_id": "source-1"
+        }
+      ],
+      "question": "Is the time spacing uniform?",
+      "rejection_reason": "The proxy evaluator rejected this response.",
+      "schema_fields": [
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "The initial length of the sample (mm)",
+          "name": "initial_sample_length",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Date"
+          ],
+          "description": "The date and time when the measurement begins",
+          "name": "measurement_date_and_time",
+          "source_pattern": "header_field",
+          "type": "array"
+        },
+        {
+          "comment": "Check whether each column's data entries are numeric or not",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "the type of the data, whether the data file is numeric or not",
+          "formula": "Check whether each column's data entries are numeric or not",
+          "name": "data_type",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Units for each data column",
+          "name": "units_of_each_column",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "measurement time step",
+          "formula": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "time_step",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "numerical differentiation (µm/s) = {Delta L (line i+1) - Delta L (line i)} / {Time (line i+1) - Time (line i)} ; compare the results line by line to column 4",
+          "depends_on": [
+            "Time(s)",
+            "Delta L|d(µm/s)",
+            "Delta L(µm)"
+          ],
+          "description": "whether the derivative column matches numerical differentiation of column 3",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "derivative_consistency",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "total duration of the measurement",
+          "name": "measurement_duration",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum = minimum numeric value in the Temperature(°C) column\nmaximum = maximum numeric value in the Temperature(°C) column",
+          "depends_on": [
+            "Temperature(°C)"
+          ],
+          "description": "range of the temperature measured",
+          "name": "temperature_range",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "maximum length change (µm)",
+          "name": "maximum_expansion",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "net_shrinkage = initial Delta L − final Delta L; if net_shrinkage > 0, the answer is True; otherwise, False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "whether there is an overall decrease in length between the beginning and the end of the measurement",
+          "name": "net_shrinkage_observed",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if Delta L shows a sudden step-like change between adjacent or nearby data points that is clearly larger than the surrounding fluctuations; otherwise False",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether there is a sudden, discontinuous changes in the measured length change",
+          "name": "abrupt_dilatation_changes_observed",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if the final Delta L returns to approximately its initial value; otherwise False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "Whether the final Delta L returns to approximately its initial value",
+          "name": "returns_to_original_length",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "depends_on": [
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Ratio of the magnitude of dL/dt data to the magnitude noise",
+          "formula": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "signal_to_noise_ratio",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Smooth the dL/dt time series; True if it is consistently non-increasing or non-decreasing; Otherwise False.",
+          "depends_on": [
+            "Delta L|d(µm/s)",
+            "Time(s)"
+          ],
+          "description": "Whether the smoothed dL/dt signal, equivalently the charging flux, changes monotonically over time.",
+          "name": "smoothed_dl_dt_monotonic",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether all three dilatation measurements exhibit the same overall qualitative behavior",
+          "formula": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "qualitative_features_consistent",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Pearson correlation coefficient(s) between the Delta L over Time measurements",
+          "formula": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "dilatation_pearson_correlation",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        }
       ],
       "source_evidence": {
         "domain": "DIL",
         "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-              "date": "Fri Nov 28 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
+        "record_count": 0,
+        "records": []
+      },
+      "source_files": [],
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "S-0006",
+      "diagnostic_schema_fields": [
+        "derivative_consistency"
+      ],
+      "domain": "DIL",
+      "metadata": {
+        "initial_sample_length": 1.33
+      },
+      "metadata_records": [
+        {
+          "initial_sample_length": 1.33,
+          "record_id": "source-1"
+        }
+      ],
+      "question": "Does the derivative column match numerical differentiation of column 3?",
+      "rejection_reason": "The proxy evaluator rejected this response.",
+      "schema_fields": [
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "The initial length of the sample (mm)",
+          "name": "initial_sample_length",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Date"
+          ],
+          "description": "The date and time when the measurement begins",
+          "name": "measurement_date_and_time",
+          "source_pattern": "header_field",
+          "type": "array"
+        },
+        {
+          "comment": "Check whether each column's data entries are numeric or not",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "the type of the data, whether the data file is numeric or not",
+          "formula": "Check whether each column's data entries are numeric or not",
+          "name": "data_type",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Units for each data column",
+          "name": "units_of_each_column",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "measurement time step",
+          "formula": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
             },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
+            "required": [
+              "source_file",
+              "column"
             ],
-            "table_rows_available": true,
-            "context_fields": []
+            "type": "object"
+          },
+          "name": "time_step",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "numerical differentiation (µm/s) = {Delta L (line i+1) - Delta L (line i)} / {Time (line i+1) - Time (line i)} ; compare the results line by line to column 4",
+          "depends_on": [
+            "Time(s)",
+            "Delta L|d(µm/s)",
+            "Delta L(µm)"
+          ],
+          "description": "whether the derivative column matches numerical differentiation of column 3",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "derivative_consistency",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "total duration of the measurement",
+          "name": "measurement_duration",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum = minimum numeric value in the Temperature(°C) column\nmaximum = maximum numeric value in the Temperature(°C) column",
+          "depends_on": [
+            "Temperature(°C)"
+          ],
+          "description": "range of the temperature measured",
+          "name": "temperature_range",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "maximum length change (µm)",
+          "name": "maximum_expansion",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "net_shrinkage = initial Delta L − final Delta L; if net_shrinkage > 0, the answer is True; otherwise, False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "whether there is an overall decrease in length between the beginning and the end of the measurement",
+          "name": "net_shrinkage_observed",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if Delta L shows a sudden step-like change between adjacent or nearby data points that is clearly larger than the surrounding fluctuations; otherwise False",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether there is a sudden, discontinuous changes in the measured length change",
+          "name": "abrupt_dilatation_changes_observed",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if the final Delta L returns to approximately its initial value; otherwise False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "Whether the final Delta L returns to approximately its initial value",
+          "name": "returns_to_original_length",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "depends_on": [
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Ratio of the magnitude of dL/dt data to the magnitude noise",
+          "formula": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "signal_to_noise_ratio",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Smooth the dL/dt time series; True if it is consistently non-increasing or non-decreasing; Otherwise False.",
+          "depends_on": [
+            "Delta L|d(µm/s)",
+            "Time(s)"
+          ],
+          "description": "Whether the smoothed dL/dt signal, equivalently the charging flux, changes monotonically over time.",
+          "name": "smoothed_dl_dt_monotonic",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether all three dilatation measurements exhibit the same overall qualitative behavior",
+          "formula": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "qualitative_features_consistent",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Pearson correlation coefficient(s) between the Delta L over Time measurements",
+          "formula": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "dilatation_pearson_correlation",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        }
+      ],
+      "source_evidence": {
+        "domain": "DIL",
+        "permitted_context_evidence": "",
+        "record_count": 0,
+        "records": []
+      },
+      "source_files": [],
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "S-0007",
+      "diagnostic_schema_fields": [
+        "temperature_range"
+      ],
+      "domain": "DIL",
+      "metadata": {
+        "initial_sample_length": 1.33
+      },
+      "metadata_records": [
+        {
+          "initial_sample_length": 1.33,
+          "record_id": "source-1"
+        }
+      ],
+      "question": "What is the temperature range?",
+      "rejection_reason": "The proxy evaluator rejected this response.",
+      "schema_fields": [
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "The initial length of the sample (mm)",
+          "name": "initial_sample_length",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Date"
+          ],
+          "description": "The date and time when the measurement begins",
+          "name": "measurement_date_and_time",
+          "source_pattern": "header_field",
+          "type": "array"
+        },
+        {
+          "comment": "Check whether each column's data entries are numeric or not",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "the type of the data, whether the data file is numeric or not",
+          "formula": "Check whether each column's data entries are numeric or not",
+          "name": "data_type",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Units for each data column",
+          "name": "units_of_each_column",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "measurement time step",
+          "formula": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "time_step",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "numerical differentiation (µm/s) = {Delta L (line i+1) - Delta L (line i)} / {Time (line i+1) - Time (line i)} ; compare the results line by line to column 4",
+          "depends_on": [
+            "Time(s)",
+            "Delta L|d(µm/s)",
+            "Delta L(µm)"
+          ],
+          "description": "whether the derivative column matches numerical differentiation of column 3",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "derivative_consistency",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "total duration of the measurement",
+          "name": "measurement_duration",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum = minimum numeric value in the Temperature(°C) column\nmaximum = maximum numeric value in the Temperature(°C) column",
+          "depends_on": [
+            "Temperature(°C)"
+          ],
+          "description": "range of the temperature measured",
+          "name": "temperature_range",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "maximum length change (µm)",
+          "name": "maximum_expansion",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "net_shrinkage = initial Delta L − final Delta L; if net_shrinkage > 0, the answer is True; otherwise, False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "whether there is an overall decrease in length between the beginning and the end of the measurement",
+          "name": "net_shrinkage_observed",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if Delta L shows a sudden step-like change between adjacent or nearby data points that is clearly larger than the surrounding fluctuations; otherwise False",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether there is a sudden, discontinuous changes in the measured length change",
+          "name": "abrupt_dilatation_changes_observed",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if the final Delta L returns to approximately its initial value; otherwise False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "Whether the final Delta L returns to approximately its initial value",
+          "name": "returns_to_original_length",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "depends_on": [
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Ratio of the magnitude of dL/dt data to the magnitude noise",
+          "formula": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "signal_to_noise_ratio",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Smooth the dL/dt time series; True if it is consistently non-increasing or non-decreasing; Otherwise False.",
+          "depends_on": [
+            "Delta L|d(µm/s)",
+            "Time(s)"
+          ],
+          "description": "Whether the smoothed dL/dt signal, equivalently the charging flux, changes monotonically over time.",
+          "name": "smoothed_dl_dt_monotonic",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether all three dilatation measurements exhibit the same overall qualitative behavior",
+          "formula": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "qualitative_features_consistent",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Pearson correlation coefficient(s) between the Delta L over Time measurements",
+          "formula": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "dilatation_pearson_correlation",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        }
+      ],
+      "source_evidence": {
+        "domain": "DIL",
+        "permitted_context_evidence": "",
+        "record_count": 0,
+        "records": []
+      },
+      "source_files": [],
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "S-0008",
+      "diagnostic_schema_fields": [
+        "dilatation_pearson_correlation"
+      ],
+      "domain": "DIL",
+      "metadata": {
+        "measurement_date_and_time": [
+          {
+            "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt": "Fri Nov 28 13:53:24 2025"
           },
           {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-              "date": "Fri Nov 29 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
+            "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt": "Fri Nov 29 13:53:24 2025"
           },
           {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt",
-              "date": "Fri Nov 30 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
+            "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt": "Fri Nov 30 13:53:24 2025"
           }
         ]
       },
-      "case_id": "S-0007"
+      "metadata_records": [
+        {
+          "measurement_date_and_time": [
+            {
+              "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt": "Fri Nov 28 13:53:24 2025"
+            },
+            {
+              "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt": "Fri Nov 29 13:53:24 2025"
+            },
+            {
+              "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt": "Fri Nov 30 13:53:24 2025"
+            }
+          ],
+          "record_id": "source-1"
+        },
+        {
+          "record_id": "source-2"
+        }
+      ],
+      "question": "What is the Pearson correlation coefficient between the dilatation measurements?",
+      "rejection_reason": "The proxy evaluator rejected this response.",
+      "schema_fields": [
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "The initial length of the sample (mm)",
+          "name": "initial_sample_length",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Date"
+          ],
+          "description": "The date and time when the measurement begins",
+          "name": "measurement_date_and_time",
+          "source_pattern": "header_field",
+          "type": "array"
+        },
+        {
+          "comment": "Check whether each column's data entries are numeric or not",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "the type of the data, whether the data file is numeric or not",
+          "formula": "Check whether each column's data entries are numeric or not",
+          "name": "data_type",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)",
+            "Temperature(°C)",
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Units for each data column",
+          "name": "units_of_each_column",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "measurement time step",
+          "formula": "Time step (s) = Time (line i+1) - Time (line i); check whether the time steps are uniform for all lines.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "time_step",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "numerical differentiation (µm/s) = {Delta L (line i+1) - Delta L (line i)} / {Time (line i+1) - Time (line i)} ; compare the results line by line to column 4",
+          "depends_on": [
+            "Time(s)",
+            "Delta L|d(µm/s)",
+            "Delta L(µm)"
+          ],
+          "description": "whether the derivative column matches numerical differentiation of column 3",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "derivative_consistency",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Time(s)"
+          ],
+          "description": "total duration of the measurement",
+          "name": "measurement_duration",
+          "source_pattern": "table_column",
+          "type": "number"
+        },
+        {
+          "comment": "minimum = minimum numeric value in the Temperature(°C) column\nmaximum = maximum numeric value in the Temperature(°C) column",
+          "depends_on": [
+            "Temperature(°C)"
+          ],
+          "description": "range of the temperature measured",
+          "name": "temperature_range",
+          "source_pattern": "table_column",
+          "type": "array"
+        },
+        {
+          "comment": "Read directly from the selected source part(s).",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "maximum length change (µm)",
+          "name": "maximum_expansion",
+          "source_pattern": "header_field",
+          "type": "number"
+        },
+        {
+          "comment": "net_shrinkage = initial Delta L − final Delta L; if net_shrinkage > 0, the answer is True; otherwise, False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "whether there is an overall decrease in length between the beginning and the end of the measurement",
+          "name": "net_shrinkage_observed",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if Delta L shows a sudden step-like change between adjacent or nearby data points that is clearly larger than the surrounding fluctuations; otherwise False",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether there is a sudden, discontinuous changes in the measured length change",
+          "name": "abrupt_dilatation_changes_observed",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "True if the final Delta L returns to approximately its initial value; otherwise False",
+          "depends_on": [
+            "Length"
+          ],
+          "description": "Whether the final Delta L returns to approximately its initial value",
+          "name": "returns_to_original_length",
+          "source_pattern": "header_field",
+          "type": "boolean"
+        },
+        {
+          "comment": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "depends_on": [
+            "Delta L|d(µm/s)"
+          ],
+          "description": "Ratio of the magnitude of dL/dt data to the magnitude noise",
+          "formula": "Calculate the ratio of the RMS Column: Delta L|d(µm/s) to the RMS noise after separating the underlying trend from short-term fluctuations",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "signal_to_noise_ratio",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Smooth the dL/dt time series; True if it is consistently non-increasing or non-decreasing; Otherwise False.",
+          "depends_on": [
+            "Delta L|d(µm/s)",
+            "Time(s)"
+          ],
+          "description": "Whether the smoothed dL/dt signal, equivalently the charging flux, changes monotonically over time.",
+          "name": "smoothed_dl_dt_monotonic",
+          "source_pattern": "table_column",
+          "type": "boolean"
+        },
+        {
+          "comment": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Whether all three dilatation measurements exhibit the same overall qualitative behavior",
+          "formula": "Compare the three Delta L versus Time curves for the same major features, such as overall trend, peaks, plateaus, and recovery behavior.",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "qualitative_features_consistent",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        },
+        {
+          "comment": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "depends_on": [
+            "Time(s)",
+            "Delta L(µm)"
+          ],
+          "description": "Pearson correlation coefficient(s) between the Delta L over Time measurements",
+          "formula": "Align the measurements at corresponding time points and calculate the Pearson correlation coefficient between the Delta L values of two data files (a pair of two data files)",
+          "items": {
+            "properties": {
+              "column": {
+                "type": "string"
+              },
+              "source_file": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_file",
+              "column"
+            ],
+            "type": "object"
+          },
+          "name": "dilatation_pearson_correlation",
+          "source_pattern": "table_column",
+          "type": "array",
+          "value_representation": "source_column_references"
+        }
+      ],
+      "source_evidence": {
+        "domain": "DIL",
+        "permitted_context_evidence": "",
+        "record_count": 2,
+        "records": [
+          {
+            "context_fields": [],
+            "domain": "DIL",
+            "record_id": "source-1",
+            "record_metadata": {
+              "date": "Fri Nov 28 13:53:24 2025",
+              "length": "1.33 mm",
+              "name": "Pd n7 2025 11 28-try11-17|d",
+              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt"
+            },
+            "row_count": 54001,
+            "source_index": 1,
+            "table_columns": [
+              "Time(s)",
+              "Temperature(°C)",
+              "Delta L(µm)",
+              "Delta L|d(µm/s)"
+            ],
+            "table_rows_available": true
+          },
+          {
+            "context_fields": [],
+            "domain": "DIL",
+            "record_id": "source-2",
+            "record_metadata": {
+              "date": "Fri Nov 29 13:53:24 2025",
+              "length": "1.33 mm",
+              "name": "Pd n7 2025 11 28-try11-17|d",
+              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt"
+            },
+            "row_count": 54001,
+            "source_index": 2,
+            "table_columns": [
+              "Time(s)",
+              "Temperature(°C)",
+              "Delta L(µm)",
+              "Delta L|d(µm/s)"
+            ],
+            "table_rows_available": true
+          }
+        ]
+      },
+      "source_files": [
+        "controlled_sources/c-0091/source_1.txt",
+        "controlled_sources/c-0091/source_2.txt"
+      ],
+      "system_answer": "No answer."
     }
   ]
 }
