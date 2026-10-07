@@ -15,7 +15,7 @@ CV_SCHEMA_PATH = ROOT / "inputs/bootstrap_schema_cv.json"
 OUTPUT_PATH = ROOT / "docs/supplementary-source-review/review_cases.json"
 
 # Fixed opaque ordering. Original query IDs are not written to the public packet.
-TARGET_ORDER = ["Q031", "Q014", "Q022", "Q040", "Q016", "Q035", "Q015", "Q028"]
+TARGET_ORDER = ["Q031", "Q014", "Q022", "Q016", "Q035", "Q015", "Q028"]
 
 
 def load_json(path: Path):
@@ -126,7 +126,7 @@ def main() -> None:
         cases.append(case)
 
     payload = {
-        "protocol": "rq1-supplementary-source-support-blind-audit-v1",
+        "protocol": "rq1-supplementary-source-support-blind-audit-v2",
         "case_count": len(cases),
         "cases": cases,
     }

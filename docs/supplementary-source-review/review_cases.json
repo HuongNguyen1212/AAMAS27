@@ -1,6 +1,6 @@
 {
-  "protocol": "rq1-supplementary-source-support-blind-audit-v1",
-  "case_count": 8,
+  "protocol": "rq1-supplementary-source-support-blind-audit-v2",
+  "case_count": 7,
   "cases": [
     {
       "domain": "DIL",
@@ -651,288 +651,6 @@
     },
     {
       "domain": "DIL",
-      "question": "How does nanoporous Pd differ from bulk Pd?",
-      "schema_fields": [
-        {
-          "description": "Indicates whether there are abrupt changes in dilatation during the experiment.",
-          "name": "abrupt_changes_in_dilatation",
-          "type": "boolean"
-        },
-        {
-          "description": "The units of measurement for each column in the dataset.",
-          "name": "column_units",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all columns in the dataset are numerical.",
-          "name": "columns_are_numerical",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the derivative column matches the numerical differentiation of the third column.",
-          "name": "derivative_match",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether derivative spikes (noise) are physical or instrumental in nature.",
-          "name": "derivative_spikes",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether there is evidence of hydrogen desorption from the sample.",
-          "name": "evidence_of_hydrogen_desorption",
-          "type": "boolean"
-        },
-        {
-          "description": "The method used for hydrogen charging of the sample.",
-          "name": "hydrogen_charging_method",
-          "type": "string"
-        },
-        {
-          "description": "The initial length of the sample measured in millimeters.",
-          "name": "initial_length_mm",
-          "type": "number"
-        },
-        {
-          "description": "The maximum expansion of the sample measured during the experiment.",
-          "name": "maximum_expansion",
-          "type": "number"
-        },
-        {
-          "description": "The date when the measurement was performed, formatted as YYYY-MM-DD.",
-          "name": "measurement_date",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap.",
-          "name": "measurement_setup_phase_transformation",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the smoothed dL/dt data over time is monotonic.",
-          "name": "monotonic_dL_dt",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether multiple kinetic processes are present during the experiment.",
-          "name": "multiple_kinetic_processes",
-          "type": "boolean"
-        },
-        {
-          "description": "A description of how nanoporous Pd differs from bulk Pd.",
-          "name": "nanoporous_vs_bulk_difference",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether the sample exhibits net shrinkage after the experiment.",
-          "name": "net_shrinkage",
-          "type": "boolean"
-        },
-        {
-          "description": "The Pearson correlation coefficient between the dilatation measurements.",
-          "name": "pearson_correlation_coefficient",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the sample undergoes α to β or β to α phase transformation.",
-          "name": "phase_transformation",
-          "type": "string"
-        },
-        {
-          "description": "The time at which the phase transformation begins and ends, formatted as 'start_time - end_time'.",
-          "name": "phase_transformation_timing",
-          "type": "string"
-        },
-        {
-          "description": "Indicates whether all three dilatation measurements show the same qualitative features.",
-          "name": "qualitative_features_agreement",
-          "type": "boolean"
-        },
-        {
-          "description": "Indicates whether the sample returns to its original length after the experiment.",
-          "name": "returns_to_original_length",
-          "type": "boolean"
-        },
-        {
-          "description": "The material composition of the sample being tested.",
-          "name": "sample_material",
-          "type": "string"
-        },
-        {
-          "description": "The method used to produce the sample, such as dealloying, templating, or another route.",
-          "name": "sample_production_method",
-          "type": "string"
-        },
-        {
-          "description": "An explanation for why the sample exhibits net shrinkage, if applicable.",
-          "name": "shrinkage_explanation",
-          "type": "string"
-        },
-        {
-          "description": "The signal-to-noise ratio (SNR) of the measurements taken during the experiment.",
-          "name": "signal_to_noise_ratio",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether smoothing is required for the dL/dt data.",
-          "name": "smoothing_required",
-          "type": "boolean"
-        },
-        {
-          "description": "The range of temperatures experienced during the experiment, specified as a range (e.g., '20-100°C').",
-          "name": "temperature_range",
-          "type": "string"
-        },
-        {
-          "description": "The total duration of the experiment measured in seconds.",
-          "name": "total_experiment_duration",
-          "type": "number"
-        },
-        {
-          "description": "Indicates whether the time spacing between measurements is uniform.",
-          "name": "uniform_time_spacing",
-          "type": "boolean"
-        },
-        {
-          "comment": "Compare materials only when both the target record and a permitted comparison record are available.",
-          "depends_on": [
-            "record_metadata",
-            "measurement_series",
-            "comparison_record"
-          ],
-          "description": "features needed to compare materials",
-          "name": "material_comparison_features",
-          "type": "object"
-        },
-        {
-          "comment": "Populate only from explicit permitted source evidence. Leave null when the source does not support the value.",
-          "description": "field representing bulk pd comparison reference",
-          "name": "bulk_pd_comparison_reference",
-          "type": "string"
-        }
-      ],
-      "metadata": {
-        "source_measurement_summary": [
-          {
-            "delta_l": {
-              "count": 54001,
-              "first": 0.0,
-              "last": -0.9942099999999998,
-              "max": 39.46821,
-              "mean": 25.603930247363827,
-              "median_positive_step": 0.0015000000000000568,
-              "min": -1.1032900000000003
-            },
-            "dl_dt": {
-              "count": 54001,
-              "first": 0.00923872,
-              "last": 0.000496705,
-              "max": 0.131925,
-              "mean": -0.00018408141636262624,
-              "median_positive_step": 0.00268221,
-              "min": -0.19898
-            },
-            "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-            "temperature": {
-              "count": 54001,
-              "first": 19.4,
-              "last": 19.45,
-              "max": 19.55,
-              "mean": 19.42722449584267,
-              "median_positive_step": 0.05000000000000071,
-              "min": 19.15
-            },
-            "time": {
-              "count": 54001,
-              "first": 0.0,
-              "last": 5400.0,
-              "max": 5400.0,
-              "mean": 2700.3499935186387,
-              "median_positive_step": 1.0,
-              "min": 0.0
-            }
-          }
-        ]
-      },
-      "metadata_records": [],
-      "system_answer": "No answer.",
-      "rejection_reason": "The proxy evaluator rejected this response.",
-      "source_files": [
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-        "dil/Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt"
-      ],
-      "source_evidence": {
-        "domain": "DIL",
-        "permitted_context_evidence": "",
-        "record_count": 3,
-        "records": [
-          {
-            "record_id": "source-1",
-            "source_index": 1,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section1_shifted.txt",
-              "date": "Fri Nov 28 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-2",
-            "source_index": 2,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section2_shifted.txt",
-              "date": "Fri Nov 29 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          },
-          {
-            "record_id": "source-3",
-            "source_index": 3,
-            "domain": "DIL",
-            "record_metadata": {
-              "source_file": "Pd n7 2025 11 27 dilatometer-try15-16 dLdt_section3_shifted.txt",
-              "date": "Fri Nov 30 13:53:24 2025",
-              "length": "1.33 mm",
-              "name": "Pd n7 2025 11 28-try11-17|d"
-            },
-            "row_count": 54001,
-            "table_columns": [
-              "Time(s)",
-              "Temperature(°C)",
-              "Delta L(µm)",
-              "Delta L|d(µm/s)"
-            ],
-            "table_rows_available": true,
-            "context_fields": []
-          }
-        ]
-      },
-      "case_id": "S-0004"
-    },
-    {
-      "domain": "DIL",
       "question": "Was the sample produced by dealloying, templating, or another route?",
       "schema_fields": [
         {
@@ -1159,7 +877,7 @@
           }
         ]
       },
-      "case_id": "S-0005"
+      "case_id": "S-0004"
     },
     {
       "domain": "DIL",
@@ -1445,7 +1163,7 @@
           }
         ]
       },
-      "case_id": "S-0006"
+      "case_id": "S-0005"
     },
     {
       "domain": "DIL",
@@ -1671,7 +1389,7 @@
           }
         ]
       },
-      "case_id": "S-0007"
+      "case_id": "S-0006"
     },
     {
       "domain": "DIL",
@@ -1946,7 +1664,7 @@
           }
         ]
       },
-      "case_id": "S-0008"
+      "case_id": "S-0007"
     }
   ]
 }
