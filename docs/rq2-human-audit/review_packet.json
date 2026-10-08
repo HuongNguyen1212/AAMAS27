@@ -1,0 +1,434 @@
+{
+  "case_count": 60,
+  "cases": [
+    {
+      "case_id": "RQ2-AUDIT-001",
+      "domain": "CV",
+      "question": "At what potential does the cathodic peak associated with hydrogen surface adsorption (UPD) occur?",
+      "reference_answer": "Approximately 0.18 V.",
+      "system_answer": "0.1 V for records 001 and 003, 0.15 V for record 002"
+    },
+    {
+      "case_id": "RQ2-AUDIT-002",
+      "domain": "CV",
+      "question": "Where is the capacitive region?",
+      "reference_answer": "Approximately 0.36 V to 0.6 V.",
+      "system_answer": "The capacitive region is between -0.002637 V and 0.399567 V for record_001, -0.000189209 V and 0.399902344 V for record_002, and -0.002637 V and 0.399536 V for record_003."
+    },
+    {
+      "case_id": "RQ2-AUDIT-003",
+      "domain": "CV",
+      "question": "At what potential does the cathodic peak associated with hydrogen bulk absorption occur?",
+      "reference_answer": "Approximately 0.1 V.",
+      "system_answer": "-0.002 V"
+    },
+    {
+      "case_id": "RQ2-AUDIT-004",
+      "domain": "DIL",
+      "question": "Does the derivative column match numerical differentiation of column 3?",
+      "reference_answer": "Yes, comparable if not identical",
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "RQ2-AUDIT-005",
+      "domain": "CV",
+      "question": "Where is the capacitive region?",
+      "reference_answer": "Approximately 0.36 V to 0.6 V.",
+      "system_answer": "The capacitive region is between 0.198415 V and 0.399567 V for record_001, 0.199966 V and 0.199733 V for record_002, and 0.198669 V and 0.399536 V for record_003."
+    },
+    {
+      "case_id": "RQ2-AUDIT-006",
+      "domain": "DIL",
+      "question": "What is the Pearson correlation coefficient between the dilatation measurements?",
+      "reference_answer": "Section 1 vs Section 2 = 0.999917; Section 1 vs Section 3 = 0.999888; Section 2 vs Section 3 = 0.999993",
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "RQ2-AUDIT-007",
+      "domain": "DIL",
+      "question": "Does the sample exhibit net shrinkage?",
+      "reference_answer": "Yes",
+      "system_answer": "Yes, the sample exhibits net shrinkage."
+    },
+    {
+      "case_id": "RQ2-AUDIT-008",
+      "domain": "DIL",
+      "question": "What is the temperature range?",
+      "reference_answer": "19–20°C (almost constant temperature)",
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "RQ2-AUDIT-009",
+      "domain": "CV",
+      "question": "At what potential do the cathodic peak(s) associated with hydrogen bulk desorption occur?",
+      "reference_answer": "At potentials below 0.34 V.",
+      "system_answer": "0.1 V and 0.3 V"
+    },
+    {
+      "case_id": "RQ2-AUDIT-010",
+      "domain": "DIL",
+      "question": "Can this measurement setup be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap?",
+      "reference_answer": "No. The critical temperature of the Pd-H system is approximately 293°C, and the electrolyte used is not suitable for operation above this temperature.",
+      "system_answer": "Yes, the measurement setup can be used to observe the α-to-β phase transformation in the Pd–H system."
+    },
+    {
+      "case_id": "RQ2-AUDIT-011",
+      "domain": "DIL",
+      "question": "When was the measurement performed?",
+      "reference_answer": "Fri Nov 28 13:53:24 2025; Fri Nov 29 13:53:24 2025; Fri Nov 30 13:53:24 2025",
+      "system_answer": "The measurements were performed on 2025-11-28, 2025-11-29, and 2025-11-30."
+    },
+    {
+      "case_id": "RQ2-AUDIT-012",
+      "domain": "DIL",
+      "question": "What are the units of each column?",
+      "reference_answer": "s, °C, µm, µm/s",
+      "system_answer": "Time(s): s, Temperature(°C): °C, Delta L(µm): µm, Delta L|d(µm/s): µm/s"
+    },
+    {
+      "case_id": "RQ2-AUDIT-013",
+      "domain": "DIL",
+      "question": "Can this measurement setup be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap?",
+      "reference_answer": "No. The critical temperature of the Pd-H system is approximately 293°C, and the electrolyte used is not suitable for operation above this temperature.",
+      "system_answer": "No, the measurement setup cannot be used to observe the α-to-β phase transformation in the Pd–H system."
+    },
+    {
+      "case_id": "RQ2-AUDIT-014",
+      "domain": "CV",
+      "question": "What is the electrochemically active surface area (ECSA)?",
+      "reference_answer": "Approximately 2.48e-2 m^2 (same order of magnitude around 1e-2 m^2). For strict calculation, additional literature constant may be needed (PdO monolayer reduction charge per unit area).",
+      "system_answer": "0.5 cm²"
+    },
+    {
+      "case_id": "RQ2-AUDIT-015",
+      "domain": "DIL",
+      "question": "What is the hydrogen charging method?",
+      "reference_answer": "Electrochemical hydrogen charging in an acidic electrolyte",
+      "system_answer": "Electrochemical charging"
+    },
+    {
+      "case_id": "RQ2-AUDIT-016",
+      "domain": "CV",
+      "question": "Where is the capacitive region?",
+      "reference_answer": "Approximately 0.36 V to 0.6 V.",
+      "system_answer": "The capacitive region is from 0.0 V to 0.2 V for records 001 and 003, and from 0.0 V to 0.199966 V for record 002."
+    },
+    {
+      "case_id": "RQ2-AUDIT-017",
+      "domain": "DIL",
+      "question": "What is the maximum expansion?",
+      "reference_answer": "Approximately 39.5 µm",
+      "system_answer": "39.46821 µm"
+    },
+    {
+      "case_id": "RQ2-AUDIT-018",
+      "domain": "DIL",
+      "question": "What is the maximum expansion?",
+      "reference_answer": "Approximately 39.5 µm",
+      "system_answer": "The maximum expansion values are 39.46821 µm for record_001, 39.37372 µm for record_002, and 39.35766 µm for record_003."
+    },
+    {
+      "case_id": "RQ2-AUDIT-019",
+      "domain": "DIL",
+      "question": "Are derivative spikes (noise) physical or instrumental?",
+      "reference_answer": "Most probably instrumental",
+      "system_answer": "Instrumental"
+    },
+    {
+      "case_id": "RQ2-AUDIT-020",
+      "domain": "CV",
+      "question": "What is the scan rate (verify 'XX mV/s' in the filename)?",
+      "reference_answer": "The scan rate matches the filename: 1 mV/s, 5 mV/s, or 10 mV/s.",
+      "system_answer": "10 mV/s for record_001, 1 mV/s for record_002, 5 mV/s for record_003"
+    },
+    {
+      "case_id": "RQ2-AUDIT-021",
+      "domain": "CV",
+      "question": "Where is the capacitive region?",
+      "reference_answer": "Approximately 0.36 V to 0.6 V.",
+      "system_answer": "The capacitive region is between 0.198669 V and 0.399567 V for record_001, 0.199733 V and 0.399902344 V for record_002, and 0.2 V and 0.4 V for record_003."
+    },
+    {
+      "case_id": "RQ2-AUDIT-022",
+      "domain": "CV",
+      "question": "Are 'Potential applied' and 'WE potential' identical?",
+      "reference_answer": "Not strictly identical, but very close with a small systematic difference; for quantitative analysis, use WE potential.",
+      "system_answer": "No, 'Potential applied' and 'WE potential' are not identical."
+    },
+    {
+      "case_id": "RQ2-AUDIT-023",
+      "domain": "DIL",
+      "question": "What is the temperature range?",
+      "reference_answer": "19–20°C (almost constant temperature)",
+      "system_answer": "19.15-19.55°C for record_001, 19.05-19.65°C for record_002, 19.15-19.6°C for record_003"
+    },
+    {
+      "case_id": "RQ2-AUDIT-024",
+      "domain": "DIL",
+      "question": "Is the time spacing uniform?",
+      "reference_answer": "Yes, 0.1 s",
+      "system_answer": "Yes, the time spacing is uniform."
+    },
+    {
+      "case_id": "RQ2-AUDIT-025",
+      "domain": "CV",
+      "question": "At what potential do the cathodic peak(s) associated with hydrogen bulk desorption occur?",
+      "reference_answer": "At potentials below 0.34 V.",
+      "system_answer": "record_001: -0.15, -0.2 V; record_002: -0.0002 V; record_003: -0.15, -0.2 V"
+    },
+    {
+      "case_id": "RQ2-AUDIT-026",
+      "domain": "DIL",
+      "question": "Is there evidence of hydrogen desorption?",
+      "reference_answer": "Yes, the observed shrinkage in length corresponds to the release of hydrogen from the sample.",
+      "system_answer": "No evidence of hydrogen desorption."
+    },
+    {
+      "case_id": "RQ2-AUDIT-027",
+      "domain": "DIL",
+      "question": "Does the sample undergo α to β or β to α phase transformation?",
+      "reference_answer": "Yes, the dilatation range indicates the occurrence of a phase transformation.",
+      "system_answer": "α to β"
+    },
+    {
+      "case_id": "RQ2-AUDIT-028",
+      "domain": "DIL",
+      "question": "What is the temperature range?",
+      "reference_answer": "19–20°C (almost constant temperature)",
+      "system_answer": "The temperature range is 19.15-19.55°C for record_001, 19.05-19.65°C for record_002, and 19.15-19.6°C for record_003."
+    },
+    {
+      "case_id": "RQ2-AUDIT-029",
+      "domain": "CV",
+      "question": "Is the potential sweep symmetric (forward vs reverse)?",
+      "reference_answer": "Yes.",
+      "system_answer": "Yes, the potential sweep is symmetric."
+    },
+    {
+      "case_id": "RQ2-AUDIT-030",
+      "domain": "DIL",
+      "question": "At what time does the phase transformation begin and end?",
+      "reference_answer": "The α→β phase transformation (hydrogen absorption / expansion) begins at approximately t=3–8 s and ends at approximately t=1300–1560 s, consistent across all three sections.",
+      "system_answer": "The phase transformation begins at 2000 seconds and ends at 3000 seconds."
+    },
+    {
+      "case_id": "RQ2-AUDIT-031",
+      "domain": "DIL",
+      "question": "Is there evidence of hydrogen desorption?",
+      "reference_answer": "Yes, the observed shrinkage in length corresponds to the release of hydrogen from the sample.",
+      "system_answer": "Yes, there is evidence of hydrogen desorption."
+    },
+    {
+      "case_id": "RQ2-AUDIT-032",
+      "domain": "DIL",
+      "question": "How does nanoporous Pd differ from bulk Pd?",
+      "reference_answer": "Compared to bulk Pd, nanoporous Pd has extremely high surface area, so surface stress significantly influences lattice strain and macroscopic dimensions, as well as hydrogen absorption behavior. Its large electrochemically active surface area leads to higher currents and faster hydrogen uptake/release. Short diffusion distances enable rapid hydrogen transport and equilibration.",
+      "system_answer": "Nanoporous Pd has a high surface area and enhanced catalytic and hydrogen absorption properties compared to bulk Pd, due to its porous structure."
+    },
+    {
+      "case_id": "RQ2-AUDIT-033",
+      "domain": "DIL",
+      "question": "Does the sample undergo α to β or β to α phase transformation?",
+      "reference_answer": "Yes, the dilatation range indicates the occurrence of a phase transformation.",
+      "system_answer": "The sample undergoes both α to β and β to α phase transformations depending on the record."
+    },
+    {
+      "case_id": "RQ2-AUDIT-034",
+      "domain": "CV",
+      "question": "Can this be correlated with WAXS/SAXS phase data (if available)?",
+      "reference_answer": "Open question: requires WAXS/SAXS data as additional input.",
+      "system_answer": "No, WAXS/SAXS phase data is not available for correlation."
+    },
+    {
+      "case_id": "RQ2-AUDIT-035",
+      "domain": "DIL",
+      "question": "What is the total duration of the experiment?",
+      "reference_answer": "5400 s",
+      "system_answer": "5400.0 seconds"
+    },
+    {
+      "case_id": "RQ2-AUDIT-036",
+      "domain": "DIL",
+      "question": "Why does the sample exhibit net shrinkage?",
+      "reference_answer": "Possibly due to phase transformation yet not fully understood.",
+      "system_answer": "The sample does not exhibit net shrinkage."
+    },
+    {
+      "case_id": "RQ2-AUDIT-037",
+      "domain": "DIL",
+      "question": "Do all three dilatation measurements show the same qualitative features?",
+      "reference_answer": "Yes, the three curves are visually comparable.",
+      "system_answer": "No"
+    },
+    {
+      "case_id": "RQ2-AUDIT-038",
+      "domain": "DIL",
+      "question": "Are there abrupt changes in dilatation?",
+      "reference_answer": "No",
+      "system_answer": "No, there are no abrupt changes in dilatation."
+    },
+    {
+      "case_id": "RQ2-AUDIT-039",
+      "domain": "DIL",
+      "question": "What is the initial length of the sample?",
+      "reference_answer": "1.33 mm",
+      "system_answer": "1.33 mm"
+    },
+    {
+      "case_id": "RQ2-AUDIT-040",
+      "domain": "DIL",
+      "question": "How does nanoporous Pd differ from bulk Pd?",
+      "reference_answer": "Compared to bulk Pd, nanoporous Pd has extremely high surface area, so surface stress significantly influences lattice strain and macroscopic dimensions, as well as hydrogen absorption behavior. Its large electrochemically active surface area leads to higher currents and faster hydrogen uptake/release. Short diffusion distances enable rapid hydrogen transport and equilibration.",
+      "system_answer": "Nanoporous Pd exhibits higher surface area and reactivity compared to bulk Pd."
+    },
+    {
+      "case_id": "RQ2-AUDIT-041",
+      "domain": "CV",
+      "question": "How many cycles should be discarded to have stable repetition?",
+      "reference_answer": "Discard at least 1 cycle; in some cases 2 cycles may be better.",
+      "system_answer": "2"
+    },
+    {
+      "case_id": "RQ2-AUDIT-042",
+      "domain": "DIL",
+      "question": "Was the sample produced by dealloying, templating, or another route?",
+      "reference_answer": "dealloying",
+      "system_answer": "The sample was produced by dealloying."
+    },
+    {
+      "case_id": "RQ2-AUDIT-043",
+      "domain": "CV",
+      "question": "What are the units for potential and current?",
+      "reference_answer": "Potential: V; current: A",
+      "system_answer": "Potential is in volts (V) and current is in amperes (A)."
+    },
+    {
+      "case_id": "RQ2-AUDIT-044",
+      "domain": "CV",
+      "question": "Are there any spikes in the dataset?",
+      "reference_answer": "No.",
+      "system_answer": "No, there are no spikes in the dataset."
+    },
+    {
+      "case_id": "RQ2-AUDIT-045",
+      "domain": "CV",
+      "question": "Is the sampling uniform in time or potential?",
+      "reference_answer": "Uniform in potential, and effectively uniform in time.",
+      "system_answer": "The sampling is uniform in time."
+    },
+    {
+      "case_id": "RQ2-AUDIT-046",
+      "domain": "DIL",
+      "question": "Are derivative spikes (noise) physical or instrumental?",
+      "reference_answer": "Most probably instrumental",
+      "system_answer": "The derivative spikes (noise) are instrumental."
+    },
+    {
+      "case_id": "RQ2-AUDIT-047",
+      "domain": "DIL",
+      "question": "Why does the sample exhibit net shrinkage?",
+      "reference_answer": "Possibly due to phase transformation yet not fully understood.",
+      "system_answer": "The sample exhibits net shrinkage due to hydrogen desorption during the experiment."
+    },
+    {
+      "case_id": "RQ2-AUDIT-048",
+      "domain": "DIL",
+      "question": "Can this measurement setup be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap?",
+      "reference_answer": "No. The critical temperature of the Pd-H system is approximately 293°C, and the electrolyte used is not suitable for operation above this temperature.",
+      "system_answer": "No, the measurement setup cannot be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap."
+    },
+    {
+      "case_id": "RQ2-AUDIT-049",
+      "domain": "DIL",
+      "question": "Are multiple kinetic processes present?",
+      "reference_answer": "Possible processes are: proton transport, adsorption, absorption, bulk diffusion",
+      "system_answer": "Yes, multiple kinetic processes are present."
+    },
+    {
+      "case_id": "RQ2-AUDIT-050",
+      "domain": "DIL",
+      "question": "Is smoothing required for the dL/dt data?",
+      "reference_answer": "An SNR of approximately 13.5 dB indicates a signal of moderate quality. Smoothing is recommended to improve figure readability and quantitative peak analysis.",
+      "system_answer": "Yes, smoothing is required for the dL/dt data."
+    },
+    {
+      "case_id": "RQ2-AUDIT-051",
+      "domain": "DIL",
+      "question": "What is the sample?",
+      "reference_answer": "Nanoporous Palladium",
+      "system_answer": "Pd"
+    },
+    {
+      "case_id": "RQ2-AUDIT-052",
+      "domain": "DIL",
+      "question": "When smoothed, is the dL/dt data over time, or equivalently the charging flux, monotonic?",
+      "reference_answer": "No",
+      "system_answer": "No, the smoothed dL/dt data is not monotonic."
+    },
+    {
+      "case_id": "RQ2-AUDIT-053",
+      "domain": "DIL",
+      "question": "How does nanoporous Pd differ from bulk Pd?",
+      "reference_answer": "Compared to bulk Pd, nanoporous Pd has extremely high surface area, so surface stress significantly influences lattice strain and macroscopic dimensions, as well as hydrogen absorption behavior. Its large electrochemically active surface area leads to higher currents and faster hydrogen uptake/release. Short diffusion distances enable rapid hydrogen transport and equilibration.",
+      "system_answer": "Nanoporous Pd has a higher surface area and different catalytic properties compared to bulk Pd due to its porous structure."
+    },
+    {
+      "case_id": "RQ2-AUDIT-054",
+      "domain": "CV",
+      "question": "What is the electrochemically active surface area (ECSA)?",
+      "reference_answer": "Approximately 2.48e-2 m^2 (same order of magnitude around 1e-2 m^2). For strict calculation, additional literature constant may be needed (PdO monolayer reduction charge per unit area).",
+      "system_answer": "0.75 cm²"
+    },
+    {
+      "case_id": "RQ2-AUDIT-055",
+      "domain": "DIL",
+      "question": "What is the signal-to-noise ratio (SNR)?",
+      "reference_answer": "Section 1 SNR = 4.78149 (13.5913 dB); Section 2 SNR = 4.72202 (13.4826 dB); Section 3 SNR = 4.71258 (13.4652 dB)",
+      "system_answer": "No answer."
+    },
+    {
+      "case_id": "RQ2-AUDIT-056",
+      "domain": "DIL",
+      "question": "Can this measurement setup be used to observe the α-to-β phase transformation in the Pd–H system in the absence of a miscibility gap?",
+      "reference_answer": "No. The critical temperature of the Pd-H system is approximately 293°C, and the electrolyte used is not suitable for operation above this temperature.",
+      "system_answer": "No, this measurement setup cannot be used to observe the α-to-β phase transformation in the Pd–H system."
+    },
+    {
+      "case_id": "RQ2-AUDIT-057",
+      "domain": "DIL",
+      "question": "Are all columns numerical?",
+      "reference_answer": "Yes, except for the header lines",
+      "system_answer": "Yes, all columns are numerical."
+    },
+    {
+      "case_id": "RQ2-AUDIT-058",
+      "domain": "CV",
+      "question": "At what potential does the cathodic peak associated with hydrogen bulk absorption occur?",
+      "reference_answer": "Approximately 0.1 V.",
+      "system_answer": "0.2 V"
+    },
+    {
+      "case_id": "RQ2-AUDIT-059",
+      "domain": "CV",
+      "question": "What are the starting potential, end potential, and potential window (range)?",
+      "reference_answer": "start 0.370 V, end 0.370 V, range 0.0 to 0.4 V.",
+      "system_answer": "Record 001: Starting potential = -0.002747 V, End potential = 0.400085 V, Potential window = 0.402832 V. Record 002: Starting potential = -0.000305176 V, End potential = 0.400238037 V, Potential window = 0.400527 V. Record 003: Starting potential = -0.002747 V, End potential = 0.400085 V, Potential window = 0.402822 V."
+    },
+    {
+      "case_id": "RQ2-AUDIT-060",
+      "domain": "DIL",
+      "question": "Does the sample return to its original length?",
+      "reference_answer": "No, shrinkage after each measurement",
+      "system_answer": "For record_001 and record_002, the sample returns to its original length. For record_003, it does not."
+    }
+  ],
+  "packet_id": "sha256:db56db0cc6da9803c22cf22d838ef39b3c47e1d710f7183f45f7407c7574aa22",
+  "protocol": "rq2-single-answer-human-audit-v3",
+  "sample_status": "frozen",
+  "score_scale": [
+    1.0,
+    0.5,
+    0.0,
+    null
+  ]
+}

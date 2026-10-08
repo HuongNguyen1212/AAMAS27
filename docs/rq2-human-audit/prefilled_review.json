@@ -1,0 +1,497 @@
+{
+  "case_count": 60,
+  "exported_at": null,
+  "migration": {
+    "ambiguous_case_ids": [],
+    "ambiguous_count": 0,
+    "content_fields": [
+      "domain",
+      "question",
+      "reference_answer",
+      "system_answer"
+    ],
+    "pending_case_ids": [
+      "RQ2-AUDIT-001",
+      "RQ2-AUDIT-002",
+      "RQ2-AUDIT-003",
+      "RQ2-AUDIT-005",
+      "RQ2-AUDIT-009",
+      "RQ2-AUDIT-013",
+      "RQ2-AUDIT-014",
+      "RQ2-AUDIT-016",
+      "RQ2-AUDIT-020",
+      "RQ2-AUDIT-021",
+      "RQ2-AUDIT-022",
+      "RQ2-AUDIT-025",
+      "RQ2-AUDIT-033",
+      "RQ2-AUDIT-034",
+      "RQ2-AUDIT-040",
+      "RQ2-AUDIT-041",
+      "RQ2-AUDIT-043",
+      "RQ2-AUDIT-044",
+      "RQ2-AUDIT-045",
+      "RQ2-AUDIT-048",
+      "RQ2-AUDIT-053",
+      "RQ2-AUDIT-054",
+      "RQ2-AUDIT-056",
+      "RQ2-AUDIT-058",
+      "RQ2-AUDIT-059"
+    ],
+    "pending_count": 25,
+    "policy": "exact-content-match-v1",
+    "source_packet_id": "sha256:de71680ee9e5515132172082ecf8068a82c8efa7b474eb3c236d3c33d61eceaa",
+    "source_packet_sha256": "sha256:7e45c3f65bb8d8b2edb7381efb4bbb9106c0b1f52b600059898c21ce478ba7a0",
+    "source_review_sha256": "sha256:4a9075c91801da103accee9a66f41709e4c13bbcad84931ef40a81cea2c1f772",
+    "target_packet_id": "sha256:db56db0cc6da9803c22cf22d838ef39b3c47e1d710f7183f45f7407c7574aa22",
+    "target_packet_sha256": "sha256:f0dc67799a6a8b3312ecaa3980c1bd2fe413a1490de25306f3f848351ebad677",
+    "transferred_count": 35,
+    "transfers": [
+      {
+        "source_case_id": "RQ2-AUDIT-004",
+        "target_case_id": "RQ2-AUDIT-004"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-006",
+        "target_case_id": "RQ2-AUDIT-006"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-007",
+        "target_case_id": "RQ2-AUDIT-007"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-008",
+        "target_case_id": "RQ2-AUDIT-008"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-010",
+        "target_case_id": "RQ2-AUDIT-010"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-011",
+        "target_case_id": "RQ2-AUDIT-011"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-012",
+        "target_case_id": "RQ2-AUDIT-012"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-015",
+        "target_case_id": "RQ2-AUDIT-015"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-017",
+        "target_case_id": "RQ2-AUDIT-017"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-058",
+        "target_case_id": "RQ2-AUDIT-018"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-019",
+        "target_case_id": "RQ2-AUDIT-019"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-014",
+        "target_case_id": "RQ2-AUDIT-023"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-024",
+        "target_case_id": "RQ2-AUDIT-024"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-026",
+        "target_case_id": "RQ2-AUDIT-026"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-027",
+        "target_case_id": "RQ2-AUDIT-027"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-023",
+        "target_case_id": "RQ2-AUDIT-028"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-029",
+        "target_case_id": "RQ2-AUDIT-029"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-030",
+        "target_case_id": "RQ2-AUDIT-030"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-005",
+        "target_case_id": "RQ2-AUDIT-031"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-032",
+        "target_case_id": "RQ2-AUDIT-032"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-035",
+        "target_case_id": "RQ2-AUDIT-035"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-036",
+        "target_case_id": "RQ2-AUDIT-036"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-037",
+        "target_case_id": "RQ2-AUDIT-037"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-038",
+        "target_case_id": "RQ2-AUDIT-038"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-039",
+        "target_case_id": "RQ2-AUDIT-039"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-042",
+        "target_case_id": "RQ2-AUDIT-042"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-046",
+        "target_case_id": "RQ2-AUDIT-046"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-047",
+        "target_case_id": "RQ2-AUDIT-047"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-049",
+        "target_case_id": "RQ2-AUDIT-049"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-050",
+        "target_case_id": "RQ2-AUDIT-050"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-051",
+        "target_case_id": "RQ2-AUDIT-051"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-052",
+        "target_case_id": "RQ2-AUDIT-052"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-055",
+        "target_case_id": "RQ2-AUDIT-055"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-057",
+        "target_case_id": "RQ2-AUDIT-057"
+      },
+      {
+        "source_case_id": "RQ2-AUDIT-060",
+        "target_case_id": "RQ2-AUDIT-060"
+      }
+    ]
+  },
+  "packet_id": "sha256:db56db0cc6da9803c22cf22d838ef39b3c47e1d710f7183f45f7407c7574aa22",
+  "packet_status": "frozen",
+  "protocol": "rq2-single-answer-human-audit-v3",
+  "reviewer_id": "Seoyun-2026-10-06-RQ2",
+  "reviews": [
+    {
+      "case_id": "RQ2-AUDIT-001",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-002",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-003",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-004",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-005",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-006",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-007",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-008",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-009",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-010",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-011",
+      "note": "The date is correct, but the time (hh:mm:ss) information is missing.",
+      "score": "0.5"
+    },
+    {
+      "case_id": "RQ2-AUDIT-012",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-013",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-014",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-015",
+      "note": "The System answer is correct, but that information is not in the datafile itself.",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-016",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-017",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-018",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-019",
+      "note": "The System answer is correct, but that information is not in the datafile itself.",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-020",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-021",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-022",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-023",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-024",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-025",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-026",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-027",
+      "note": "Both α to β AND β to α phase transformation exist, but the information required to answer the question is not in the datafile itself.",
+      "score": "0.5"
+    },
+    {
+      "case_id": "RQ2-AUDIT-028",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-029",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-030",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-031",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-032",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-033",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-034",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-035",
+      "note": "Does the number of significant figures matter? For example, 5400 vs 5400.0",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-036",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-037",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-038",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-039",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-040",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-041",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-042",
+      "note": "The system answer is correct, but the information required to answer the question is not in the datafile itself.",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-043",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-044",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-045",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-046",
+      "note": "The system answer is correct, but the information required to answer this question is not in the datafile itself.",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-047",
+      "note": "\"The sample exhibits net shrinkage\" : correct\n\"due to hydrogen desorption during the experiment.\" : incorrect/unknown",
+      "score": "0.5"
+    },
+    {
+      "case_id": "RQ2-AUDIT-048",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-049",
+      "note": "The system answer is correct, but the information required to answer the question is not in the datafile itself.",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-050",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-051",
+      "note": "The system answer is partially correct, but the information required to answer the question is not in the datafile itself.",
+      "score": "0.5"
+    },
+    {
+      "case_id": "RQ2-AUDIT-052",
+      "note": "",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-053",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-054",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-055",
+      "note": "",
+      "score": "0.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-056",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-057",
+      "note": "All \"columns\" are numerical, except for the header lines.",
+      "score": "1.0"
+    },
+    {
+      "case_id": "RQ2-AUDIT-058",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-059",
+      "note": "",
+      "score": ""
+    },
+    {
+      "case_id": "RQ2-AUDIT-060",
+      "note": "For all data files (record_001, record_002, record_003), the sample does not return to its original length.",
+      "score": "0.5"
+    }
+  ]
+}
